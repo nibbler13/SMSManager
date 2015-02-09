@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Меню</string>
+    <string name="addresses_list_activity">Адреса получателей</string>
+    <string name="app_name">Email2SMS</string>
+    <string name="excluded_list_activity">Список исключений</string>
+    <string name="general_settings">Общие настройки</string>
+    <string name="isThisFirstTime">isThisFirstTime</string>
+    <string name="logview_activity">Журнал работы</string>
+    <string name="pop3settings_activity">Настройки почты</string>
+    <string name="settings_activity">Настройки</string>
+    <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
+    <string name="timetable_layout">График работы</string>
+    <string name="unread_symbols">Нечитаемые знаки</string>
+    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Email2SMS</string>
+    <string name="logview_activity">Журнал работы</string>
+    <string name="settings_activity">Настройки</string>
+    <string name="pop3settings_activity">Настройки почты</string>
+    <string name="addresses_list_activity">Адреса получателей</string>
+    <string name="excluded_list_activity">Список исключений</string>
+    <string name="timetable_layout">График работы</string>
+    <string name="action_settings">Меню</string>
+    <string name="general_settings">Общие настройки</string>
+    <string name="unread_symbols">Нечитаемые знаки</string>
+
+    <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
+    <string name="isThisFirstTime">isThisFirstTime</string>
+    <!--general settings-->
+    <string name="automaticallyStartWithOS">automaticallyStartWithOS</string>
+    <string name="writeLogFileToSD">writeLogFileToSD</string>
+    <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string>
+    <string name="maxSymbolsInSMS">maxSymbolsInSMS</string>
+    <!--pop3settings-->
+    <string name="pop3ServerName">pop3ServerName</string>
+    <string name="pop3ServerPort">pop3ServerPort</string>
+    <string name="sendLogViaMail">sendLogViaMail</string>
+    <string name="smtpServerName">smtpServerName</string>
+    <string name="smtpServerPort">smtpServerPort</string>
+    <string name="smtpAuthentication">smtpAuthentication</string>
+    <string name="useSSL">useSSL</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
+    <string name="emailFolderName">emailFolderName</string>
+    <string name="checkingInterval">checkingInterval</string>
+
+</resources>

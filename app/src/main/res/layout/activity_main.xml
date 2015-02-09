@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.smsmanager.MainActivity"
+    android:textAlignment="center">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textColor="#b6290091"
+        android:gravity="center_horizontal"
+        android:text="Приложение периодически проверяет указанный электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС"/>
+
+    <Button
+        android:id="@+id/sendSMS"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Запустить"
+        android:layout_above="@+id/serviceLabel"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/totalEmailReceivedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_marginLeft="10dp"
+        android:text="12345" />
+
+    <TextView
+        android:id="@+id/totalSMSLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_marginLeft="10dp"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/totalMessagesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_marginLeft="10dp"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/serviceLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Сервис остановлен"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:text="Всего сообщений отправлено:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_below="@+id/textView1"
+        android:text="Всего СМС отправлено:" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView3"
+        android:text="Всего писем получено:" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Настройки"
+        android:onClick="settingsOnClick"
+        android:id="@+id/settings_button"
+        android:layout_above="@+id/log_button"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Журнал работы"
+        android:onClick="logViewOnClick"
+        android:id="@+id/log_button"
+        android:layout_above="@+id/sendSMS"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

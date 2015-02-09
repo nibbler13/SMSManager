@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Автоматически запускать вместе с запуском устройства"
+        android:id="@+id/startOnBootBox"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:elegantTextHeight="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Писать лог-файл на карту памяти"
+        android:id="@+id/checkBox"
+        android:layout_marginTop="10dp"
+        android:checked="true"
+        android:layout_below="@+id/startOnBootBox"
+        android:layout_alignLeft="@+id/startOnBootBox"
+        android:layout_alignStart="@+id/startOnBootBox" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалять записи в \nжурнале старше"
+        android:id="@+id/checkBox2"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignLeft="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox"
+        android:checked="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="3"
+        android:id="@+id/editText"
+        android:layout_toRightOf="@+id/checkBox2"
+        android:layout_alignBottom="@+id/checkBox2"
+        android:layout_marginLeft="10dp"
+        android:hint="60"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="дней"
+        android:id="@+id/textView"
+        android:layout_toRightOf="@+id/editText"
+        android:layout_alignBaseline="@+id/editText"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отправлять в виде СМС из каждого сообщения первые"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/checkBox2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="4"
+        android:hint="350"
+        android:gravity="center"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="символов"
+        android:id="@+id/textView7"
+        android:layout_toRightOf="@+id/editText2"
+        android:layout_alignBaseline="@+id/editText2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Одно СМС сообщение на латинице допускает максимум 160 символов, в кириллице максимум 70 символов. При превышении указанных размеров сообщение будет отправлено в виде нескольких СМС и соответственно будет дороже стоить."
+        android:gravity="fill_horizontal"
+        android:textStyle="italic"
+        android:textColor="#b6290091"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/general_settings_layout.xml -->
