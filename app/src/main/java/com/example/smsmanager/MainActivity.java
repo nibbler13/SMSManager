@@ -61,10 +61,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView totalMessagesLabel;
 	private TextView totalEmailsReceivedLabel;
 	private TextView serviceLabel;
-	public Integer smsCounter;
-	public Integer messagesCounter;
-	public Integer emailsCounter;
-    private Boolean isServiceRun;
+	private Integer smsCounter = 0;
+    private Integer messagesCounter = 0;
+    private Integer emailsCounter = 0;
+    private Boolean isServiceRun = false;
 	ScheduledExecutorService scheduledExecutorService;
     ScheduledFuture<?> scheduledFuture;
     SharedPreferences sharedPreferences;
@@ -76,6 +76,8 @@ public class MainActivity extends Activity implements OnClickListener {
     	Log.d("nibbler", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
         
         sendSMS = (Button) findViewById(R.id.sendSMS);
         sendSMS.setOnClickListener(this);
@@ -89,13 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
         totalEmailsReceivedLabel = (TextView) findViewById(R.id.totalEmailReceivedLabel);
         serviceLabel = (TextView) findViewById(R.id.serviceLabel);
         serviceLabel.setBackgroundColor(Color.RED);
-        smsCounter = 0;
-        messagesCounter = 0;
-        emailsCounter = 0;
-        isServiceRun = false;
     	updateLabel();
-
-        sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
 
         boolean checking = sharedPreferences.getBoolean(getString(R.string.isThisFirstTime), true);
         Log.d("nibbler", "onCreate checking=" + checking);
@@ -106,7 +102,21 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void setStandardSettings(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        //general settings defaults value
+        editor.putBoolean(getString(R.string.automaticallyStartWithOS), false);
+        editor.putBoolean(getString(R.string.writeLogFileToSD), true);
+        editor.putBoolean(getString(R.string.deleteLogOlderThanDays), true);
+        editor.putInt(getString(R.string.deleteLogOlderValue), 60);
+        editor.putInt(getString(R.string.maxSymbolsInSMS), 350);
+        //pop3 settings default value
+        editor.putBoolean(getString(R.string.sendLogViaMail), true);
+        editor.putBoolean(getString(R.string.smtpAuthentication), true);
+        editor.putBoolean(getString(R.string.useSSL), true);
+        editor.putString(getString(R.string.emailFolderName), "inbox");
+        editor.putInt(getString(R.string.checkingInterval), 60);
 
+        editor.apply();
     }
 
     public void settingsOnClick(View view){

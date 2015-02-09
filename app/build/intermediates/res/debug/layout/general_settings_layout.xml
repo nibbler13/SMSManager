@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Писать лог-файл на карту памяти"
-        android:id="@+id/checkBox"
+        android:id="@+id/writeLogToSDCheckBox"
         android:layout_marginTop="10dp"
         android:checked="true"
         android:layout_below="@+id/startOnBootBox"
@@ -33,11 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Удалять записи в \nжурнале старше"
-        android:id="@+id/checkBox2"
+        android:id="@+id/deleteOlderThanCheckBox"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignLeft="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox"
+        android:layout_below="@+id/writeLogToSDCheckBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:checked="true" />
 
     <EditText
@@ -45,9 +45,11 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="3"
-        android:id="@+id/editText"
-        android:layout_toRightOf="@+id/checkBox2"
-        android:layout_alignBottom="@+id/checkBox2"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:id="@+id/deleteOlderValueEditText"
+        android:layout_toRightOf="@+id/deleteOlderThanCheckBox"
+        android:layout_alignBottom="@+id/deleteOlderThanCheckBox"
         android:layout_marginLeft="10dp"
         android:hint="60"
         android:gravity="center" />
@@ -56,17 +58,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="дней"
-        android:id="@+id/textView"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_alignBaseline="@+id/editText"
+        android:layout_toRightOf="@+id/deleteOlderValueEditText"
+        android:layout_alignBaseline="@+id/deleteOlderValueEditText"
         android:layout_marginLeft="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Отправлять в виде СМС из каждого сообщения первые"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/checkBox2"
+        android:id="@+id/sendFirstSymbolsTextView"
+        android:layout_below="@+id/deleteOlderThanCheckBox"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
@@ -76,10 +77,12 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="4"
+        android:singleLine="true"
+        android:maxLength="6"
         android:hint="350"
         android:gravity="center"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/textView6"
+        android:id="@+id/maxSymbolsToSendEditText"
+        android:layout_below="@+id/sendFirstSymbolsTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
@@ -87,9 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="символов"
-        android:id="@+id/textView7"
-        android:layout_toRightOf="@+id/editText2"
-        android:layout_alignBaseline="@+id/editText2"/>
+        android:layout_toRightOf="@+id/maxSymbolsToSendEditText"
+        android:layout_alignBaseline="@+id/maxSymbolsToSendEditText"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,9 +101,9 @@
         android:textStyle="italic"
         android:textColor="#b6290091"
         android:id="@+id/textView8"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/maxSymbolsToSendEditText"
         android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-</RelativeLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/general_settings_layout.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/general_settings_layout.xml -->

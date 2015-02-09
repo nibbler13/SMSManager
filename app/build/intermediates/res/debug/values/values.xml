@@ -1,24 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Меню</string>
+    <string name="addresses_list">addresses_list</string>
     <string name="addresses_list_activity">Адреса получателей</string>
     <string name="app_name">Email2SMS</string>
+    <string name="automaticallyStartWithOS">automaticallyStartWithOS</string>
+    <string name="checkingInterval">checkingInterval</string>
+    <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string>
+    <string name="deleteLogOlderValue">deleteLogOlderValue</string>
+    <string name="emailFolderName">emailFolderName</string>
+    <string name="excluded_list">excluded_list</string>
     <string name="excluded_list_activity">Список исключений</string>
+    <string name="friday_checkbox">friday_checkbox</string>
+    <string name="friday_end">friday_end</string>
+    <string name="friday_start">monday_start</string>
     <string name="general_settings">Общие настройки</string>
     <string name="isThisFirstTime">isThisFirstTime</string>
+    <string name="login">login</string>
     <string name="logview_activity">Журнал работы</string>
+    <string name="maxSymbolsInSMS">maxSymbolsInSMS</string>
+    <string name="monday_checkbox">monday_checkbox</string>
+    <string name="monday_end">monday_end</string>
+    <string name="monday_start">monday_start</string>
+    <string name="password">password</string>
+    <string name="pop3ServerName">pop3ServerName</string>
+    <string name="pop3ServerPort">pop3ServerPort</string>
     <string name="pop3settings_activity">Настройки почты</string>
+    <string name="saturday_checkbox">saturday_checkbox</string>
+    <string name="saturday_end">saturday_end</string>
+    <string name="saturday_start">saturday_start</string>
+    <string name="sendLogViaMail">sendLogViaMail</string>
     <string name="settings_activity">Настройки</string>
     <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
+    <string name="smtpAuthentication">smtpAuthentication</string>
+    <string name="smtpServerName">smtpServerName</string>
+    <string name="smtpServerPort">smtpServerPort</string>
+    <string name="sunday_checkbox">sunday_checkbox</string>
+    <string name="sunday_end">sunday_end</string>
+    <string name="sunday_start">sunday_start</string>
+    <string name="thursday_checkbox">thursday_checkbox</string>
+    <string name="thursday_end">thursday_end</string>
+    <string name="thursday_start">thursday_start</string>
     <string name="timetable_layout">График работы</string>
+    <string name="tuesday_checkbox">tuesday_checkbox</string>
+    <string name="tuesday_end">tuesday_end</string>
+    <string name="tuesday_start">tuesday_start</string>
     <string name="unread_symbols">Нечитаемые знаки</string>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/styles.xml -->
+    <string name="unreadable_list">unreadable_list</string>
+    <string name="useSSL">useSSL</string>
+    <string name="wednesday_checkbox">wednesday_checkbox</string>
+    <string name="wednesday_end">wednesday_end</string>
+    <string name="wednesday_start">wednesday_start</string>
+    <string name="writeLogFileToSD">writeLogFileToSD</string>
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

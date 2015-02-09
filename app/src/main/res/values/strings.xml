@@ -13,23 +13,52 @@
     <string name="unread_symbols">Нечитаемые знаки</string>
 
     <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
-    <string name="isThisFirstTime">isThisFirstTime</string>
+    <string name="isThisFirstTime">isThisFirstTime</string> <!-- boolean -->
     <!--general settings-->
-    <string name="automaticallyStartWithOS">automaticallyStartWithOS</string>
-    <string name="writeLogFileToSD">writeLogFileToSD</string>
-    <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string>
-    <string name="maxSymbolsInSMS">maxSymbolsInSMS</string>
-    <!--pop3settings-->
-    <string name="pop3ServerName">pop3ServerName</string>
-    <string name="pop3ServerPort">pop3ServerPort</string>
-    <string name="sendLogViaMail">sendLogViaMail</string>
-    <string name="smtpServerName">smtpServerName</string>
-    <string name="smtpServerPort">smtpServerPort</string>
-    <string name="smtpAuthentication">smtpAuthentication</string>
-    <string name="useSSL">useSSL</string>
-    <string name="login">login</string>
-    <string name="password">password</string>
-    <string name="emailFolderName">emailFolderName</string>
-    <string name="checkingInterval">checkingInterval</string>
+    <string name="automaticallyStartWithOS">automaticallyStartWithOS</string> <!-- boolean -->
+    <string name="writeLogFileToSD">writeLogFileToSD</string> <!-- boolean -->
+    <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string> <!-- boolean -->
+    <string name="deleteLogOlderValue">deleteLogOlderValue</string> <!-- integer -->
+    <string name="maxSymbolsInSMS">maxSymbolsInSMS</string> <!-- integer -->
+    <!--pop3 settings-->
+    <string name="pop3ServerName">pop3ServerName</string> <!-- string -->
+    <string name="pop3ServerPort">pop3ServerPort</string> <!-- integer -->
+    <string name="sendLogViaMail">sendLogViaMail</string> <!-- boolean -->
+    <string name="smtpServerName">smtpServerName</string> <!-- string -->
+    <string name="smtpServerPort">smtpServerPort</string> <!-- integer -->
+    <string name="smtpAuthentication">smtpAuthentication</string> <!-- boolean -->
+    <string name="useSSL">useSSL</string> <!-- boolean -->
+    <string name="login">login</string> <!-- string -->
+    <string name="password">password</string> <!-- string -->
+    <string name="emailFolderName">emailFolderName</string> <!-- string -->
+    <string name="checkingInterval">checkingInterval</string> <!-- integer -->
+    <!--addresses settings-->
+    <string name="addresses_list">addresses_list</string> <!--  -->
+    <!--excluded settings-->
+    <string name="excluded_list">excluded_list</string> <!--  -->
+    <!--unreadable settings-->
+    <string name="unreadable_list">unreadable_list</string> <!--  -->
+    <!--timetable settings-->
+    <string name="monday_checkbox">monday_checkbox</string> <!--  -->
+    <string name="tuesday_checkbox">tuesday_checkbox</string> <!--  -->
+    <string name="wednesday_checkbox">wednesday_checkbox</string> <!--  -->
+    <string name="thursday_checkbox">thursday_checkbox</string> <!--  -->
+    <string name="friday_checkbox">friday_checkbox</string> <!--  -->
+    <string name="saturday_checkbox">saturday_checkbox</string> <!--  -->
+    <string name="sunday_checkbox">sunday_checkbox</string> <!--  -->
+    <string name="monday_start">monday_start</string> <!--  -->
+    <string name="monday_end">monday_end</string> <!--  -->
+    <string name="tuesday_start">tuesday_start</string> <!--  -->
+    <string name="tuesday_end">tuesday_end</string> <!--  -->
+    <string name="wednesday_start">wednesday_start</string> <!--  -->
+    <string name="wednesday_end">wednesday_end</string> <!--  -->
+    <string name="thursday_start">thursday_start</string> <!--  -->
+    <string name="thursday_end">thursday_end</string> <!--  -->
+    <string name="friday_start">monday_start</string> <!--  -->
+    <string name="friday_end">friday_end</string> <!--  -->
+    <string name="saturday_start">saturday_start</string> <!--  -->
+    <string name="saturday_end">saturday_end</string> <!--  -->
+    <string name="sunday_start">sunday_start</string> <!--  -->
+    <string name="sunday_end">sunday_end</string> <!--  -->
 
 </resources>
