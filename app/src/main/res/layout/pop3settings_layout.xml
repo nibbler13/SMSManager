@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pop3ServerAddressEditText"
+            android:inputType="textUri"
             android:hint="pop.yandex.com"
             android:ems="20" />
 
@@ -33,6 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:maxLength="5"
+            android:singleLine="true"
             android:hint="995"
             android:ems="20"
             android:id="@+id/pop3PortNumberEditText" />
@@ -55,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="smtp.yandex.com"
+            android:inputType="textUri"
             android:ems="20"
             android:id="@+id/smtpServerEditText"/>
 
@@ -67,6 +71,9 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="5"
             android:hint="465"
             android:ems="20"
             android:id="@+id/smtpPortEditText"/>
@@ -97,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/loginEditText"
+            android:inputType="text"
             android:ems="20"
             android:hint="nibble2" />
 
@@ -125,6 +133,7 @@
             android:layout_height="wrap_content"
             android:ems="20"
             android:hint="inbox"
+            android:inputType="text"
             android:id="@+id/inboxFolderEditText" />
 
         <TextView
@@ -138,6 +147,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="18"
             android:ems="20"
             android:id="@+id/checkingIntervalEditBox"
             android:hint="60" />

@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent" android:layout_height="match_parent">
 
         <TextView
@@ -404,4 +404,4 @@
             android:layout_alignBottom="@+id/sundayEndTextView"/>
 
     </RelativeLayout>
-</ScrollView><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/timetable_layout.xml -->
+</ScrollView><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/timetable_layout.xml -->

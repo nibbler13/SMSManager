@@ -82,9 +82,7 @@ public class MainActivity extends Activity implements OnClickListener {
         sendSMS = (Button) findViewById(R.id.sendSMS);
         sendSMS.setOnClickListener(this);
         settingsButton = (Button)findViewById(R.id.settings_button);
-        //settingsButton.setOnClickListener(this);
         logViewButton = (Button)findViewById(R.id.log_button);
-        //logViewButton.setOnClickListener(this);
         
         totalSmsLabel = (TextView) findViewById(R.id.totalSMSLabel);
         totalMessagesLabel = (TextView) findViewById(R.id.totalMessagesLabel);
@@ -452,7 +450,7 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        return false;
     }
 
     @Override

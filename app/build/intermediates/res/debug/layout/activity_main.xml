@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="5dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="5dp"
     tools:context="com.example.smsmanager.MainActivity"
     android:textAlignment="center">
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Запустить"
         android:layout_above="@+id/serviceLabel"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView4"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Всего сообщений отправлено:" />
 
     <TextView
@@ -107,4 +107,4 @@
         android:layout_above="@+id/sendSMS"
         android:layout_centerHorizontal="true"/>
 
-</RelativeLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/activity_main.xml -->
+</RelativeLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/activity_main.xml -->

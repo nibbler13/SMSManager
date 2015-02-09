@@ -34,7 +34,8 @@
         <activity
             android:name="com.example.smsmanager.LogViewActivity"
             android:label="@string/logview_activity"
-            android:parentActivityName="com.example.smsmanager.MainActivity" >
+            android:parentActivityName="com.example.smsmanager.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -42,7 +43,8 @@
         <activity
             android:name="com.example.smsmanager.SettingsActivity"
             android:label="@string/settings_activity"
-            android:parentActivityName="com.example.smsmanager.MainActivity" >
+            android:parentActivityName="com.example.smsmanager.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -50,7 +52,8 @@
         <activity
             android:name="com.example.smsmanager.AddressesListActivity"
             android:label="@string/addresses_list_activity"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
@@ -58,7 +61,8 @@
         <activity
             android:name="com.example.smsmanager.ExcludedListActivity"
             android:label="@string/excluded_list_activity"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
@@ -66,7 +70,8 @@
         <activity
             android:name="com.example.smsmanager.POP3SettingsActivity"
             android:label="@string/pop3settings_activity"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
@@ -74,7 +79,8 @@
         <activity
             android:name="com.example.smsmanager.TimetableActivity"
             android:label="@string/timetable_layout"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
@@ -82,7 +88,8 @@
         <activity
             android:name="com.example.smsmanager.GeneralSettingsActivity"
             android:label="@string/general_settings"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
@@ -90,7 +97,8 @@
         <activity
             android:name="com.example.smsmanager.UnreadSymbolsActivity"
             android:label="@string/unread_symbols"
-            android:parentActivityName="com.example.smsmanager.SettingsActivity" >
+            android:parentActivityName="com.example.smsmanager.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SettingsActivity" />
