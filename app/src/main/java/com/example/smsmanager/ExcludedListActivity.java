@@ -68,4 +68,21 @@ public class ExcludedListActivity extends Activity {
         editText.setText("");
         adapter.notifyDataSetChanged();
     }
+
+    public void excludedInfoOnClick(View view) {
+        Log.d("nibbler", "excludedInfoOnClick");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Если сообщение будет содержать хотя бы одну строку из списка, то такое сообщение будет игнорировано и не будет выслано получателю в виде СМС").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
 }

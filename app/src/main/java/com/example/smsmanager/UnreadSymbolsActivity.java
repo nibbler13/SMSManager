@@ -33,7 +33,7 @@ public class UnreadSymbolsActivity extends Activity {
 
         editText = (EditText)findViewById(R.id.unreadEditText);
 
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView)findViewById(R.id.unreadSymbolsListView);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,4 +68,23 @@ public class UnreadSymbolsActivity extends Activity {
         editText.setText("");
         adapter.notifyDataSetChanged();
     }
+
+    public void unreadInfoOnClick(View view) {
+        Log.d("nibbler", "unreadInfoOnClick");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("В этом списке содержатся знаки, которые будут удалены из оригинального сообщения, например разные ковычки и служебные символы (<>%$#)").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
 }
+
+

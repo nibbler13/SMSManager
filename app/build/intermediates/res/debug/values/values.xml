@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Меню</string>
-    <string name="addresses_list">addresses_list</string>
+    <string name="addresses_list">addresses_list_size</string>
     <string name="addresses_list_activity">Адреса получателей</string>
     <string name="app_name">Email2SMS</string>
     <string name="automaticallyStartWithOS">automaticallyStartWithOS</string>
@@ -58,7 +58,7 @@
     <string name="wednesday_end">wednesday_end</string>
     <string name="wednesday_start">wednesday_start</string>
     <string name="writeLogFileToSD">writeLogFileToSD</string>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
