@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,6 +90,23 @@ public class AddressesListActivity extends Activity {
 
     public void addAddressesButtonOnClick(View view){
         Log.d("nibbler", "addAddressesButton onClick");
+        if (editText.getText().toString().equalsIgnoreCase("")){
+            return;
+        }
+        if (!editText.getText().toString().contains("=")){
+            Toast.makeText(getApplicationContext(), "Введенная строка не содержит символ '='", Toast.LENGTH_LONG).show();
+            return;
+        }
+        String[] separatedString = editText.getText().toString().split("=", 2);
+        Log.d("nibbler", "0: " + separatedString[0] + " 1: " + separatedString[1]);
+        if (separatedString[0].length() == 0 || separatedString[0].trim().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Левая часть выражения не может быть пустой", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!separatedString[1].matches("^[0-9]{7,20}$") || separatedString[1].contains("=")){
+            Toast.makeText(getApplicationContext(), "Правая часть выражения не соответствует требованиям (можно только цифры)", Toast.LENGTH_LONG).show();
+            return;
+        }
         values.add(editText.getText().toString());
         editText.setText("");
         adapter.notifyDataSetChanged();
@@ -108,6 +126,6 @@ public class AddressesListActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Если в теме сообщения будет присутствовать строка из списка, то СМС сообщение будет отправлено на указанный номер. Строка может быть набором любых символов, после строки ставится знак = и далее номер телефона (только цифры с 8 в начале). Например \"нижний=89601811873\"").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage("Если в теме сообщения будет присутствовать строка из списка, то СМС сообщение будет отправлено на указанный номер. Строка может быть набором любых символов, после строки ставится знак = и далее номер телефона. Например \"нижний=89601811873\"").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 }

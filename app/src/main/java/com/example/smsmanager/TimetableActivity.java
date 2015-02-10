@@ -15,3 +15,7 @@ public class TimetableActivity extends Activity {
         Log.d("nibbler", "TimetableActivity activity onCreate");
     }
 }
+
+
+//([01]?[0-9]|2[0-3]):[0-5][0-9]
+//regex to match 24-time

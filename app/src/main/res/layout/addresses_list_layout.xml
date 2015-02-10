@@ -11,7 +11,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="ключевое_слово=89ххххххххх"
+        android:hint="ключевая фраза=89ххххххххх"
         android:layout_weight="0"
         android:id="@+id/addressesEditText"/>
 
