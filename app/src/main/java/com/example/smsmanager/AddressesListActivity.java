@@ -73,13 +73,9 @@ public class AddressesListActivity extends Activity {
         sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
         strings = sharedPreferences.getStringSet(getString(R.string.addresses_list), new HashSet<String>(Arrays.asList(new String[]{"1", "3", "5"})));
 
-        Log.d("nibbler", "strings length: " + Integer.toString(strings.size()));
         if (strings.size() > 0){
-            String[] stringToParse = strings.toArray(new String[0]);Log.d("nibbler", "stringToParseLength:" + Integer.toString(stringToParse.length));
-            for (int i = 0; i < strings.size(); i++) {
-                Log.d("nibbler", "element " + Integer.toString(i) + " contain: " + stringToParse[i]);
-                adapter.add(stringToParse[i]);
-            }
+            String[] stringToParse = strings.toArray(new String[0]);
+            adapter.addAll(stringToParse);
             adapter.sort(new Comparator<String>() {
                 @Override
                 public int compare(String lhs, String rhs) {
@@ -135,5 +131,19 @@ public class AddressesListActivity extends Activity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Если в теме сообщения будет присутствовать строка из списка, то СМС сообщение будет отправлено на указанный номер. Строка может быть набором любых символов, после строки ставится знак = и далее номер телефона. Например \"нижний=89601811873\".").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
+
+    public void onPause() {
+        super.onPause();
+        Log.d("nibbler", "Addresses onPause");
+
+        strings.clear();
+        if (adapter.getCount() > 0) {
+            for (int i = 0; i < adapter.getCount(); i++) {
+                strings.add(adapter.getItem(i));
+            }
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putStringSet(getString(R.string.addresses_list), strings).apply();
     }
 }

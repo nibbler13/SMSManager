@@ -7,7 +7,7 @@
     <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Настройки</string>
-    <string name="addresses_list">addresses_list_size</string>
+    <string name="addresses_list">addresses_list</string>
     <string name="addresses_list_activity">Адреса получателей</string>
     <string name="app_name">Email2SMS</string>
     <string name="automaticallyStartWithOS">automaticallyStartWithOS</string>

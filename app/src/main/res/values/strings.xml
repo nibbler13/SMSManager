@@ -33,7 +33,7 @@
     <string name="emailFolderName">emailFolderName</string> <!-- string -->
     <string name="checkingInterval">checkingInterval</string> <!-- integer -->
     <!--addresses settings-->
-    <string name="addresses_list">addresses_list_size</string> <!--  -->
+    <string name="addresses_list">addresses_list</string> <!--  -->
     <!--excluded settings-->
     <string name="excluded_list">excluded_list</string> <!--  -->
     <!--unreadable settings-->
