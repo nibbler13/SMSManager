@@ -11,7 +11,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="ключевое_слово=89ххххххххх"
+        android:hint="ключевая фраза=89ххххххххх"
         android:layout_weight="0"
         android:id="@+id/addressesEditText"/>
 
@@ -30,12 +30,4 @@
         android:id="@+id/addressesListView"
         android:drawSelectorOnTop="true"/>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Описание"
-        android:id="@+id/addressesInfo"
-        android:onClick="addressesInfoOnClick"
-        android:layout_weight="0"/>
-
-</LinearLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/addresses_list_layout.xml -->
+</LinearLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/addresses_list_layout.xml -->

@@ -30,12 +30,4 @@
         android:id="@+id/addressesListView"
         android:drawSelectorOnTop="true"/>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Описание"
-        android:id="@+id/addressesInfo"
-        android:onClick="addressesInfoOnClick"
-        android:layout_weight="0"/>
-
 </LinearLayout>

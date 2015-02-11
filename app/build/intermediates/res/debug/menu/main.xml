@@ -4,9 +4,36 @@
 
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
+        android:orderInCategory="99"
+        android:icon="@drawable/ic_action_settings"
+        android:showAsAction="ifRoom"
+        android:onClick="settingsActionBarClicked"
         android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/logViewActionBar"
+        android:showAsAction="ifRoom"
+        android:onClick="logViewActionBarClicked"
+        android:orderInCategory="97"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:title="Просмотреть лог-файл"
+        />
+    <item
+        android:id="@+id/helpActionBar"
+        android:showAsAction="ifRoom"
+        android:onClick="helpActionBarClicked"
+        android:orderInCategory="98"
+        android:icon="@drawable/ic_action_help"
+        android:title="Помощь"
+        />
+    <item
+        android:id="@+id/aboutActionBar"
+        android:showAsAction="ifRoom"
+        android:orderInCategory="100"
+        android:onClick="aboutActionBarClicked"
+        android:icon="@drawable/ic_action_about"
+        android:title="О программе"
+        />
+
 
 </menu>
-<!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/menu/main.xml -->
+<!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/menu/main.xml -->

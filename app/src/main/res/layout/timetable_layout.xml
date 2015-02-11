@@ -9,14 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textColor="#b6290091"
-            android:text="В этом окне можно настроить расписание по которому будут обрабатываться сообщения, поступающие на почтовый ящик"
-            android:id="@+id/textView5" />
-
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -2,7 +2,9 @@ package com.example.smsmanager;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -55,8 +57,6 @@ import javax.mail.internet.MimeMultipart;
 public class MainActivity extends Activity implements OnClickListener {
 	
 	private Button sendSMS;
-    private Button settingsButton;
-    private Button logViewButton;
 	private TextView totalSmsLabel;
 	private TextView totalMessagesLabel;
 	private TextView totalEmailsReceivedLabel;
@@ -65,6 +65,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private Integer messagesCounter = 0;
     private Integer emailsCounter = 0;
     private Boolean isServiceRun = false;
+    Context context = this;
 	ScheduledExecutorService scheduledExecutorService;
     ScheduledFuture<?> scheduledFuture;
     SharedPreferences sharedPreferences;
@@ -81,8 +82,6 @@ public class MainActivity extends Activity implements OnClickListener {
         
         sendSMS = (Button) findViewById(R.id.sendSMS);
         sendSMS.setOnClickListener(this);
-        settingsButton = (Button)findViewById(R.id.settings_button);
-        logViewButton = (Button)findViewById(R.id.log_button);
         
         totalSmsLabel = (TextView) findViewById(R.id.totalSMSLabel);
         totalMessagesLabel = (TextView) findViewById(R.id.totalMessagesLabel);
@@ -116,18 +115,6 @@ public class MainActivity extends Activity implements OnClickListener {
 
         editor.apply();
     }
-
-    public void settingsOnClick(View view){
-        Log.d("nibbler", "settings click");
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
-    public void logViewOnClick(View view){
-        Log.d("nibbler", "logView click");
-        Intent intent = new Intent(this, LogViewActivity.class);
-        startActivity(intent);
-    }
     
     public void onClick(View view){
     	Log.d("nibbler", "onClick");
@@ -149,13 +136,11 @@ public class MainActivity extends Activity implements OnClickListener {
                 }
             }, 5, 60, TimeUnit.SECONDS);
 
-            settingsButton.setVisibility(View.INVISIBLE);
             sendSMS.setText("Остановить");
             serviceLabel.setText("Сервис выполняется");
             serviceLabel.setBackgroundColor(Color.GREEN);
             isServiceRun = true;
         } else {
-            settingsButton.setVisibility(View.VISIBLE);
             sendSMS.setText("Запустить");
             serviceLabel.setText("Сервис остановлен");
             serviceLabel.setBackgroundColor(Color.RED);
@@ -450,15 +435,62 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void settingsActionBarClicked(MenuItem item){
+        Log.d("nibbler", "settingsActionBarClicked");
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
+
+    public void aboutActionBarClicked(MenuItem item){
+        Log.d("nibbler", "aboutActionBarClicked");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Приложение периодически проверяет указанный в настройках электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС.\n\nАвтор: Грашкин Павел\nnn-admin@nnkk.budzdorov.su\n2015 Нижний Новгород\nv1.0beta\n\nВозможности:\n" +
+                "-Получение писем через POP3 протокол\n" +
+                "-Возможность использовать SSL\n" +
+                "-Номера телефонов получателей СМС задаются на основе кодового слова в теме письма\n" +
+                "-Часть символов (ненужных) можно исключить из СМС сообщения\n" +
+                "-Игнорирование письма, если оно содержит определенную строку\n" +
+                "-Возможность работы по заданному расписанию\n" +
+                "-Ведение лог-файла в формате CSV для выгрузки в Excel\n" +
+                "-Лог файл может быть выслан по почте\n" +
+                "-Изменение время опроса почтового сервера.").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
+
+    public void logViewActionBarClicked(MenuItem item){
+        Log.d("nibbler", "logViewActionBarClicked");
+        Intent intent = new Intent(this, LogViewActivity.class);
+        startActivity(intent);
+    }
+
+    public void helpActionBarClicked(MenuItem item){
+        Log.d("nibbler", "helpActionBarClicked");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
+
 }

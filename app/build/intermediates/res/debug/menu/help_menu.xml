@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/helpActionBar"
+        android:showAsAction="ifRoom"
+        android:onClick="helpActionBarClicked"
+        android:orderInCategory="98"
+        android:icon="@drawable/ic_action_help"
+        android:title="Помощь"
+        />
+
+</menu><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/menu/help_menu.xml -->

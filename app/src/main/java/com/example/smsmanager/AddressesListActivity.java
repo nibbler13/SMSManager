@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -94,7 +96,7 @@ public class AddressesListActivity extends Activity {
             return;
         }
         if (!editText.getText().toString().contains("=")){
-            Toast.makeText(getApplicationContext(), "Введенная строка не содержит символ '='", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Строка не содержит символ '='", Toast.LENGTH_LONG).show();
             return;
         }
         String[] separatedString = editText.getText().toString().split("=", 2);
@@ -104,7 +106,7 @@ public class AddressesListActivity extends Activity {
             return;
         }
         if (!separatedString[1].matches("^[0-9]{7,20}$") || separatedString[1].contains("=")){
-            Toast.makeText(getApplicationContext(), "Правая часть выражения не соответствует требованиям (можно только цифры)", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Правая часть выражения не соответствует требованиям (можно только цифры, длиной от 7 до 20)", Toast.LENGTH_LONG).show();
             return;
         }
         values.add(editText.getText().toString());
@@ -112,8 +114,14 @@ public class AddressesListActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
-    public void addressesInfoOnClick(View view){
-        Log.d("nibbler", "addressesInfoOnClick");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+    public void helpActionBarClicked(MenuItem item){
+        Log.d("nibbler", "helpActionBarClicked");
 
         DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
             @Override
@@ -126,6 +134,6 @@ public class AddressesListActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Если в теме сообщения будет присутствовать строка из списка, то СМС сообщение будет отправлено на указанный номер. Строка может быть набором любых символов, после строки ставится знак = и далее номер телефона. Например \"нижний=89601811873\"").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage("Если в теме сообщения будет присутствовать строка из списка, то СМС сообщение будет отправлено на указанный номер. Строка может быть набором любых символов, после строки ставится знак = и далее номер телефона. Например \"нижний=89601811873\".").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 }

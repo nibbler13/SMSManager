@@ -8,7 +8,7 @@
     <string name="addresses_list_activity">Адреса получателей</string>
     <string name="excluded_list_activity">Список исключений</string>
     <string name="timetable_layout">График работы</string>
-    <string name="action_settings">Меню</string>
+    <string name="action_settings">Настройки</string>
     <string name="general_settings">Общие настройки</string>
     <string name="unread_symbols">Нечитаемые знаки</string>
 

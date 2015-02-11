@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,8 +71,14 @@ public class ExcludedListActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
-    public void excludedInfoOnClick(View view) {
-        Log.d("nibbler", "excludedInfoOnClick");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+    public void helpActionBarClicked(MenuItem item){
+        Log.d("nibbler", "helpActionBarClicked");
 
         DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
             @Override
@@ -83,6 +91,6 @@ public class ExcludedListActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Если сообщение будет содержать хотя бы одну строку из списка, то такое сообщение будет игнорировано и не будет выслано получателю в виде СМС").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage("Если сообщение будет содержать хотя бы одну строку из списка, то такое сообщение будет игнорировано и не будет выслано получателю в виде СМС.").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 }

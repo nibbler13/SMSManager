@@ -1,10 +1,15 @@
 package com.example.smsmanager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -20,6 +25,8 @@ public class GeneralSettingsActivity extends Activity{
     CheckBox deleteOlderCB;
     EditText deleteValueET;
     EditText maxSymbolsET;
+
+    Context context = this;
 
     boolean autoStartBool;
     boolean writeToSDBool;
@@ -113,5 +120,28 @@ public class GeneralSettingsActivity extends Activity{
         editor.apply();
 
         Log.d("nibbler", "GeneralSettingsActivity onPause");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+    public void helpActionBarClicked(MenuItem item){
+        Log.d("nibbler", "helpActionBarClicked");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Одно СМС сообщение на латинице допускает максимум 160 символов, в кириллице максимум 70 символов. При превышении указанных размеров сообщение будет отправлено в виде нескольких СМС и соответственно будет дороже стоить.").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 }

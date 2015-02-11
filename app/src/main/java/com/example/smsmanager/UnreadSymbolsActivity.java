@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,8 +71,14 @@ public class UnreadSymbolsActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
-    public void unreadInfoOnClick(View view) {
-        Log.d("nibbler", "unreadInfoOnClick");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+
+    public void helpActionBarClicked(MenuItem item){
+        Log.d("nibbler", "helpActionBarClicked");
 
         DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
             @Override
@@ -83,7 +91,7 @@ public class UnreadSymbolsActivity extends Activity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("В этом списке содержатся знаки, которые будут удалены из оригинального сообщения, например разные ковычки и служебные символы (<>%$#)").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage("В этом списке содержатся знаки, которые будут удалены из оригинального сообщения, например разные ковычки и служебные символы (<>%$#).").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 }
 
