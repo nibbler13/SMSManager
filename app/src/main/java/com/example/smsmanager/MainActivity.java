@@ -56,7 +56,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class MainActivity extends Activity implements OnClickListener {
 	
-	private Button sendSMS;
+	private Button startServiceButton;
 	private TextView totalSmsLabel;
 	private TextView totalMessagesLabel;
 	private TextView totalEmailsReceivedLabel;
@@ -80,8 +80,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
         sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
         
-        sendSMS = (Button) findViewById(R.id.sendSMS);
-        sendSMS.setOnClickListener(this);
+        startServiceButton = (Button) findViewById(R.id.sendSMS);
+        startServiceButton.setOnClickListener(this);
         
         totalSmsLabel = (TextView) findViewById(R.id.totalSMSLabel);
         totalMessagesLabel = (TextView) findViewById(R.id.totalMessagesLabel);
@@ -136,12 +136,12 @@ public class MainActivity extends Activity implements OnClickListener {
                 }
             }, 5, 60, TimeUnit.SECONDS);
 
-            sendSMS.setText("Остановить");
+            startServiceButton.setText("Остановить");
             serviceLabel.setText("Сервис выполняется");
             serviceLabel.setBackgroundColor(Color.GREEN);
             isServiceRun = true;
         } else {
-            sendSMS.setText("Запустить");
+            startServiceButton.setText("Запустить");
             serviceLabel.setText("Сервис остановлен");
             serviceLabel.setBackgroundColor(Color.RED);
             scheduledFuture.cancel(false);
@@ -439,7 +439,25 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public void settingsActionBarClicked(MenuItem item){
-        Log.d("nibbler", "settingsActionBarClicked");
+        Log.d("nibbler", "settingsActionBarClicked " + startServiceButton.getText().toString());
+
+        if (startServiceButton.getText().toString().equalsIgnoreCase("Остановить")){
+            DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            break;
+                    }
+                }
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Настройки можно изменять только когда сервис остановлен.").setPositiveButton("Ок", dialogClickListenerInfo).show();
+            return;
+        }
+
+
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }

@@ -39,26 +39,47 @@
     <!--unreadable settings-->
     <string name="unreadable_list">unreadable_list</string> <!-- stringSet -->
     <!--timetable settings-->
-    <string name="monday_checkbox">monday_checkbox</string> <!--  -->
-    <string name="tuesday_checkbox">tuesday_checkbox</string> <!--  -->
-    <string name="wednesday_checkbox">wednesday_checkbox</string> <!--  -->
-    <string name="thursday_checkbox">thursday_checkbox</string> <!--  -->
-    <string name="friday_checkbox">friday_checkbox</string> <!--  -->
-    <string name="saturday_checkbox">saturday_checkbox</string> <!--  -->
-    <string name="sunday_checkbox">sunday_checkbox</string> <!--  -->
-    <string name="monday_start">monday_start</string> <!--  -->
-    <string name="monday_end">monday_end</string> <!--  -->
-    <string name="tuesday_start">tuesday_start</string> <!--  -->
-    <string name="tuesday_end">tuesday_end</string> <!--  -->
-    <string name="wednesday_start">wednesday_start</string> <!--  -->
-    <string name="wednesday_end">wednesday_end</string> <!--  -->
-    <string name="thursday_start">thursday_start</string> <!--  -->
-    <string name="thursday_end">thursday_end</string> <!--  -->
-    <string name="friday_start">monday_start</string> <!--  -->
-    <string name="friday_end">friday_end</string> <!--  -->
-    <string name="saturday_start">saturday_start</string> <!--  -->
-    <string name="saturday_end">saturday_end</string> <!--  -->
-    <string name="sunday_start">sunday_start</string> <!--  -->
-    <string name="sunday_end">sunday_end</string> <!--  -->
+    <!--monday-->
+    <string name="monday_checkbox">monday_checkbox</string> <!-- boolean -->
+    <string name="monday_hour_start">monday_start</string> <!-- int -->
+    <string name="monday_hour_end">monday_end</string> <!-- int -->
+    <string name="monday_minute_start">monday_start</string> <!-- int -->
+    <string name="monday_minute_end">monday_end</string> <!-- int -->
+    <!--tuesday-->
+    <string name="tuesday_checkbox">tuesday_checkbox</string> <!-- boolean -->
+    <string name="tuesday_hour_start">tuesday_start</string> <!-- int -->
+    <string name="tuesday_hour_end">tuesday_end</string> <!-- int -->
+    <string name="tuesday_minute_start">tuesday_start</string> <!-- int -->
+    <string name="tuesday_minute_end">tuesday_end</string> <!-- int -->
+    <!--wednesday-->
+    <string name="wednesday_checkbox">wednesday_checkbox</string> <!-- boolean -->
+    <string name="wednesday_hour_start">wednesday_start</string> <!-- int -->
+    <string name="wednesday_hour_end">wednesday_end</string> <!-- int -->
+    <string name="wednesday_minute_start">wednesday_start</string> <!-- int -->
+    <string name="wednesday_minute_end">wednesday_end</string> <!-- int -->
+    <!--thursday-->
+    <string name="thursday_checkbox">thursday_checkbox</string> <!-- boolean -->
+    <string name="thursday_hour_start">thursday_start</string> <!-- int -->
+    <string name="thursday_hour_end">thursday_end</string> <!-- int -->
+    <string name="thursday_minute_start">thursday_start</string> <!-- int -->
+    <string name="thursday_minute_end">thursday_end</string> <!-- int -->
+    <!--friday-->
+    <string name="friday_checkbox">friday_checkbox</string> <!-- boolean -->
+    <string name="friday_hour_start">monday_start</string> <!-- int -->
+    <string name="friday_hour_end">friday_end</string> <!-- int -->
+    <string name="friday_minute_start">monday_start</string> <!-- int -->
+    <string name="friday_minute_end">friday_end</string> <!-- int -->
+    <!--saturday-->
+    <string name="saturday_checkbox">saturday_checkbox</string> <!-- boolean -->
+    <string name="saturday_hour_start">saturday_start</string> <!-- int -->
+    <string name="saturday_hour_end">saturday_end</string> <!-- int -->
+    <string name="saturday_minute_start">saturday_start</string> <!-- int -->
+    <string name="saturday_minute_end">saturday_end</string> <!-- int -->
+    <!--sunday-->
+    <string name="sunday_checkbox">sunday_checkbox</string> <!-- boolean -->
+    <string name="sunday_hour_start">sunday_start</string> <!-- int -->
+    <string name="sunday_hour_end">sunday_end</string> <!-- int -->
+    <string name="sunday_minute_start">sunday_start</string> <!-- int -->
+    <string name="sunday_minute_end">sunday_end</string> <!-- int -->
 
 </resources>
