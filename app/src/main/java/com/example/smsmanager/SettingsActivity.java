@@ -12,6 +12,7 @@ import android.view.View;
 public class SettingsActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.settings_layout);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Log.d("nibbler", "This is Settings onCreate");

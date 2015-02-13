@@ -3,108 +3,112 @@
     package="com.example.smsmanager"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
-    
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-    	<service 
-    	    android:name=".CheckEmailsAndSendSMS"
-    	    android:exported="false"/>
-    
+        <service
+            android:name=".CheckEmailsAndSendSMS"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LogViewActivity"
+        <activity
+            android:name=".LogViewActivity"
             android:label="@string/logview_activity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".SettingsActivity"
             android:label="@string/settings_activity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".AddressesListActivity"
+        <activity
+            android:name=".AddressesListActivity"
             android:label="@string/addresses_list_activity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-        <activity android:name=".ExcludedListActivity"
+        <activity
+            android:name=".ExcludedListActivity"
             android:label="@string/excluded_list_activity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-        <activity android:name=".POP3SettingsActivity"
+        <activity
+            android:name=".POP3SettingsActivity"
             android:label="@string/pop3settings_activity"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-        <activity android:name=".TimetableActivity"
+        <activity
+            android:name=".TimetableActivity"
             android:label="@string/timetable_layout"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-        <activity android:name=".GeneralSettingsActivity"
+        <activity
+            android:name=".GeneralSettingsActivity"
             android:label="@string/general_settings"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-        <activity android:name=".UnreadSymbolsActivity"
+        <activity
+            android:name=".UnreadSymbolsActivity"
             android:label="@string/unread_symbols"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".SettingsActivity">
+            android:parentActivityName=".SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity"/>
+                android:value=".SettingsActivity" />
         </activity>
-
-
+        <activity
+            android:name=".SettingsActivity2"
+            android:label="@string/title_activity_settings_activity2" >
+        </activity>
     </application>
 
 </manifest>

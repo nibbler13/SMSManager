@@ -71,7 +71,7 @@ public class AddressesListActivity extends Activity {
         });
 
         sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
-        strings = sharedPreferences.getStringSet(getString(R.string.addresses_list), new HashSet<String>(Arrays.asList(new String[]{"1", "3", "5"})));
+        strings = new HashSet<String>(sharedPreferences.getStringSet(getString(R.string.addresses_list), new HashSet<String>(Arrays.asList(new String[]{"1", "3", "5"}))));
 
         if (strings.size() > 0){
             String[] stringToParse = strings.toArray(new String[0]);
@@ -88,7 +88,7 @@ public class AddressesListActivity extends Activity {
 
     public void addAddressesButtonOnClick(View view){
         Log.d("nibbler", "addAddressesButton onClick");
-        if (editText.getText().toString().equalsIgnoreCase("")){
+        if (editText.getText().toString().isEmpty()){
             return;
         }
         if (!editText.getText().toString().contains("=")){

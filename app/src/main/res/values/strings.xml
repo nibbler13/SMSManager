@@ -33,11 +33,11 @@
     <string name="emailFolderName">emailFolderName</string> <!-- string -->
     <string name="checkingInterval">checkingInterval</string> <!-- integer -->
     <!--addresses settings-->
-    <string name="addresses_list">addresses_list</string> <!--  -->
+    <string name="addresses_list">addresses_list</string> <!-- stringSet -->
     <!--excluded settings-->
-    <string name="excluded_list">excluded_list</string> <!--  -->
+    <string name="excluded_list">excluded_list</string> <!-- stringSet -->
     <!--unreadable settings-->
-    <string name="unreadable_list">unreadable_list</string> <!--  -->
+    <string name="unreadable_list">unreadable_list</string> <!-- stringSet -->
     <!--timetable settings-->
     <string name="monday_checkbox">monday_checkbox</string> <!--  -->
     <string name="tuesday_checkbox">tuesday_checkbox</string> <!--  -->
