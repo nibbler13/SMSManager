@@ -59,4 +59,4 @@
         android:layout_below="@+id/unreadSymbolsButton"
         android:layout_centerHorizontal="true" />
 
-</RelativeLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/settings_layout.xml -->
+</RelativeLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/settings_layout.xml -->

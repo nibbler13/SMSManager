@@ -6,12 +6,17 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TimePicker;
+
+import java.util.Arrays;
 
 /**
  * Created by NIBBLER on 07/02/15.
@@ -19,8 +24,12 @@ import android.widget.TimePicker;
 public class TimetableActivity extends Activity {
 
     final Context context = this;
+    final static int numberOfWeekDays = 7;
     SharedPreferences sharedPreferences;
-    timeTableElement[] timetable;
+    TimeTableElement[] timetable;
+    EditText[] startsFromArray;
+    EditText[] endToArray;
+    CheckBox[] checkBoxesArray;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,27 +37,74 @@ public class TimetableActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Log.d("nibbler", "TimetableActivity activity onCreate");
 
-        sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
-        timetable = new timeTableElement[]{
-                new timeTableElement(),
-                new timeTableElement(),
-                new timeTableElement(),
-                new timeTableElement(),
-                new timeTableElement(),
-                new timeTableElement(),
-                new timeTableElement()};
+        startsFromArray = new EditText[]{
+                (EditText)findViewById(R.id.mondayStartEditText),
+                (EditText)findViewById(R.id.tuesdayStartEditText),
+                (EditText)findViewById(R.id.wednesdayStartEditText),
+                (EditText)findViewById(R.id.thursdayStartEditText),
+                (EditText)findViewById(R.id.fridayStartEditText),
+                (EditText)findViewById(R.id.saturdayStartEditText),
+                (EditText)findViewById(R.id.sundayStartEditText)
+        };
 
-        for (int i = 0; i < 7; i++){
-            timetable[i].setHour_end(sharedPreferences.getInt(timeTableElement.weekDays[i] + "_hour_end", 23));
-            timetable[i].setHour_start(sharedPreferences.getInt(timeTableElement.weekDays[i] + "_hour_start", 0));
-            timetable[i].setMinute_end(sharedPreferences.getInt(timeTableElement.weekDays[i] + "_minute_end", 59));
-            timetable[i].setMinute_start(sharedPreferences.getInt(timeTableElement.weekDays[i] + "_minute_start", 0));
-            timetable[i].setEnable(sharedPreferences.getBoolean(timeTableElement.weekDays[i] + "_checkbox", true));
+        endToArray = new EditText[]{
+                (EditText)findViewById(R.id.mondayEndEditText),
+                (EditText)findViewById(R.id.tuesdayEndEditText),
+                (EditText)findViewById(R.id.wednesdayEndEditText),
+                (EditText)findViewById(R.id.thursdayEndEditText),
+                (EditText)findViewById(R.id.fridayEndEditText),
+                (EditText)findViewById(R.id.saturdayEndEditText),
+                (EditText)findViewById(R.id.sundayEndEditText)
+        };
+
+        checkBoxesArray = new CheckBox[]{
+                (CheckBox)findViewById(R.id.mondayCheckBox),
+                (CheckBox)findViewById(R.id.tuesdayCheckBox),
+                (CheckBox)findViewById(R.id.wednesdayCheckBox),
+                (CheckBox)findViewById(R.id.thursdayCheckBox),
+                (CheckBox)findViewById(R.id.fridayCheckBox),
+                (CheckBox)findViewById(R.id.saturdayCheckBox),
+                (CheckBox)findViewById(R.id.sundayCheckBox),
+        };
+
+        sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
+        timetable = new TimeTableElement[]{
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement()};
+
+        for (int i = 0; i < numberOfWeekDays; i++){
+            timetable[i].setHour_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_end", 23));
+            timetable[i].setHour_start(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_start", 0));
+            timetable[i].setMinute_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_minute_end", 59));
+            timetable[i].setMinute_start(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_minute_start", 0));
+            timetable[i].setEnable(sharedPreferences.getBoolean(TimeTableElement.weekDays[i] + "_checkbox", true));
+
+            checkBoxesArray[i].setChecked(timetable[i].getEnable());
+            configureEditTextLine(i, timetable[i].getEnable());
         }
     }
 
-    public void updateVisualElements(){
-
+    private void configureEditTextLine(int position, boolean status){
+        startsFromArray[position].setText(timetable[position].getStartString());
+        endToArray[position].setText(timetable[position].getEndString());
+        startsFromArray[position].setEnabled(status);
+        endToArray[position].setEnabled(status);
+        startsFromArray[position].setTextColor(Color.rgb(150 * ((status) ? 0 : 1), 150 * ((status) ? 0 : 1), 150 * ((status) ? 0 : 1)));
+        endToArray[position].setTextColor(Color.rgb(150 * ((status) ? 0 : 1), 150 * ((status) ? 0 : 1), 150 * ((status) ? 0 : 1)));
+        if (timetable[position].getHour_start() > timetable[position].getHour_end() ||
+                timetable[position].getHour_start() == timetable[position].getHour_end() &&
+                timetable[position].getMinute_start() > timetable[position].getMinute_end()) {
+            startsFromArray[position].setBackgroundColor(Color.RED);
+            endToArray[position].setBackgroundColor(Color.RED);
+        } else {
+            startsFromArray[position].setBackgroundColor(android.R.drawable.editbox_background);
+            endToArray[position].setBackgroundColor(android.R.drawable.editbox_background);
+        }
     }
 
     @Override
@@ -74,17 +130,37 @@ public class TimetableActivity extends Activity {
         builder.setMessage("В этом окне можно настроить расписание по которому будут обрабатываться сообщения, поступающие на почтовый ящик.").setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 
-    public void showTimePicker(View view){
-        Log.d("nibbler", "showTimePicker: " + Integer.toString(view.getId()));
-
+    public void showStartTimePicker(View view){
+        final int i = Arrays.asList(startsFromArray).indexOf((EditText)view);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Log.d("nibbler", "hour: " + Integer.toString(hourOfDay) + " minute: " + Integer.toString(minute));
+                timetable[i].setHour_start(hourOfDay);
+                timetable[i].setMinute_start(minute);
+                configureEditTextLine(i, checkBoxesArray[i].isChecked());
             }
-        }, 0, 0, false);
+        }, timetable[i].getHour_start(), timetable[i].getMinute_start(), true);
         timePickerDialog.show();
+    }
+
+    public void showEndTimePicker(View view){
+        final int i = Arrays.asList(endToArray).indexOf((EditText)view);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                timetable[i].setHour_end(hourOfDay);
+                timetable[i].setMinute_end(minute);
+                configureEditTextLine(i, checkBoxesArray[i].isChecked());
+            }
+        }, timetable[i].getHour_end(), timetable[i].getMinute_end(), true);
+        timePickerDialog.show();
+    }
+
+    public void checkboxClicked(View view){
+        int i = Arrays.asList(checkBoxesArray).indexOf((CheckBox)view);
+        configureEditTextLine(i, ((CheckBox) view).isChecked());
     }
 }
 
