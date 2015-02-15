@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.smsmanager"
+        applicationId "com.example.email2sms"
         minSdkVersion 14
         targetSdkVersion 21
     }

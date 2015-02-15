@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.smsmanager"
+    package="com.nibbler.email2sms"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -19,12 +19,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <service
-            android:name=".CheckEmailsAndSendSMS"
-            android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.nibbler.email2sms.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -34,80 +31,76 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LogViewActivity"
+            android:name="com.nibbler.email2sms.LogViewActivity"
             android:label="@string/logview_activity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.nibbler.email2sms.MainActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.nibbler.email2sms.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.nibbler.email2sms.SettingsActivity"
             android:label="@string/settings_activity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.nibbler.email2sms.MainActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.nibbler.email2sms.MainActivity" />
         </activity>
         <activity
-            android:name=".AddressesListActivity"
+            android:name="com.nibbler.email2sms.AddressesListActivity"
             android:label="@string/addresses_list_activity"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
         <activity
-            android:name=".ExcludedListActivity"
+            android:name="com.nibbler.email2sms.ExcludedListActivity"
             android:label="@string/excluded_list_activity"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
         <activity
-            android:name=".POP3SettingsActivity"
+            android:name="com.nibbler.email2sms.POP3SettingsActivity"
             android:label="@string/pop3settings_activity"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
         <activity
-            android:name=".TimetableActivity"
+            android:name="com.nibbler.email2sms.TimetableActivity"
             android:label="@string/timetable_layout"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
         <activity
-            android:name=".GeneralSettingsActivity"
+            android:name="com.nibbler.email2sms.GeneralSettingsActivity"
             android:label="@string/general_settings"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
         <activity
-            android:name=".UnreadSymbolsActivity"
+            android:name="com.nibbler.email2sms.UnreadSymbolsActivity"
             android:label="@string/unread_symbols"
-            android:parentActivityName=".SettingsActivity"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
             android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SettingsActivity" />
-        </activity>
-        <activity
-            android:name=".SettingsActivity2"
-            android:label="@string/title_activity_settings_activity2" >
+                android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
     </application>
 

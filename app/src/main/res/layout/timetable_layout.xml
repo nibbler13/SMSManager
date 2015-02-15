@@ -115,7 +115,7 @@
             android:gravity="center"
             android:id="@+id/mondayStartEditText"
             android:layout_toRightOf="@+id/mondayStartFromTextView"
-            android:layout_alignBottom="@+id/mondayStartFromTextView"
+            android:layout_alignBaseline="@+id/mondayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -124,7 +124,7 @@
             android:text="до"
             android:id="@+id/mondayEndTextView"
             android:layout_toRightOf="@+id/mondayStartEditText"
-            android:layout_alignBottom="@+id/mondayStartEditText"
+            android:layout_alignBottom="@+id/mondayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -139,7 +139,7 @@
             android:id="@+id/mondayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/mondayEndTextView"
-            android:layout_alignBottom="@+id/mondayEndTextView"/>
+            android:layout_alignBaseline="@+id/mondayEndTextView"/>
 
 
         <!--   Вторник   -->
@@ -164,7 +164,7 @@
             android:gravity="center"
             android:id="@+id/tuesdayStartEditText"
             android:layout_toRightOf="@+id/tuesdayStartFromTextView"
-            android:layout_alignBottom="@+id/tuesdayStartFromTextView"
+            android:layout_alignBaseline="@+id/tuesdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -173,7 +173,7 @@
             android:text="до"
             android:id="@+id/tuesdayEndTextView"
             android:layout_toRightOf="@+id/tuesdayStartEditText"
-            android:layout_alignBottom="@+id/tuesdayStartEditText"
+            android:layout_alignBottom="@+id/tuesdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -188,7 +188,7 @@
             android:id="@+id/tuesdayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tuesdayEndTextView"
-            android:layout_alignBottom="@+id/tuesdayEndTextView"/>
+            android:layout_alignBaseline="@+id/tuesdayEndTextView"/>
 
         <!--   Среда   -->
 
@@ -212,7 +212,7 @@
             android:gravity="center"
             android:id="@+id/wednesdayStartEditText"
             android:layout_toRightOf="@+id/wednesdayStartFromTextView"
-            android:layout_alignBottom="@+id/wednesdayStartFromTextView"
+            android:layout_alignBaseline="@+id/wednesdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -221,7 +221,7 @@
             android:text="до"
             android:id="@+id/wednesdayEndTextView"
             android:layout_toRightOf="@+id/wednesdayStartEditText"
-            android:layout_alignBottom="@+id/wednesdayStartEditText"
+            android:layout_alignBottom="@+id/wednesdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -236,7 +236,7 @@
             android:id="@+id/wednesdayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/wednesdayEndTextView"
-            android:layout_alignBottom="@+id/wednesdayEndTextView"/>
+            android:layout_alignBaseline="@+id/wednesdayEndTextView"/>
 
         <!--   Четверг   -->
 
@@ -260,7 +260,7 @@
             android:gravity="center"
             android:id="@+id/thursdayStartEditText"
             android:layout_toRightOf="@+id/thursdayStartFromTextView"
-            android:layout_alignBottom="@+id/thursdayStartFromTextView"
+            android:layout_alignBaseline="@+id/thursdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -269,7 +269,7 @@
             android:text="до"
             android:id="@+id/thursdayEndTextView"
             android:layout_toRightOf="@+id/thursdayStartEditText"
-            android:layout_alignBottom="@+id/thursdayStartEditText"
+            android:layout_alignBottom="@+id/thursdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -284,7 +284,7 @@
             android:id="@+id/thursdayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/thursdayEndTextView"
-            android:layout_alignBottom="@+id/thursdayEndTextView"/>
+            android:layout_alignBaseline="@+id/thursdayEndTextView"/>
 
         <!--   Пятница   -->
 
@@ -308,7 +308,7 @@
             android:gravity="center"
             android:id="@+id/fridayStartEditText"
             android:layout_toRightOf="@+id/fridayStartFromTextView"
-            android:layout_alignBottom="@+id/fridayStartFromTextView"
+            android:layout_alignBaseline="@+id/fridayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -317,7 +317,7 @@
             android:text="до"
             android:id="@+id/fridayEndTextView"
             android:layout_toRightOf="@+id/fridayStartEditText"
-            android:layout_alignBottom="@+id/fridayStartEditText"
+            android:layout_alignBottom="@+id/fridayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -332,7 +332,7 @@
             android:id="@+id/fridayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/fridayEndTextView"
-            android:layout_alignBottom="@+id/fridayEndTextView"/>
+            android:layout_alignBaseline="@+id/fridayEndTextView"/>
 
         <!--   Суббота   -->
 
@@ -356,7 +356,7 @@
             android:gravity="center"
             android:id="@+id/saturdayStartEditText"
             android:layout_toRightOf="@+id/saturdayStartFromTextView"
-            android:layout_alignBottom="@+id/saturdayStartFromTextView"
+            android:layout_alignBaseline="@+id/saturdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -365,7 +365,7 @@
             android:text="до"
             android:id="@+id/saturdayEndTextView"
             android:layout_toRightOf="@+id/saturdayStartEditText"
-            android:layout_alignBottom="@+id/saturdayStartEditText"
+            android:layout_alignBottom="@+id/saturdayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -380,7 +380,7 @@
             android:id="@+id/saturdayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/saturdayEndTextView"
-            android:layout_alignBottom="@+id/saturdayEndTextView"/>
+            android:layout_alignBaseline="@+id/saturdayEndTextView"/>
 
         <!--   Воскресенье   -->
 
@@ -404,7 +404,7 @@
             android:gravity="center"
             android:id="@+id/sundayStartEditText"
             android:layout_toRightOf="@+id/sundayStartFromTextView"
-            android:layout_alignBottom="@+id/sundayStartFromTextView"
+            android:layout_alignBaseline="@+id/sundayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <TextView
@@ -413,7 +413,7 @@
             android:text="до"
             android:id="@+id/sundayEndTextView"
             android:layout_toRightOf="@+id/sundayStartEditText"
-            android:layout_alignBottom="@+id/sundayStartEditText"
+            android:layout_alignBottom="@+id/sundayStartFromTextView"
             android:layout_marginLeft="10dp"/>
 
         <EditText
@@ -428,7 +428,7 @@
             android:id="@+id/sundayEndEditText"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/sundayEndTextView"
-            android:layout_alignBottom="@+id/sundayEndTextView"/>
+            android:layout_alignBaseline="@+id/sundayEndTextView"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sendLogToEmailActionBar"
+        android:showAsAction="always"
+        android:orderInCategory="97"
+        android:onClick="senLogActionBarClicked"
+        android:title="Отправить лог-файл по почте"
+        android:icon="@drawable/ic_action_email"
+        />
+    <item
+        android:id="@+id/helpActionBar"
+        android:showAsAction="ifRoom"
+        android:onClick="helpActionBarClicked"
+        android:orderInCategory="99"
+        android:icon="@drawable/ic_action_help"
+        android:title="Помощь"
+        />
+    <item
+        android:icon="@drawable/ic_action_remove"
+        android:onClick="removeActionBarOnClicked"
+        android:title="Очистить"
+        android:orderInCategory="98"
+        android:showAsAction="ifRoom"
+        android:id="@+id/removeActionBar"
+        />
+
+</menu>
