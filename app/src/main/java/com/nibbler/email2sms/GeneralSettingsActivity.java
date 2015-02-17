@@ -48,7 +48,7 @@ public class GeneralSettingsActivity extends Activity{
         deleteValueET = (EditText)findViewById(R.id.deleteOlderValueEditText);
         maxSymbolsET = (EditText)findViewById(R.id.maxSymbolsToSendEditText);
 
-        autoStartBool = sharedPreferences.getBoolean(getString(R.string.automaticallyStartWithOS), false);
+        autoStartBool = sharedPreferences.getBoolean(getString(R.string.automaticallyStartWithOS), true);
         writeToSDBool = sharedPreferences.getBoolean(getString(R.string.writeLogFileToSD), true);
         deleteOlderBool = sharedPreferences.getBoolean(getString(R.string.deleteLogOlderThanDays), true);
         deleteOlderValueInt = sharedPreferences.getInt(getString(R.string.deleteLogOlderValue), 60);

@@ -33,10 +33,8 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -99,12 +97,19 @@ public class MainActivity extends Activity implements OnClickListener {
             setStandardSettings();
             sharedPreferences.edit().putBoolean(getString(R.string.isThisFirstTime), false).apply();
         }
+
+        if (stopService(new Intent(this, BackgroundEmailCheck.class))){
+            Toast.makeText(this, "Service is running", Toast.LENGTH_LONG);
+        } else {
+            startService(new Intent(this, BackgroundEmailCheck.class));
+            Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG);
+        }
     }
 
     public void setStandardSettings(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         //general settings defaults value
-        editor.putBoolean(getString(R.string.automaticallyStartWithOS), false);
+        editor.putBoolean(getString(R.string.automaticallyStartWithOS), true);
         editor.putBoolean(getString(R.string.writeLogFileToSD), true);
         editor.putBoolean(getString(R.string.deleteLogOlderThanDays), true);
         editor.putInt(getString(R.string.deleteLogOlderValue), 60);
@@ -162,7 +167,7 @@ public class MainActivity extends Activity implements OnClickListener {
             String toLogFile = timeStamp() + "Запуск сервиса\r\n";
             writeToLog(toLogFile);
 
-            Toast.makeText(MainActivity.this, "Сервис запущен", Toast.LENGTH_LONG).show();
+            /*Toast.makeText(MainActivity.this, "Сервис запущен", Toast.LENGTH_LONG).show();
             scheduledExecutorService = Executors.newScheduledThreadPool(1);
             scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
                 @Override
@@ -174,20 +179,22 @@ public class MainActivity extends Activity implements OnClickListener {
                         }
                     });
                 }
-            }, 5, 60, TimeUnit.SECONDS);
+            }, 5, 60, TimeUnit.SECONDS);*/
 
             startServiceButton.setText("Остановить");
             serviceLabel.setText("Сервис выполняется");
             serviceLabel.setBackgroundColor(Color.GREEN);
             isServiceRun = true;
+            startService(new Intent(this, BackgroundEmailCheck.class));
         } else {
             String toLogFile = timeStamp() + "Остановка сервиса\r\n";
             writeToLog(toLogFile);
             startServiceButton.setText("Запустить");
             serviceLabel.setText("Сервис остановлен");
             serviceLabel.setBackgroundColor(Color.RED);
-            scheduledFuture.cancel(false);
+            //scheduledFuture.cancel(false);
             isServiceRun = false;
+            stopService(new Intent(this, BackgroundEmailCheck.class));
         }
     }
     

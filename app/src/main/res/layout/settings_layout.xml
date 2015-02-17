@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Общие настройки"
         android:id="@+id/generalSettingsButton"
@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Настройки почты"
         android:id="@+id/button"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Адреса получателей"
         android:id="@+id/button2"
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Список исключений"
         android:id="@+id/button3"
@@ -42,7 +42,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Нечитаемые знаки"
         android:id="@+id/unreadSymbolsButton"
@@ -51,7 +51,7 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="200dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Расписание"
         android:id="@+id/button4"
