@@ -2,6 +2,7 @@ package com.nibbler.email2sms;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -98,11 +99,19 @@ public class MainActivity extends Activity implements OnClickListener {
             sharedPreferences.edit().putBoolean(getString(R.string.isThisFirstTime), false).apply();
         }
 
-        if (stopService(new Intent(this, BackgroundEmailCheck.class))){
+        /*if (stopService(new Intent(this, BackgroundEmailCheck.class))){
             Toast.makeText(this, "Service is running", Toast.LENGTH_LONG);
         } else {
             startService(new Intent(this, BackgroundEmailCheck.class));
             Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG);
+        }*/
+
+        if (isMyServiceRunning(BackgroundEmailCheck.class)){
+            Toast.makeText(this, "Service is running", Toast.LENGTH_LONG).show();
+            setMainButton(true);
+        } else {
+            Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG).show();
+            setMainButton(false);
         }
     }
 
@@ -180,21 +189,28 @@ public class MainActivity extends Activity implements OnClickListener {
                     });
                 }
             }, 5, 60, TimeUnit.SECONDS);*/
-
-            startServiceButton.setText("Остановить");
-            serviceLabel.setText("Сервис выполняется");
-            serviceLabel.setBackgroundColor(Color.GREEN);
-            isServiceRun = true;
+            setMainButton(true);
             startService(new Intent(this, BackgroundEmailCheck.class));
         } else {
             String toLogFile = timeStamp() + "Остановка сервиса\r\n";
             writeToLog(toLogFile);
+            //scheduledFuture.cancel(false);
+            setMainButton(false);
+            stopService(new Intent(this, BackgroundEmailCheck.class));
+        }
+    }
+
+    private void setMainButton(boolean status){
+        if (status) {
+            startServiceButton.setText("Остановить");
+            serviceLabel.setText("Сервис выполняется");
+            serviceLabel.setBackgroundColor(Color.GREEN);
+            isServiceRun = true;
+        } else {
             startServiceButton.setText("Запустить");
             serviceLabel.setText("Сервис остановлен");
             serviceLabel.setBackgroundColor(Color.RED);
-            //scheduledFuture.cancel(false);
             isServiceRun = false;
-            stopService(new Intent(this, BackgroundEmailCheck.class));
         }
     }
     
@@ -558,5 +574,15 @@ public class MainActivity extends Activity implements OnClickListener {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass){
+        ActivityManager manager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
+            if (serviceClass.getName().equals(service.service.getClassName())){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -5,9 +5,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by NIBBLER on 16/02/15.
@@ -16,6 +22,9 @@ public class BackgroundEmailCheck extends Service {
 
     private NotificationManager mNM;
     private int NOTIFICATION = 76667;
+    ScheduledExecutorService scheduledExecutorService;
+    ScheduledFuture<?> scheduledFuture;
+    SharedPreferences sharedPreferences;
 
     public IBinder onBind(Intent intent){
         return null;
@@ -27,6 +36,20 @@ public class BackgroundEmailCheck extends Service {
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         showNotification();
         Log.d("nibbler", "BackgroundEmailCheck onCreate");
+
+        sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
+        long REPEAT_TIME = sharedPreferences.getInt(this.getString(R.string.checkingInterval), 60);
+        scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                checkEmail();
+            }
+        }, 10, REPEAT_TIME, TimeUnit.SECONDS);
+    }
+
+    private void checkEmail(){
+        Log.d("nibbler", "background service checkEmail");
     }
 
     @Override
@@ -40,6 +63,7 @@ public class BackgroundEmailCheck extends Service {
     public void onDestroy(){
         Toast.makeText(this, "My service stopped", Toast.LENGTH_LONG).show();
         mNM.cancel(NOTIFICATION);
+        scheduledFuture.cancel(false);
         Log.d("nibbler", "BackgroundEmailCheck onDestroy");
     }
 

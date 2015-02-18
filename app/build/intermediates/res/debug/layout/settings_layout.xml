@@ -1,62 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <Button
+    <ListView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Общие настройки"
-        android:id="@+id/generalSettingsButton"
-        android:onClick="generalSettingsOnClick"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="fill_parent"
+        android:id="@+id/settingsListView"
+        android:drawSelectorOnTop="true"
+        >
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Настройки почты"
-        android:id="@+id/button"
-        android:onClick="pop3SettingsOnClick"
-        android:layout_below="@+id/generalSettingsButton"
-        android:layout_centerHorizontal="true" />
+        </ListView>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Адреса получателей"
-        android:id="@+id/button2"
-        android:onClick="addressesListOnClick"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Список исключений"
-        android:id="@+id/button3"
-        android:onClick="excludedListOnClick"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Нечитаемые знаки"
-        android:id="@+id/unreadSymbolsButton"
-        android:onClick="unreadSymbolsButtonOnClick"
-        android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Расписание"
-        android:id="@+id/button4"
-        android:onClick="timetableOnClick"
-        android:layout_below="@+id/unreadSymbolsButton"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/settings_layout.xml -->
+</LinearLayout><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/settings_layout.xml -->
