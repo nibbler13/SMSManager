@@ -1,6 +1,5 @@
 package com.nibbler.email2sms;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -9,10 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,40 +16,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Flags;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -71,15 +39,16 @@ public class MainActivity extends Activity implements OnClickListener {
 	ScheduledExecutorService scheduledExecutorService;
     ScheduledFuture<?> scheduledFuture;
     SharedPreferences sharedPreferences;
+    private LogFile logFile;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	String toLogFile = timeStamp() + "Запуск приложения\r\n";
-    	writeToLog(toLogFile);
     	Log.d("nibbler", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        logFile = new LogFile(this);
+        logFile.writeToLog("Запуск приложения");
         sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
         
         startServiceButton = (Button) findViewById(R.id.sendSMS);
@@ -107,10 +76,10 @@ public class MainActivity extends Activity implements OnClickListener {
         }*/
 
         if (isMyServiceRunning(BackgroundEmailCheck.class)){
-            Toast.makeText(this, "Service is running", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Service is running", Toast.LENGTH_LONG).show();
             setMainButton(true);
         } else {
-            Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG).show();
             setMainButton(false);
         }
     }
@@ -173,8 +142,7 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onClick(View view){
     	Log.d("nibbler", "mainActivity onClick");
         if(!isServiceRun) {
-            String toLogFile = timeStamp() + "Запуск сервиса\r\n";
-            writeToLog(toLogFile);
+            //logFile.writeToLog("Запуск сервиса");
 
             /*Toast.makeText(MainActivity.this, "Сервис запущен", Toast.LENGTH_LONG).show();
             scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -192,8 +160,7 @@ public class MainActivity extends Activity implements OnClickListener {
             setMainButton(true);
             startService(new Intent(this, BackgroundEmailCheck.class));
         } else {
-            String toLogFile = timeStamp() + "Остановка сервиса\r\n";
-            writeToLog(toLogFile);
+            //logFile.writeToLog("Остановка сервиса");
             //scheduledFuture.cancel(false);
             setMainButton(false);
             stopService(new Intent(this, BackgroundEmailCheck.class));
@@ -214,15 +181,15 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
     
-    public boolean isExternalStorageWritable(){
+    /*public boolean isExternalStorageWritable(){
     	String state = Environment.getExternalStorageState();
     	if (Environment.MEDIA_MOUNTED.equals(state)){
     		return true;
     	}
     	return false;
-    }
+    }*/
     
-    public void checkEmail(){
+    /*public void checkEmail(){
     	PerformCheck performCheck = new PerformCheck();
     	performCheck.execute();
     	String toLogFile = "";
@@ -276,9 +243,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
     	updateLabel();
-    }
+    }*/
     
-    public void writeToLog(String info){
+    /*public void writeToLog(String info){
     	if (isExternalStorageWritable()) {
     		if (info.endsWith("\r\n")){
     			info = info.substring(0, info.length()-1);
@@ -295,7 +262,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				/*PrintWriter pw = new PrintWriter(f);
 				pw.println(info);
 				pw.flush();
-				pw.close();*/
+				pw.close();
 				
 				OutputStreamWriter os = new OutputStreamWriter(f, "CP1251");
 				os.write(info);
@@ -322,7 +289,7 @@ public class MainActivity extends Activity implements OnClickListener {
     public String timeStamp(){
 		Calendar c = Calendar.getInstance();
 		return c.getTime().toString() + ";";
-    }
+    }*/
     
     public void updateLabel(){
     	totalSmsLabel.setText(smsCounter.toString());
@@ -330,7 +297,7 @@ public class MainActivity extends Activity implements OnClickListener {
     	totalEmailsReceivedLabel.setText(emailsCounter.toString());
     }
     
-    public class SendLogFile extends AsyncTask<javax.mail.Address, Void, Void>{
+    /*public class SendLogFile extends AsyncTask<javax.mail.Address, Void, Void>{
     	protected Void doInBackground(javax.mail.Address... addresses){
     		Properties localPropertiesSmtp = System.getProperties();
 			localPropertiesSmtp.setProperty("mail.smtp.port", "465");
@@ -494,7 +461,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 			return null;
 		}
-	}
+	}*/
 
 
     @Override
