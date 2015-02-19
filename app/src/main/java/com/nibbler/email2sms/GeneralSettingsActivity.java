@@ -84,6 +84,11 @@ public class GeneralSettingsActivity extends Activity{
         super.onPause();
 
         autoStartBool = autoStartCB.isChecked();
+
+        LogFile logFile = new LogFile(this);
+        if (writeToSDBool != writeLogToSDCB.isChecked()){
+            logFile.changeLogFileFolder();
+        }
         writeToSDBool = writeLogToSDCB.isChecked();
         deleteOlderBool = deleteOlderCB.isChecked();
 

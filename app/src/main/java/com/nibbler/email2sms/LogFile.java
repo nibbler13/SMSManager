@@ -91,15 +91,49 @@ public class LogFile {
                 inputStream = new BufferedInputStream(new FileInputStream(file));
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "CP1251"));
                 String line = "";
-                Calendar calendar = Calendar.getInstance();
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((line = bufferedReader.readLine()) != null) {
-                    line = line.substring(4);
-                    line = line.replace(" " + Integer.toString(calendar.get(Calendar.YEAR)) + ";", " - ").replace(" GMT", "");
+                    //line = line.substring(4);
+                    line = line.replaceAll("\\s\\D{3,}\\s\\d{4}[;]", " - ").replace(" GMT", "");
                     stringBuilder.append(line + "\n");
                 }
                 textFromLogFile = stringBuilder.toString();
 
+                inputStream.close();
+            } catch (FileNotFoundException e) {
+                Log.d("nibbler", "LogFile FileNotFoundException");
+            } catch (IOException e) {
+                Log.d("nibbler", "LogFile IOException");
+            }
+        }
+        Log.d("nibbler", "LogFile textFromLogFile: " + textFromLogFile);
+        return textFromLogFile;
+    }
+
+    private String getLogFileTextFromSD(boolean fromSD){
+        Log.d("nibbler", "LogFile getLogFileTextFromSD");
+        String textFromLogFile = "";
+        InputStream inputStream = null;
+        File file;
+        boolean tempWriteToSD = writeToSDCard;
+        writeToSDCard = fromSD;
+        file = getLogFile();
+        writeToSDCard = tempWriteToSD;
+
+        if (file == null){
+            return textFromLogFile;
+        }
+
+        if (file.exists()) {
+            try {
+                inputStream = new BufferedInputStream(new FileInputStream(file));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "CP1251"));
+                String line = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+                textFromLogFile = stringBuilder.toString();
                 inputStream.close();
             } catch (FileNotFoundException e) {
                 Log.d("nibbler", "LogFile FileNotFoundException");
@@ -136,10 +170,23 @@ public class LogFile {
 
         file = new File(context.getFilesDir(), FILE_NAME);
         if (file.exists()) {
+            Log.d("nibbler", "getLogFile return file");
             return file;
         }
 
         Log.d("nibbler", "LogFile getLogFile return null");
         return file;
+    }
+
+    public void changeLogFileFolder(){
+        Log.d("nibbler", "changeLogFileFolder");
+        String logPart1 = getLogFileTextFromSD(writeToSDCard);
+        String logPart2 = getLogFileTextFromSD(!writeToSDCard);
+        StringBuilder stringBuilder = new StringBuilder().append(logPart1).append(logPart2);
+        deleteLogFile();
+        writeToSDCard = !writeToSDCard;
+        deleteLogFile();
+        writeToLog(stringBuilder.toString());
+        writeToSDCard = !writeToSDCard;
     }
 }
