@@ -24,7 +24,7 @@ import java.util.Arrays;
 public class TimetableActivity extends Activity {
 
     final Context context = this;
-    final static int numberOfWeekDays = 7;
+    final static int NUMBER_OF_WEEK_DAYS = 7;
     SharedPreferences sharedPreferences;
     TimeTableElement[] timetable;
     EditText[] startsFromArray;
@@ -77,7 +77,7 @@ public class TimetableActivity extends Activity {
                 new TimeTableElement(),
                 new TimeTableElement()};
 
-        for (int i = 0; i < numberOfWeekDays; i++){
+        for (int i = 0; i < NUMBER_OF_WEEK_DAYS; i++){
             timetable[i].setHour_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_end", 23));
             timetable[i].setHour_start(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_start", 0));
             timetable[i].setMinute_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_minute_end", 59));
@@ -168,7 +168,7 @@ public class TimetableActivity extends Activity {
         Log.d("nibbler", "timetable onPause");
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (int i = 0; i < numberOfWeekDays; i++){
+        for (int i = 0; i < NUMBER_OF_WEEK_DAYS; i++){
             editor.putBoolean(TimeTableElement.weekDays[i] + "_checkbox", checkBoxesArray[i].isChecked());
             editor.putInt(TimeTableElement.weekDays[i] + "_hour_start", timetable[i].getHour_start());
             editor.putInt(TimeTableElement.weekDays[i] + "_hour_end", timetable[i].getHour_end());

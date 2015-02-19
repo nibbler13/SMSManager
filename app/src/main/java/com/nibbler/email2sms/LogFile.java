@@ -37,19 +37,43 @@ public class LogFile {
     }
 
     public void writeToLog(String info){
-        Log.d("nibbler", "LogFile writeToLog: " + info);
+        Log.d("nibbler", "LogFile writeToLog");
         File file = getLogFile();
         if (file == null){
             return;
         }
-        /*if (info.endsWith("\r\n")){
-            info = info.substring(0, info.length()-1);
-        }*/
+
         try {
             Log.d("nibbler", "LogFile try to write string to file");
             FileOutputStream f = new FileOutputStream(file, true);
             OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
             os.write(timeStamp() + info + "\r\n");
+            os.flush();
+            os.close();
+            f.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            Log.d("nibbler", "FileNotFoundException");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("nibbler", "IOException");
+        } catch (IllegalArgumentException e){
+            Log.d("nibbler", "IllegalArgumentException");
+        }
+    }
+
+    private void writeToLogWithoutTimeStamp(String info){
+        Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp");
+        File file = getLogFile();
+        if (file == null){
+            return;
+        }
+
+        try {
+            Log.d("nibbler", "LogFile try to write string to file");
+            FileOutputStream f = new FileOutputStream(file, true);
+            OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
+            os.write(info);
             os.flush();
             os.close();
             f.close();
@@ -93,7 +117,6 @@ public class LogFile {
                 String line = "";
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((line = bufferedReader.readLine()) != null) {
-                    //line = line.substring(4);
                     line = line.replaceAll("\\s\\D{3,}\\s\\d{4}[;]", " - ").replace(" GMT", "");
                     stringBuilder.append(line + "\n");
                 }
@@ -160,6 +183,7 @@ public class LogFile {
         Log.d("nibbler", "LogFile getLogFile isExternalStorageWritable: " + isExternalStorageWritable() + " writeToSDCard: " + writeToSDCard);
         if (isExternalStorageWritable() && writeToSDCard) {
             File root = android.os.Environment.getExternalStorageDirectory();
+            Log.d("nibbler", "LogFile root.getAbsolutePath: " + root.getAbsolutePath());
             File dir = new File(root.getAbsolutePath() + "/" + FOLDER_NAME);
             if (!dir.exists()){
                 dir.mkdirs();
@@ -186,7 +210,7 @@ public class LogFile {
         deleteLogFile();
         writeToSDCard = !writeToSDCard;
         deleteLogFile();
-        writeToLog(stringBuilder.toString());
+        writeToLogWithoutTimeStamp(stringBuilder.toString());
         writeToSDCard = !writeToSDCard;
     }
 }

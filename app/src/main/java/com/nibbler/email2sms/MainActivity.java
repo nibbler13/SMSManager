@@ -20,8 +20,6 @@ import android.widget.TextView;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -31,14 +29,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView totalMessagesLabel;
 	private TextView totalEmailsReceivedLabel;
 	private TextView serviceLabel;
-	private Integer smsCounter = 0;
-    private Integer messagesCounter = 0;
-    private Integer emailsCounter = 0;
     private Boolean isServiceRun = false;
-    Context context = this;
-	ScheduledExecutorService scheduledExecutorService;
-    ScheduledFuture<?> scheduledFuture;
-    SharedPreferences sharedPreferences;
+    private Context context = this;
+    private SharedPreferences sharedPreferences;
     private LogFile logFile;
 	
     @Override
@@ -59,7 +52,6 @@ public class MainActivity extends Activity implements OnClickListener {
         totalEmailsReceivedLabel = (TextView) findViewById(R.id.totalEmailReceivedLabel);
         serviceLabel = (TextView) findViewById(R.id.serviceLabel);
         serviceLabel.setBackgroundColor(Color.RED);
-    	updateLabel();
 
         boolean checking = sharedPreferences.getBoolean(getString(R.string.isThisFirstTime), true);
         Log.d("nibbler", "onCreate checking=" + checking);
@@ -68,20 +60,13 @@ public class MainActivity extends Activity implements OnClickListener {
             sharedPreferences.edit().putBoolean(getString(R.string.isThisFirstTime), false).apply();
         }
 
-        /*if (stopService(new Intent(this, BackgroundEmailCheck.class))){
-            Toast.makeText(this, "Service is running", Toast.LENGTH_LONG);
-        } else {
-            startService(new Intent(this, BackgroundEmailCheck.class));
-            Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG);
-        }*/
-
         if (isMyServiceRunning(BackgroundEmailCheck.class)){
-            //Toast.makeText(this, "Service is running", Toast.LENGTH_LONG).show();
             setMainButton(true);
         } else {
-            //Toast.makeText(this, "Service is NOT running", Toast.LENGTH_LONG).show();
             setMainButton(false);
         }
+
+        updateLabel();
     }
 
     public void setStandardSettings(){
@@ -95,7 +80,8 @@ public class MainActivity extends Activity implements OnClickListener {
         //pop3 settings default value
         editor.putBoolean(getString(R.string.sendLogViaMail), true);
         editor.putBoolean(getString(R.string.smtpAuthentication), true);
-        editor.putBoolean(getString(R.string.useSSL), true);
+        editor.putBoolean(getString(R.string.pop3UseSSL), true);
+        editor.putBoolean(getString(R.string.smtpUseSSL), true);
         editor.putString(getString(R.string.emailFolderName), "inbox");
         editor.putInt(getString(R.string.checkingInterval), 60);
         //addresses settings default value
@@ -135,6 +121,10 @@ public class MainActivity extends Activity implements OnClickListener {
             editor.putInt(TimeTableElement.weekDays[i] + "_minute_start", 0);
             editor.putInt(TimeTableElement.weekDays[i] + "_minute_end", 59);
         }
+        //set counters to 0
+        editor.putInt(getString(R.string.totalEmailCounter), 0);
+        editor.putInt(getString(R.string.totalMessagesCounter), 0);
+        editor.putInt(getString(R.string.totalSmsCounter), 0);
 
         editor.apply();
     }
@@ -142,26 +132,11 @@ public class MainActivity extends Activity implements OnClickListener {
     public void onClick(View view){
     	Log.d("nibbler", "mainActivity onClick");
         if(!isServiceRun) {
-            //logFile.writeToLog("Запуск сервиса");
-
-            /*Toast.makeText(MainActivity.this, "Сервис запущен", Toast.LENGTH_LONG).show();
-            scheduledExecutorService = Executors.newScheduledThreadPool(1);
-            scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            checkEmail();
-                        }
-                    });
-                }
-            }, 5, 60, TimeUnit.SECONDS);*/
+            logFile.writeToLog("Запуск сервиса");
             setMainButton(true);
             startService(new Intent(this, BackgroundEmailCheck.class));
         } else {
-            //logFile.writeToLog("Остановка сервиса");
-            //scheduledFuture.cancel(false);
+            logFile.writeToLog("Остановка сервиса");
             setMainButton(false);
             stopService(new Intent(this, BackgroundEmailCheck.class));
         }
@@ -181,288 +156,11 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
     
-    /*public boolean isExternalStorageWritable(){
-    	String state = Environment.getExternalStorageState();
-    	if (Environment.MEDIA_MOUNTED.equals(state)){
-    		return true;
-    	}
-    	return false;
-    }*/
-    
-    /*public void checkEmail(){
-    	PerformCheck performCheck = new PerformCheck();
-    	performCheck.execute();
-    	String toLogFile = "";
-    	boolean isAnythingFinded = false;
-    	try {
-			String[] messages = performCheck.get();
-			Context context = getApplicationContext();
-			Toast toast = Toast.makeText(context, "Обнаружено сообщений: " + messages.length/2, Toast.LENGTH_LONG);
-			toast.show();
-			
-			for (int i = 0; i < messages.length; i += 2){
-				if (messages[i] != null) {
-					isAnythingFinded = true;
-					Log.d("nibbler", "---message " + i/2 + " subject: " + messages[i] + " content: " + messages[i+1]);
-					try{
-						toLogFile += (timeStamp() + "Сообщения для;" + messages[i] + ";со следующим содержанием;" + messages[i+1]);
-			        	SmsManager smsManager = SmsManager.getDefault();
-			        	ArrayList<String> msgArray = smsManager.divideMessage(messages[i+1]);
-				    	smsManager.sendMultipartTextMessage(messages[i], null, msgArray, null, null);
-				    	smsCounter += msgArray.size();
-				    	messagesCounter += 1;
-				    	Toast.makeText(getApplicationContext(), "Сообщение отправлено, кол-во СМС: " + msgArray.size(), Toast.LENGTH_LONG).show();
-				    	toLogFile += (";было отправлено, кол-во СМС;" + msgArray.size() + "\r\n");
-			    	} catch (Exception ex) {
-			    		Log.d("nibbler", "SmsManager Exception");
-			    		Toast.makeText(getApplicationContext(), "Сообщение не удалось отправить", Toast.LENGTH_LONG).show();
-				    	toLogFile += (timeStamp() + "Сообщение не было отправлено;SmsManager Exception\r\n");
-			    		ex.printStackTrace();
-			    	}
-				}
-			}
-    		if (isAnythingFinded){
-	    		toLogFile += timeStamp() + "Информация;СМС отправлено: " + smsCounter.toString() + ", messagesCounter: " + messagesCounter.toString() + ", Сообщений получено: " + emailsCounter.toString() + "\r\n";
-		    	writeToLog(toLogFile);
-    		}
-		} catch (InterruptedException e) {
-			Log.d("nibbler", "MESSAGES CATCH InterruptedException");
-    		Toast.makeText(getApplicationContext(), "MESSAGES CATCH InterruptedException", Toast.LENGTH_LONG).show();
-    		toLogFile += timeStamp() + "MESSAGES CATCH InterruptedException\r\n";
-    		writeToLog(toLogFile);
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			Log.d("nibbler", "MESSAGES CATCH ExecutionException");
-    		Toast.makeText(getApplicationContext(), "MESSAGES CATCH ExecutionException", Toast.LENGTH_LONG).show();
-    		toLogFile += timeStamp() + "MESSAGES CATCH ExecutionException\r\n";
-    		writeToLog(toLogFile);
-			e.printStackTrace();
-		} catch (NullPointerException e) {
-			Log.d("nibbler", "MESSAGES CATCH NullPointerException");
-    		Toast.makeText(getApplicationContext(), "Новых сообщений не обнаружено", Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-		}
-    	updateLabel();
-    }*/
-    
-    /*public void writeToLog(String info){
-    	if (isExternalStorageWritable()) {
-    		if (info.endsWith("\r\n")){
-    			info = info.substring(0, info.length()-1);
-    		}
-			File root = android.os.Environment.getExternalStorageDirectory();
-			File dir = new File(root.getAbsolutePath() + "/Email2SMS");
-			if (!dir.exists()){
-				dir.mkdirs();
-			}
-			File file = new File(dir, "/Log.csv");
-			
-			try {
-				FileOutputStream f = new FileOutputStream(file, true);
-				/*PrintWriter pw = new PrintWriter(f);
-				pw.println(info);
-				pw.flush();
-				pw.close();
-				
-				OutputStreamWriter os = new OutputStreamWriter(f, "CP1251");
-				os.write(info);
-				os.flush();
-				os.close();
-				
-				
-				f.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-				Log.d("nibbler", "FileNotFoundException");
-			} catch (IOException e) {
-				e.printStackTrace();
-				Log.d("nibbler", "IOException");
-			} catch (IllegalArgumentException e){
-				Log.d("nibbler", "IllegalArgumentException");
-			}
-			
-		} else {
-			Log.d("nibbler", "isExternalStorageWritable = false");
-		}
-    }
-    
-    public String timeStamp(){
-		Calendar c = Calendar.getInstance();
-		return c.getTime().toString() + ";";
-    }*/
-    
     public void updateLabel(){
-    	totalSmsLabel.setText(smsCounter.toString());
-    	totalMessagesLabel.setText(messagesCounter.toString());
-    	totalEmailsReceivedLabel.setText(emailsCounter.toString());
+    	totalSmsLabel.setText(Integer.toString(sharedPreferences.getInt(getString(R.string.totalSmsCounter), 0)));
+    	totalMessagesLabel.setText(Integer.toString(sharedPreferences.getInt(getString(R.string.totalMessagesCounter), 0)));
+    	totalEmailsReceivedLabel.setText(Integer.toString(sharedPreferences.getInt(getString(R.string.totalEmailCounter), 0)));
     }
-    
-    /*public class SendLogFile extends AsyncTask<javax.mail.Address, Void, Void>{
-    	protected Void doInBackground(javax.mail.Address... addresses){
-    		Properties localPropertiesSmtp = System.getProperties();
-			localPropertiesSmtp.setProperty("mail.smtp.port", "465");
-			localPropertiesSmtp.setProperty("mail.smtp.connectiontimeout", "4000");
-			localPropertiesSmtp.setProperty("mail.smtp.timeout", "10000");
-			localPropertiesSmtp.setProperty("mail.smtp.host", "smtp.yandex.com");
-			localPropertiesSmtp.setProperty("mail.smtp.auth", "true");
-			localPropertiesSmtp.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			localPropertiesSmtp.setProperty("mail.smtp.socketFactory.port", "465");
-			localPropertiesSmtp.setProperty("mail.smtp.socketFactory.fallback", "false");
-			Session session = Session.getInstance(localPropertiesSmtp, new javax.mail.Authenticator(){
-				protected PasswordAuthentication getPasswordAuthentication(){
-					return new PasswordAuthentication("nibble2", "N!i9b8b7##");
-				}
-			});
-			try {
-				MimeMessage message = new MimeMessage(session);
-				message.setFrom(new InternetAddress("nibble2@yandex.ru"));
-				if (addresses[0] != null) {
-					message.addRecipient(Message.RecipientType.TO, addresses[0]);
-				} else {
-					message.addRecipient(Message.RecipientType.TO, new InternetAddress("nibble@yandex.ru"));
-				}
-				message.setSubject("Email2SMS LogFile");
-				BodyPart messageBodyPart = new MimeBodyPart();
-				messageBodyPart.setText(timeStamp());
-				Multipart multipart = new MimeMultipart();
-				multipart.addBodyPart(messageBodyPart);
-				messageBodyPart = new MimeBodyPart();
-				File root = android.os.Environment.getExternalStorageDirectory();
-				File file = new File(root.getAbsolutePath() + "/Email2SMS/Log.csv");
-				DataSource source = new FileDataSource(file);
-				messageBodyPart.setDataHandler(new DataHandler(source));
-				messageBodyPart.setFileName("Log.csv");
-				multipart.addBodyPart(messageBodyPart);
-				message.setContent(multipart);
-				Transport.send(message);
-				Log.d("nibbler", "message successfully sent");
-			} catch (MessagingException mex) {
-				mex.printStackTrace();
-				Log.d("nibbler", "!!!MessagingException");
-			}
-    		return null;
-    	}
-    }
-    
-    public class PerformCheck extends AsyncTask<Void, Void, String[]>{
-		String toLogFile = "";
-		@SuppressLint("DefaultLocale") 
-		@Override
-		protected String[] doInBackground(Void... params){
-			try {
-				Properties localProperties = System.getProperties();
-				localProperties.setProperty("mail.pop3.port", "995");
-				localProperties.setProperty("mail.pop3.connectiontimeout", "4000");
-				localProperties.setProperty("mail.pop3.timeout", "10000");
-				localProperties.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-				localProperties.setProperty("mail.pop3.socketFactory.port", "995");
-				localProperties.setProperty("mail.pop3.socketFactory.fallback", "false");
-				Store localStore = Session.getDefaultInstance(localProperties).getStore("pop3");
-				localStore.connect("pop.yandex.com", "nibble2", "N!i9b8b7##");
-				Folder localFolder = localStore.getFolder("inbox");
-				Message[] arrayOfMessage;
-				String[] messagesToSMS;
-				int messagesTotal = 0;
-				if (localFolder != null) {
-					Log.d("nibbler", "localFolder is notNULL");
-					//toLogFile += timeStamp() + "LocalFolder is notNull\r\n";
-					localFolder.open(Folder.READ_WRITE);
-					arrayOfMessage = localFolder.getMessages();
-					messagesTotal = arrayOfMessage.length;
-					messagesToSMS = new String[messagesTotal * 2];
-					Log.d("nibbler", "Inbox contains: " + messagesTotal);
-					//toLogFile += timeStamp() + "Inbox contains," + messagesTotal + "\r\n";
-					if (messagesTotal <= 0) {
-						localFolder.close(true);
-						localStore.close();
-					} else {
-						emailsCounter += messagesTotal;
-
-						for (int i = 0; i < messagesTotal; i++) {
-							try {
-								Object content = arrayOfMessage[i].getContent();
-								String contentType = arrayOfMessage[i].getContentType().toLowerCase();
-								String subject = arrayOfMessage[i].getSubject().toLowerCase();
-
-								if (subject.contains("log")){
-									SendLogFile sendLog = new SendLogFile();
-									sendLog.execute(arrayOfMessage[i].getFrom());
-								}
-								
-								toLogFile += timeStamp() + "Получено сообщение с темой;" + subject;
-								
-								if (contentType.contains("text")){
-									if (subject.contains("������")) {
-										//������� ����� ��������
-										messagesToSMS[i*2] = "89601811873";
-									} else if (subject.contains("������")){
-										//������� ������ �����������
-										messagesToSMS[i*2] = "89674659975";
-									} else if (subject.contains("���������")){
-										//���������� ����� ���������
-										messagesToSMS[i*2] = "89673034433";
-									} else if (subject.contains("���")){
-										//������� ������� ����������
-										messagesToSMS[i*2] = "89603848641";
-									} else if (subject.contains("���������")){
-										//������ �������� ���������
-										messagesToSMS[i*2] = "89216516778";
-									} else if (subject.contains("�����������")){
-										//������� �������� ��������
-										messagesToSMS[i*2] = "89095327069";
-									} else if (subject.contains("����������")){
-										//������ ��������� �������������
-										messagesToSMS[i*2] = "89659031324";
-									}
-									
-									if (messagesToSMS[i*2] != null) {
-										messagesToSMS[i*2+1] = content.toString()
-												.replace("\n", "")
-												.replace("\r", "")
-												.replace("<BR>", " ")
-												.replace(";", ",")
-												.replace("&lt,", "")
-												.replace("&gt,", "")
-												.replace("<a href=\"mailto:", "");
-										toLogFile += ";с текстом;" + messagesToSMS[i*2+1];
-										if (messagesToSMS[i*2+1].length() > 350) {
-											messagesToSMS[i*2+1] = messagesToSMS[i*2+1].substring(0, 350);
-										}
-									}
-								}
-								toLogFile += "\r\n";
-								arrayOfMessage[i].setFlag(Flags.Flag.DELETED, true);
-							} catch (MessagingException ex) {
-								Log.d("nibbler", "ME");
-								toLogFile += timeStamp() + "MessagingException ME\r\n";
-							} catch (Exception ex) {
-								Log.d("nibbler", "EE");
-								toLogFile += timeStamp() + "Exception EE\r\n";
-							}
-						}
-						localFolder.close(true);
-						localStore.close();
-						if (messagesTotal > 0) {
-							writeToLog(toLogFile);
-							Log.d("nibbler", "messagesTotal: " + messagesTotal);
-					    	toLogFile = timeStamp() + "Информация;СМС отправлено: " + smsCounter.toString() + ", messagesCounter: " + messagesCounter.toString() + ", Сообщений получено: " + emailsCounter.toString() + "\r\n";
-					    	writeToLog(toLogFile);
-						}
-						return messagesToSMS;
-					}
-				} else {
-					localStore.close();
-				}
-			} catch (Exception localException) {
-				localException.printStackTrace();
-				Log.d("nibbler", "EXCEPTION");
-				toLogFile += timeStamp() + "Exception localException\r\n";
-				writeToLog(toLogFile);
-			}
-			return null;
-		}
-	}*/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -485,7 +183,7 @@ public class MainActivity extends Activity implements OnClickListener {
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Настройки можно изменять только когда сервис остановлен.").setPositiveButton("Ок", dialogClickListenerInfo).show();
+            builder.setMessage(getString(R.string.mainActivitySettingsStartErrorText)).setPositiveButton("Ок", dialogClickListenerInfo).show();
             return;
         }
 
@@ -508,16 +206,7 @@ public class MainActivity extends Activity implements OnClickListener {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("Приложение периодически проверяет указанный в настройках электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС.\n\nАвтор: Грашкин Павел\nnn-admin@nnkk.budzdorov.su\n2015 Нижний Новгород\nv1.0beta\n\nВозможности:\n" +
-                "-Получение писем через POP3 протокол\n" +
-                "-Возможность использовать SSL\n" +
-                "-Номера телефонов получателей СМС задаются на основе кодового слова в теме письма\n" +
-                "-Часть символов (ненужных) можно исключить из СМС сообщения\n" +
-                "-Игнорирование письма, если оно содержит определенную строку\n" +
-                "-Возможность работы по заданному расписанию\n" +
-                "-Ведение лог-файла в формате CSV для выгрузки в Excel\n" +
-                "-Лог файл может быть выслан по почте\n" +
-                "-Изменение время опроса почтового сервера.").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage(getString(R.string.mainActivityAboutActionBarText)).setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 
     public void logViewActionBarClicked(MenuItem item){
@@ -540,7 +229,7 @@ public class MainActivity extends Activity implements OnClickListener {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage("При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".").setPositiveButton("Ок", dialogClickListenerInfo).show();
+        builder.setMessage(getString(R.string.mainActivityHelpActionBarText)).setPositiveButton("Ок", dialogClickListenerInfo).show();
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass){

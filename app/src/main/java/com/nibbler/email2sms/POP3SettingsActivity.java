@@ -21,26 +21,32 @@ public class POP3SettingsActivity extends Activity {
 
     EditText pop3ServerNameET;
     EditText pop3ServerPortET;
+    EditText pop3LoginET;
+    EditText pop3PasswordET;
+    CheckBox pop3UseSSLCB;
     CheckBox sendLogFileToMailCB;
     EditText smtpServerNameET;
     EditText smtpPortET;
     CheckBox smtpAuthenticationCB;
-    CheckBox useSSLCB;
-    EditText loginET;
-    EditText passwordET;
+    CheckBox smtpUseSSLCB;
+    EditText smtpLoginET;
+    EditText smtpPasswordET;
     EditText inboxFolderNameET;
     EditText checkIntervalET;
     Button checkConnection;
 
     String pop3ServerNameString;
     int pop3ServerPortInt;
+    String pop3LoginString;
+    String pop3PasswordString;
+    Boolean pop3UseSSLBool;
     boolean sendLogFileToMailBool;
     String smtpServerNameString;
     int smtpPortInt;
     boolean smtpAuthenticationBool;
-    boolean useSSLBool;
-    String loginString;
-    String passwordString;
+    boolean smtpUseSSLBool;
+    String smtpLoginString;
+    String smtpPasswordString;
     String inboxFolderNameString;
     int checkIntervalInt;
 
@@ -56,13 +62,16 @@ public class POP3SettingsActivity extends Activity {
 
         pop3ServerNameET = (EditText)findViewById(R.id.pop3ServerAddressEditText);
         pop3ServerPortET = (EditText)findViewById(R.id.pop3PortNumberEditText);
+        pop3LoginET = (EditText)findViewById(R.id.pop3LoginEditText);
+        pop3PasswordET = (EditText)findViewById(R.id.pop3PasswordEditText);
+        pop3UseSSLCB = (CheckBox)findViewById(R.id.pop3UseSSLCheckBox);
         sendLogFileToMailCB = (CheckBox)findViewById(R.id.logFileSendCheckBox);
         smtpServerNameET = (EditText)findViewById(R.id.smtpServerEditText);
         smtpPortET = (EditText)findViewById(R.id.smtpPortEditText);
         smtpAuthenticationCB = (CheckBox)findViewById(R.id.smtpAuthenticationCheckBox);
-        useSSLCB = (CheckBox)findViewById(R.id.useSSLCheckBox);
-        loginET = (EditText)findViewById(R.id.loginEditText);
-        passwordET = (EditText)findViewById(R.id.passwordEditText);
+        smtpUseSSLCB = (CheckBox)findViewById(R.id.smtpUseSSLCheckBox);
+        smtpLoginET = (EditText)findViewById(R.id.smtpLoginEditText);
+        smtpPasswordET = (EditText)findViewById(R.id.smtpPasswordEditText);
         inboxFolderNameET = (EditText)findViewById(R.id.inboxFolderEditText);
         checkIntervalET = (EditText)findViewById(R.id.checkingIntervalEditBox);
         checkConnection = (Button)findViewById(R.id.checkConnectionButton);
@@ -71,13 +80,16 @@ public class POP3SettingsActivity extends Activity {
 
         pop3ServerNameString = sharedPreferences.getString(getString(R.string.pop3ServerName), "");
         pop3ServerPortInt = sharedPreferences.getInt(getString(R.string.pop3ServerPort), 0);
+        pop3LoginString = sharedPreferences.getString(getString(R.string.pop3Login), "");
+        pop3PasswordString = sharedPreferences.getString(getString(R.string.pop3Password), "");
+        pop3UseSSLBool = sharedPreferences.getBoolean(getString(R.string.pop3UseSSL), true);
         sendLogFileToMailBool = sharedPreferences.getBoolean(getString(R.string.sendLogViaMail), true);
         smtpServerNameString = sharedPreferences.getString(getString(R.string.smtpServerName), "");
         smtpPortInt = sharedPreferences.getInt(getString(R.string.smtpServerPort), 0);
         smtpAuthenticationBool = sharedPreferences.getBoolean(getString(R.string.smtpAuthentication), true);
-        useSSLBool = sharedPreferences.getBoolean(getString(R.string.useSSL), true);
-        loginString = sharedPreferences.getString(getString(R.string.login), "");
-        passwordString = sharedPreferences.getString(getString(R.string.password), "");
+        smtpUseSSLBool = sharedPreferences.getBoolean(getString(R.string.smtpUseSSL), true);
+        smtpLoginString = sharedPreferences.getString(getString(R.string.smtpLogin), "");
+        smtpPasswordString = sharedPreferences.getString(getString(R.string.smtpPassword), "");
         inboxFolderNameString = sharedPreferences.getString(getString(R.string.emailFolderName), "inbox");
         checkIntervalInt = sharedPreferences.getInt(getString(R.string.checkingInterval), 60);
 
@@ -161,9 +173,12 @@ public class POP3SettingsActivity extends Activity {
         }
 
         smtpAuthenticationCB.setChecked(smtpAuthenticationBool);
-        useSSLCB.setChecked(useSSLBool);
-        loginET.setText(loginString);
-        passwordET.setText(passwordString);
+        smtpUseSSLCB.setChecked(smtpUseSSLBool);
+        smtpLoginET.setText(smtpLoginString);
+        smtpPasswordET.setText(smtpPasswordString);
+        pop3UseSSLCB.setChecked(pop3UseSSLBool);
+        pop3LoginET.setText(pop3LoginString);
+        pop3PasswordET.setText(pop3PasswordString);
         inboxFolderNameET.setText(inboxFolderNameString);
         checkIntervalET.setText(Integer.toString(checkIntervalInt));
 

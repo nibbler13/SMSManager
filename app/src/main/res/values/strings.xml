@@ -12,6 +12,11 @@
     <string name="general_settings">Общие настройки</string>
     <string name="unread_symbols">Нечитаемые знаки</string>
 
+    <!--counters-->
+    <string name="totalSmsCounter">totalSmsCounter</string> <!-- integer -->
+    <string name="totalMessagesCounter">totalMessagesCounter</string> <!-- integer -->
+    <string name="totalEmailCounter">totalEmailCounter</string> <!-- integer -->
+
     <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
     <string name="isThisFirstTime">isThisFirstTime</string> <!-- boolean -->
     <!--general settings-->
@@ -23,13 +28,16 @@
     <!--pop3 settings-->
     <string name="pop3ServerName">pop3ServerName</string> <!-- string -->
     <string name="pop3ServerPort">pop3ServerPort</string> <!-- integer -->
+    <string name="pop3Login">pop3Login</string> <!-- string -->
+    <string name="pop3Password">pop3Password</string> <!-- string -->
+    <string name="pop3UseSSL">pop3UseSSL</string> <!-- boolean -->
     <string name="sendLogViaMail">sendLogViaMail</string> <!-- boolean -->
     <string name="smtpServerName">smtpServerName</string> <!-- string -->
     <string name="smtpServerPort">smtpServerPort</string> <!-- integer -->
     <string name="smtpAuthentication">smtpAuthentication</string> <!-- boolean -->
-    <string name="useSSL">useSSL</string> <!-- boolean -->
-    <string name="login">login</string> <!-- string -->
-    <string name="password">password</string> <!-- string -->
+    <string name="smtpUseSSL">smtpUseSSL</string> <!-- boolean -->
+    <string name="smtpLogin">smtpLogin</string> <!-- string -->
+    <string name="smtpPassword">smtpPassword</string> <!-- string -->
     <string name="emailFolderName">emailFolderName</string> <!-- string -->
     <string name="checkingInterval">checkingInterval</string> <!-- integer -->
     <!--addresses settings-->
@@ -81,5 +89,10 @@
     <string name="sunday_hour_end">sunday_end</string> <!-- int -->
     <string name="sunday_minute_start">sunday_start</string> <!-- int -->
     <string name="sunday_minute_end">sunday_end</string> <!-- int -->
+
+    <!--textForAlertDialog-->
+    <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>
+    <string name="mainActivityAboutActionBarText">Приложение периодически проверяет указанный в настройках электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС.\n\nАвтор: Грашкин Павел\nnn-admin@nnkk.budzdorov.su\n2015 Нижний Новгород\nv1.0beta\n\nВозможности:\n-Получение писем через POP3 протокол\n-Возможность использовать SSL\n-Номера телефонов получателей СМС задаются на основе кодового слова в теме письма\n-Часть символов (ненужных) можно исключить из СМС сообщения\n-Игнорирование письма, если оно содержит определенную строку\n-Возможность работы по заданному расписанию\n-Ведение лог-файла в формате CSV для выгрузки в Excel\n-Лог файл может быть выслан по почте\n-Изменение время опроса почтового сервера.</string>
+    <string name="mainActivitySettingsStartErrorText">Настройки можно изменять только когда сервис остановлен.</string>
 
 </resources>

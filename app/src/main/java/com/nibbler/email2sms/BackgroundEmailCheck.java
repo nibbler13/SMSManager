@@ -47,10 +47,30 @@ public class BackgroundEmailCheck extends Service {
 
     private NotificationManager mNM;
     private int NOTIFICATION = 76667;
-    ScheduledExecutorService scheduledExecutorService;
-    ScheduledFuture<?> scheduledFuture;
-    SharedPreferences sharedPreferences;
-    LogFile logFile;
+    private ScheduledExecutorService scheduledExecutorService;
+    private ScheduledFuture<?> scheduledFuture;
+    private SharedPreferences sharedPreferences;
+    private LogFile logFile;
+
+    private final int NUMBER_OF_WEEK_DAYS = 7;
+
+    //settings
+    private int maxSymbolsInSMS;
+    private String pop3ServerName;
+    private int pop3ServerPort;
+    private boolean sendLogViaMail;
+    private String smtpServerName;
+    private int smtpServerPort;
+    private boolean smtpAuthentication;
+    private boolean useSSL;
+    private String login;
+    private String password;
+    private String emailFolderName;
+    private int checkingInterval;
+    private String[] addresses_list;
+    private String[] excluded_list;
+    private String[] unreadable_list;
+    private TimeTableElement[] timeTableElements;
 
     public IBinder onBind(Intent intent){
         return null;
@@ -58,13 +78,38 @@ public class BackgroundEmailCheck extends Service {
 
     @Override
     public void onCreate(){
-        //Toast.makeText(this, "Congrats! My Service Created", Toast.LENGTH_LONG).show();
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         showNotification();
-        Log.d("nibbler", "BackgroundEmailCheck onCreate");
 
+        Log.d("nibbler", "BackgroundEmailCheck onCreate");
         logFile = new LogFile(this);
+        logFile.writeToLog("Сервис создан");
+
         sharedPreferences = this.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
+
+        maxSymbolsInSMS = sharedPreferences.getInt(getString(R.string.maxSymbolsInSMS), 350);
+        pop3ServerName = sharedPreferences.getString(getString(R.string.pop3ServerName), "");
+        pop3ServerPort = sharedPreferences.getInt(getString(R.string.pop3ServerPort), 0);
+        sendLogViaMail = sharedPreferences.getBoolean(getString(R.string.sendLogViaMail), true);
+        smtpServerName = sharedPreferences.getString(getString(R.string.smtpServerName), "");
+        smtpServerPort = sharedPreferences.getInt(getString(R.string.smtpServerPort), 0);
+        smtpAuthentication = sharedPreferences.getBoolean(getString(R.string.smtpAuthentication), true);
+        useSSL = sharedPreferences.getBoolean(getString(R.string.useSSL), true);
+        private String login =
+        private String password;
+        private String emailFolderName;
+        private int checkingInterval;
+
+
+
+
+
+
+
+
+
+
+
         long REPEAT_TIME = sharedPreferences.getInt(this.getString(R.string.checkingInterval), 60);
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
@@ -77,6 +122,7 @@ public class BackgroundEmailCheck extends Service {
 
     private void checkEmail(){
         Log.d("nibbler", "background service checkEmail");
+        logFile.writeToLog("Запущена проверка почтового ящика");
 
         PerformCheck performCheck = new PerformCheck();
         performCheck.execute();
@@ -84,9 +130,7 @@ public class BackgroundEmailCheck extends Service {
         boolean isAnythingFounded = false;
         try {
             String[] messages = performCheck.get();
-            //Context context = getApplicationContext();
-            //Toast toast = Toast.makeText(context, "Обнаружено сообщений: " + messages.length/2, Toast.LENGTH_LONG);
-            //toast.show();
+            logFile.writeToLog("Обнаружено сообщений: " + messages.length/2);
 
             for (int i = 0; i < messages.length; i += 2){
                 if (messages[i] != null) {
