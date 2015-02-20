@@ -11,10 +11,12 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -58,19 +60,28 @@ public class BackgroundEmailCheck extends Service {
     private int maxSymbolsInSMS;
     private String pop3ServerName;
     private int pop3ServerPort;
+    private boolean pop3UseSSL;
+    private String pop3Login;
+    private String pop3Password;
     private boolean sendLogViaMail;
     private String smtpServerName;
     private int smtpServerPort;
     private boolean smtpAuthentication;
-    private boolean useSSL;
-    private String login;
-    private String password;
+    private String smtpLogin;
+    private String smtpPassword;
+    private boolean smtpUseSSL;
     private String emailFolderName;
-    private int checkingInterval;
     private String[] addresses_list;
     private String[] excluded_list;
     private String[] unreadable_list;
     private TimeTableElement[] timeTableElements;
+
+    //general counters
+    private int totalSmsCounter;
+    private int totalMessagesCounter;
+    private int totalEmailCounter;
+
+    private boolean configIsCorrect;
 
     public IBinder onBind(Intent intent){
         return null;
@@ -78,9 +89,6 @@ public class BackgroundEmailCheck extends Service {
 
     @Override
     public void onCreate(){
-        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        showNotification();
-
         Log.d("nibbler", "BackgroundEmailCheck onCreate");
         logFile = new LogFile(this);
         logFile.writeToLog("Сервис создан");
@@ -94,39 +102,81 @@ public class BackgroundEmailCheck extends Service {
         smtpServerName = sharedPreferences.getString(getString(R.string.smtpServerName), "");
         smtpServerPort = sharedPreferences.getInt(getString(R.string.smtpServerPort), 0);
         smtpAuthentication = sharedPreferences.getBoolean(getString(R.string.smtpAuthentication), true);
-        useSSL = sharedPreferences.getBoolean(getString(R.string.useSSL), true);
-        private String login =
-        private String password;
-        private String emailFolderName;
-        private int checkingInterval;
+        pop3UseSSL = sharedPreferences.getBoolean(getString(R.string.pop3UseSSL), true);
+        pop3Login = sharedPreferences.getString(getString(R.string.pop3Login), "");
+        pop3Password = sharedPreferences.getString(getString(R.string.pop3Password), "");
+        smtpLogin = sharedPreferences.getString(getString(R.string.smtpLogin), "");
+        smtpPassword = sharedPreferences.getString(getString(R.string.smtpPassword), "");
+        smtpUseSSL = sharedPreferences.getBoolean(getString(R.string.smtpUseSSL), true);
+        emailFolderName = sharedPreferences.getString(getString(R.string.emailFolderName), "");
+
+        totalSmsCounter = sharedPreferences.getInt(getString(R.string.totalSmsCounter), 0);
+        totalMessagesCounter = sharedPreferences.getInt(getString(R.string.totalMessagesCounter), 0);
+        totalEmailCounter = sharedPreferences.getInt(getString(R.string.totalEmailCounter), 0);
+
+        Set<String> addressesSet = sharedPreferences.getStringSet(getString(R.string.addresses_list), new HashSet<String>(Arrays.asList(new String[]{""})));
+        Set<String> excludedSet = sharedPreferences.getStringSet(getString(R.string.excluded_list), new HashSet<String>(Arrays.asList(new String[]{""})));
+        Set<String> unreadableSet = sharedPreferences.getStringSet(getString(R.string.unreadable_list), new HashSet<String>(Arrays.asList(new String[]{""})));
+
+        addresses_list = addressesSet.toArray(new String[0]);
+        excluded_list = excludedSet.toArray(new String[0]);
+        unreadable_list = unreadableSet.toArray(new String[0]);
+
+        timeTableElements = new TimeTableElement[]{
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement(),
+                new TimeTableElement()};
+
+        for (int i = 0; i < NUMBER_OF_WEEK_DAYS; i++) {
+            timeTableElements[i].setHour_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_end", 23));
+            timeTableElements[i].setHour_start(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_hour_start", 0));
+            timeTableElements[i].setMinute_end(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_minute_end", 59));
+            timeTableElements[i].setMinute_start(sharedPreferences.getInt(TimeTableElement.weekDays[i] + "_minute_start", 0));
+            timeTableElements[i].setEnable(sharedPreferences.getBoolean(TimeTableElement.weekDays[i] + "_checkbox", true));
+        }
 
 
+        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        configIsCorrect = true;
+        if (pop3Login.equalsIgnoreCase("") ||
+            pop3Password.equalsIgnoreCase("") ||
+            pop3ServerName.equalsIgnoreCase("") ||
+            pop3ServerPort < 1 ||
+            pop3ServerPort > 63535) {
+            configIsCorrect = false;
+        }
 
+        if (sendLogViaMail) {
+            if (smtpLogin.equalsIgnoreCase("") ||
+                smtpPassword.equalsIgnoreCase("") ||
+                smtpServerName.equalsIgnoreCase("") ||
+                smtpServerPort < 1 ||
+                smtpServerPort > 63535) {
+                configIsCorrect = false;
+            }
+        }
+        showNotificationNormalState(configIsCorrect);
+        if (!configIsCorrect) return;
 
-
-
-
-
-
-
-
-        long REPEAT_TIME = sharedPreferences.getInt(this.getString(R.string.checkingInterval), 60);
+        int checkingInterval = sharedPreferences.getInt(getString(R.string.checkingInterval), 60);
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 checkEmail();
             }
-        }, 10, REPEAT_TIME, TimeUnit.SECONDS);
+        }, 10, checkingInterval, TimeUnit.SECONDS);
     }
 
     private void checkEmail(){
         Log.d("nibbler", "background service checkEmail");
-        logFile.writeToLog("Запущена проверка почтового ящика");
 
         PerformCheck performCheck = new PerformCheck();
         performCheck.execute();
-        String toLogFile = "";
         boolean isAnythingFounded = false;
         try {
             String[] messages = performCheck.get();
@@ -135,43 +185,34 @@ public class BackgroundEmailCheck extends Service {
             for (int i = 0; i < messages.length; i += 2){
                 if (messages[i] != null) {
                     isAnythingFounded = true;
-                    Log.d("nibbler", "---message " + i/2 + " subject: " + messages[i] + " content: " + messages[i+1]);
+                    Log.d("nibbler", "BackgroundEmailCheck checkEmail --- message " + i/2 + " subject: " + messages[i] + " content: " + messages[i+1]);
                     try{
-                        toLogFile += ("Сообщения для;" + messages[i] + ";со следующим содержанием;" + messages[i+1]);
                         SmsManager smsManager = SmsManager.getDefault();
                         ArrayList<String> msgArray = smsManager.divideMessage(messages[i+1]);
                         smsManager.sendMultipartTextMessage(messages[i], null, msgArray, null, null);
-                        //smsCounter += msgArray.size();
-                        //messagesCounter += 1;
-                        //Toast.makeText(getApplicationContext(), "Сообщение отправлено, кол-во СМС: " + msgArray.size(), Toast.LENGTH_LONG).show();
-                        toLogFile += (";было отправлено, кол-во СМС;" + msgArray.size());
+                        totalSmsCounter += msgArray.size();
+                        totalMessagesCounter += 1;
+                        logFile.writeToLog("Сообщения для;" + messages[i] + ";со следующим содержанием;" + messages[i+1] + ";было отправлено, кол-во СМС;" + msgArray.size());
                     } catch (Exception ex) {
-                        Log.d("nibbler", "SmsManager Exception");
-                        //Toast.makeText(getApplicationContext(), "Сообщение не удалось отправить", Toast.LENGTH_LONG).show();
-                        toLogFile += ("Сообщение не было отправлено;SmsManager Exception");
+                        Log.d("nibbler", "BackgroundEmailCheck checkEmail SmsManager Exception");
+                        logFile.writeToLog("Сообщение не было отправлено;SmsManager Exception");
                         ex.printStackTrace();
                     }
                 }
             }
             if (isAnythingFounded){
-                //toLogFile += "Информация;СМС отправлено: " + smsCounter.toString() + ", messagesCounter: " + messagesCounter.toString() + ", Сообщений получено: " + emailsCounter.toString();
-                logFile.writeToLog(toLogFile);
+                logFile.writeToLog("Информация;СМС отправлено: " + Integer.toString(totalSmsCounter) + ", messagesCounter: " + Integer.toString(totalMessagesCounter) + ", Сообщений получено: " + Integer.toString(totalEmailCounter));
             }
         } catch (InterruptedException e) {
-            Log.d("nibbler", "MESSAGES CATCH InterruptedException");
-            Toast.makeText(getApplicationContext(), "MESSAGES CATCH InterruptedException", Toast.LENGTH_LONG).show();
-            toLogFile += "MESSAGES CATCH InterruptedException";
-            logFile.writeToLog(toLogFile);
+            Log.d("nibbler", "BackgroundEmailCheck checkEmail --- MESSAGES CATCH InterruptedException");
+            logFile.writeToLog("BackgroundEmailCheck checkEmail --- MESSAGES CATCH InterruptedException");
             e.printStackTrace();
         } catch (ExecutionException e) {
-            Log.d("nibbler", "MESSAGES CATCH ExecutionException");
-            Toast.makeText(getApplicationContext(), "MESSAGES CATCH ExecutionException", Toast.LENGTH_LONG).show();
-            toLogFile += "MESSAGES CATCH ExecutionException";
-            logFile.writeToLog(toLogFile);
+            Log.d("nibbler", "BackgroundEmailCheck checkEmail --- MESSAGES CATCH ExecutionException");
+            logFile.writeToLog("BackgroundEmailCheck checkEmail --- MESSAGES CATCH ExecutionException");
             e.printStackTrace();
         } catch (NullPointerException e) {
-            Log.d("nibbler", "MESSAGES CATCH NullPointerException");
-            Toast.makeText(getApplicationContext(), "Новых сообщений не обнаружено", Toast.LENGTH_LONG).show();
+            Log.d("nibbler", "BackgroundEmailCheck checkEmail --- There is no new emails");
             e.printStackTrace();
         }
     }
@@ -344,27 +385,33 @@ public class BackgroundEmailCheck extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startID){
-        Toast.makeText(this, "My service started", Toast.LENGTH_LONG).show();
-        Log.d("nibbler", "BackgroundEmailCheck onStart");
+        Log.d("nibbler", "BackgroundEmailCheck onStartCommand");
         return START_STICKY;
     }
 
     @Override
     public void onDestroy(){
-        Toast.makeText(this, "My service stopped", Toast.LENGTH_LONG).show();
         mNM.cancel(NOTIFICATION);
-        scheduledFuture.cancel(false);
+        if (configIsCorrect) scheduledFuture.cancel(false);
         Log.d("nibbler", "BackgroundEmailCheck onDestroy");
     }
 
-    private void showNotification(){
-        CharSequence text = "Email2SMS сервис запущен";
+    private void showNotificationNormalState(boolean status){
+        CharSequence text;
+        int icon;
+        if (status) {
+            text = "Сервис запущен";
+            icon = R.drawable.ic_launcher;
+        } else {
+            text = "Неверные настройки!";
+            icon = R.drawable.ic_launcher_red;
+        }
 
         @SuppressWarnings("deprecation")
-        Notification notification = new Notification(R.drawable.ic_launcher, text, System.currentTimeMillis());
+        Notification notification = new Notification(icon, text, System.currentTimeMillis());
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
         notification.flags = Notification.FLAG_ONGOING_EVENT;
-        notification.setLatestEventInfo(this, "Нажмите, чтобы перейти к приложению", text, contentIntent);
+        notification.setLatestEventInfo(this, "Email2SMS", text, contentIntent);
         mNM.notify(NOTIFICATION, notification);
     }
 }

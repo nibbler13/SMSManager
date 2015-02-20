@@ -24,7 +24,6 @@
     <string name="friday_minute_start">monday_start</string>
     <string name="general_settings">Общие настройки</string>
     <string name="isThisFirstTime">isThisFirstTime</string>
-    <string name="login">login</string>
     <string name="logview_activity">Журнал работы</string>
     <string name="mainActivityAboutActionBarText">Приложение периодически проверяет указанный в настройках электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС.\n\nАвтор: Грашкин Павел\nnn-admin@nnkk.budzdorov.su\n2015 Нижний Новгород\nv1.0beta\n\nВозможности:\n-Получение писем через POP3 протокол\n-Возможность использовать SSL\n-Номера телефонов получателей СМС задаются на основе кодового слова в теме письма\n-Часть символов (ненужных) можно исключить из СМС сообщения\n-Игнорирование письма, если оно содержит определенную строку\n-Возможность работы по заданному расписанию\n-Ведение лог-файла в формате CSV для выгрузки в Excel\n-Лог файл может быть выслан по почте\n-Изменение время опроса почтового сервера.</string>
     <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>
@@ -35,9 +34,11 @@
     <string name="monday_hour_start">monday_start</string>
     <string name="monday_minute_end">monday_end</string>
     <string name="monday_minute_start">monday_start</string>
-    <string name="password">password</string>
+    <string name="pop3Login">pop3Login</string>
+    <string name="pop3Password">pop3Password</string>
     <string name="pop3ServerName">pop3ServerName</string>
     <string name="pop3ServerPort">pop3ServerPort</string>
+    <string name="pop3UseSSL">pop3UseSSL</string>
     <string name="pop3settings_activity">Настройки почты</string>
     <string name="saturday_checkbox">saturday_checkbox</string>
     <string name="saturday_hour_end">saturday_end</string>
@@ -48,8 +49,11 @@
     <string name="settings_activity">Настройки</string>
     <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
     <string name="smtpAuthentication">smtpAuthentication</string>
+    <string name="smtpLogin">smtpLogin</string>
+    <string name="smtpPassword">smtpPassword</string>
     <string name="smtpServerName">smtpServerName</string>
     <string name="smtpServerPort">smtpServerPort</string>
+    <string name="smtpUseSSL">smtpUseSSL</string>
     <string name="sunday_checkbox">sunday_checkbox</string>
     <string name="sunday_hour_end">sunday_end</string>
     <string name="sunday_hour_start">sunday_start</string>
@@ -63,7 +67,7 @@
     <string name="timetable_layout">График работы</string>
     <string name="totalEmailCounter">totalEmailCounter</string>
     <string name="totalMessagesCounter">totalMessagesCounter</string>
-    <string name="totalSmsCounter">smsCounter</string>
+    <string name="totalSmsCounter">totalSmsCounter</string>
     <string name="tuesday_checkbox">tuesday_checkbox</string>
     <string name="tuesday_hour_end">tuesday_end</string>
     <string name="tuesday_hour_start">tuesday_start</string>
@@ -71,7 +75,6 @@
     <string name="tuesday_minute_start">tuesday_start</string>
     <string name="unread_symbols">Нечитаемые знаки</string>
     <string name="unreadable_list">unreadable_list</string>
-    <string name="useSSL">useSSL</string>
     <string name="wednesday_checkbox">wednesday_checkbox</string>
     <string name="wednesday_hour_end">wednesday_end</string>
     <string name="wednesday_hour_start">wednesday_start</string>

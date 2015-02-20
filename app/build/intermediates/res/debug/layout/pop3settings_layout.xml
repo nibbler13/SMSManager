@@ -40,12 +40,48 @@
             android:ems="20"
             android:id="@+id/pop3PortNumberEditText" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="POP3: Логин:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pop3LoginEditText"
+            android:inputType="text"
+            android:ems="20"
+            android:hint="nibble2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="POP3: Пароль:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pop3PasswordEditText"
+            android:ems="20"
+            android:hint="************"
+            android:inputType="textPassword" />
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="POP3: Использовать SSL"
+            android:id="@+id/pop3UseSSLCheckBox"
+            android:checked="true" />
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Отправлять журнал работы по почте"
             android:checked="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/logFileSendCheckBox"/>
 
         <TextView
@@ -86,24 +122,16 @@
             android:id="@+id/smtpAuthenticationCheckBox"
             android:checked="true"/>
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Использовать SSL"
-            android:id="@+id/useSSLCheckBox"
-            android:checked="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Логин:" />
+            android:text="SMTP: Логин:" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/loginEditText"
+            android:id="@+id/smtpLoginEditText"
             android:inputType="text"
             android:ems="20"
             android:hint="nibble2" />
@@ -112,20 +140,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Пароль:" />
+            android:text="SMTP: Пароль:" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/passwordEditText"
+            android:id="@+id/smtpPasswordEditText"
             android:ems="20"
             android:hint="************"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SMTP: Использовать SSL"
+            android:id="@+id/smtpUseSSLCheckBox"
+            android:checked="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:text="Имя корневой папки:" />
 
         <EditText
@@ -140,7 +175,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Интервал опроса сервера в секундах:"
-            android:layout_marginTop="15dp"
             android:id="@+id/textView25" />
 
         <EditText

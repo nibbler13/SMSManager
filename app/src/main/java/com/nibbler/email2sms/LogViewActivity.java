@@ -27,7 +27,7 @@ public class LogViewActivity extends Activity{
     final Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            Log.d("nibbler", "logViewActivity runnable.run");
+            //Log.d("nibbler", "logViewActivity runnable.run");
             updateResultsInUi();
         }
     };
@@ -38,14 +38,14 @@ public class LogViewActivity extends Activity{
         setContentView(R.layout.logview_layout);
         logFile = new LogFile(this);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        Log.d("nibbler", "This is LogView onCreate");
+        //Log.d("nibbler", "This is LogView onCreate");
 
         logTextView = (TextView)findViewById(R.id.logViewTextView);
         logTextView.setMovementMethod(new ScrollingMovementMethod());
 
         Thread thread = new Thread(){
             public void run(){
-                Log.d("nibbler", "logViewActivity thread.run");
+                //Log.d("nibbler", "logViewActivity thread.run");
                 textFromLogFile = logFile.getLogFileText();
                 handler.post(runnable);
             }
@@ -55,7 +55,7 @@ public class LogViewActivity extends Activity{
     }
 
     private void updateResultsInUi(){
-        Log.d("nibbler", "logViewActivity updateResultsInUi");
+        //Log.d("nibbler", "logViewActivity updateResultsInUi");
         if (!textFromLogFile.equalsIgnoreCase("")){
             logTextView.setText(textFromLogFile);
         } else {
@@ -71,7 +71,7 @@ public class LogViewActivity extends Activity{
     }
 
     public void helpActionBarClicked(MenuItem item){
-        Log.d("nibbler", "helpActionBarClicked");
+        //Log.d("nibbler", "helpActionBarClicked");
 
         DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
             @Override
@@ -88,7 +88,7 @@ public class LogViewActivity extends Activity{
     }
 
     public void senLogActionBarClicked(MenuItem item){
-        Log.d("nibbler", "logViewActivity senLogToEmailClicked");
+        //Log.d("nibbler", "logViewActivity senLogToEmailClicked");
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
@@ -120,7 +120,7 @@ public class LogViewActivity extends Activity{
     }
 
     public void removeActionBarOnClicked(MenuItem item){
-        Log.d("nibbler", "logViewActivity removeActionBarOnClicked");
+        //Log.d("nibbler", "logViewActivity removeActionBarOnClicked");
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override

@@ -40,15 +40,6 @@
             android:ems="20"
             android:id="@+id/pop3PortNumberEditText" />
 
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="POP3: Использовать SSL"
-            android:id="@+id/pop3UseSSLCheckBox"
-            android:checked="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,12 +68,20 @@
             android:hint="************"
             android:inputType="textPassword" />
 
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="POP3: Использовать SSL"
+            android:id="@+id/pop3UseSSLCheckBox"
+            android:checked="true" />
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Отправлять журнал работы по почте"
             android:checked="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/logFileSendCheckBox"/>
 
         <TextView
@@ -123,14 +122,6 @@
             android:id="@+id/smtpAuthenticationCheckBox"
             android:checked="true"/>
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="SMTP: Использовать SSL"
-            android:id="@+id/smtpUseSSLCheckBox"
-            android:checked="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,10 +150,17 @@
             android:hint="************"
             android:inputType="textPassword" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SMTP: Использовать SSL"
+            android:id="@+id/smtpUseSSLCheckBox"
+            android:checked="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:text="Имя корневой папки:" />
 
         <EditText
@@ -177,7 +175,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Интервал опроса сервера в секундах:"
-            android:layout_marginTop="15dp"
             android:id="@+id/textView25" />
 
         <EditText

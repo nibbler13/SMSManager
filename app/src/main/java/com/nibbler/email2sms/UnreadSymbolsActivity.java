@@ -70,7 +70,7 @@ public class UnreadSymbolsActivity extends Activity {
         });
 
         sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
-        strings = new HashSet<String>(sharedPreferences.getStringSet(getString(R.string.unreadable_list), new HashSet<String>(Arrays.asList(new String[]{"1", "3", "5"}))));
+        strings = new HashSet<String>(sharedPreferences.getStringSet(getString(R.string.unreadable_list), new HashSet<String>(Arrays.asList(new String[]{""}))));
 
         Log.d("nibbler", "unread strings.size()=" + Integer.toString(strings.size()));
 

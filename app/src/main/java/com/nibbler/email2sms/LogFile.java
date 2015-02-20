@@ -30,21 +30,21 @@ public class LogFile {
     private boolean writeToSDCard;
 
     public LogFile(Context externalContext){
-        Log.d("nibbler", "LogFile Constructor");
+        //Log.d("nibbler", "LogFile Constructor");
         context = externalContext;
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharedSettingsName), Context.MODE_PRIVATE);
         writeToSDCard = sharedPreferences.getBoolean(context.getString(R.string.writeLogFileToSD), true);
     }
 
     public void writeToLog(String info){
-        Log.d("nibbler", "LogFile writeToLog");
+        //Log.d("nibbler", "LogFile writeToLog");
         File file = getLogFile();
         if (file == null){
             return;
         }
 
         try {
-            Log.d("nibbler", "LogFile try to write string to file");
+            //Log.d("nibbler", "LogFile try to write string to file");
             FileOutputStream f = new FileOutputStream(file, true);
             OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
             os.write(timeStamp() + info + "\r\n");
@@ -53,24 +53,24 @@ public class LogFile {
             f.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Log.d("nibbler", "FileNotFoundException");
+            Log.d("nibbler", "LogFile writeToLog FileNotFoundException");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("nibbler", "IOException");
+            Log.d("nibbler", "LogFile writeToLog IOException");
         } catch (IllegalArgumentException e){
-            Log.d("nibbler", "IllegalArgumentException");
+            Log.d("nibbler", "LogFile writeToLog IllegalArgumentException");
         }
     }
 
     private void writeToLogWithoutTimeStamp(String info){
-        Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp");
+        //Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp");
         File file = getLogFile();
         if (file == null){
             return;
         }
 
         try {
-            Log.d("nibbler", "LogFile try to write string to file");
+            //Log.d("nibbler", "LogFile try to write string to file");
             FileOutputStream f = new FileOutputStream(file, true);
             OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
             os.write(info);
@@ -79,12 +79,12 @@ public class LogFile {
             f.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Log.d("nibbler", "FileNotFoundException");
+            Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp FileNotFoundException");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("nibbler", "IOException");
+            Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp IOException");
         } catch (IllegalArgumentException e){
-            Log.d("nibbler", "IllegalArgumentException");
+            Log.d("nibbler", "LogFile writeToLogWithoutTimeStamp IllegalArgumentException");
         }
     }
 
@@ -102,7 +102,7 @@ public class LogFile {
     }
 
     public String getLogFileText(){
-        Log.d("nibbler", "LogFile getLogFileText");
+        //Log.d("nibbler", "LogFile getLogFileText");
         String textFromLogFile = "";
         InputStream inputStream = null;
         File file = getLogFile();
@@ -124,17 +124,17 @@ public class LogFile {
 
                 inputStream.close();
             } catch (FileNotFoundException e) {
-                Log.d("nibbler", "LogFile FileNotFoundException");
+                Log.d("nibbler", "LogFile getLogFileText FileNotFoundException");
             } catch (IOException e) {
-                Log.d("nibbler", "LogFile IOException");
+                Log.d("nibbler", "LogFile getLogFileText IOException");
             }
         }
-        Log.d("nibbler", "LogFile textFromLogFile: " + textFromLogFile);
+        //Log.d("nibbler", "LogFile textFromLogFile: " + textFromLogFile);
         return textFromLogFile;
     }
 
     private String getLogFileTextFromSD(boolean fromSD){
-        Log.d("nibbler", "LogFile getLogFileTextFromSD");
+        //Log.d("nibbler", "LogFile getLogFileTextFromSD");
         String textFromLogFile = "";
         InputStream inputStream = null;
         File file;
@@ -159,9 +159,9 @@ public class LogFile {
                 textFromLogFile = stringBuilder.toString();
                 inputStream.close();
             } catch (FileNotFoundException e) {
-                Log.d("nibbler", "LogFile FileNotFoundException");
+                Log.d("nibbler", "LogFile getLogFileTextFromSD FileNotFoundException");
             } catch (IOException e) {
-                Log.d("nibbler", "LogFile IOException");
+                Log.d("nibbler", "LogFile getLogFileTextFromSD IOException");
             }
         }
         return textFromLogFile;
@@ -180,10 +180,10 @@ public class LogFile {
 
     public File getLogFile(){
         File file = null;
-        Log.d("nibbler", "LogFile getLogFile isExternalStorageWritable: " + isExternalStorageWritable() + " writeToSDCard: " + writeToSDCard);
+        //Log.d("nibbler", "LogFile getLogFile isExternalStorageWritable: " + isExternalStorageWritable() + " writeToSDCard: " + writeToSDCard);
         if (isExternalStorageWritable() && writeToSDCard) {
             File root = android.os.Environment.getExternalStorageDirectory();
-            Log.d("nibbler", "LogFile root.getAbsolutePath: " + root.getAbsolutePath());
+            //Log.d("nibbler", "LogFile root.getAbsolutePath: " + root.getAbsolutePath());
             File dir = new File(root.getAbsolutePath() + "/" + FOLDER_NAME);
             if (!dir.exists()){
                 dir.mkdirs();
@@ -194,7 +194,7 @@ public class LogFile {
 
         file = new File(context.getFilesDir(), FILE_NAME);
         if (file.exists()) {
-            Log.d("nibbler", "getLogFile return file");
+            //Log.d("nibbler", "getLogFile return file");
             return file;
         }
 
@@ -203,7 +203,7 @@ public class LogFile {
     }
 
     public void changeLogFileFolder(){
-        Log.d("nibbler", "changeLogFileFolder");
+        //Log.d("nibbler", "changeLogFileFolder");
         String logPart1 = getLogFileTextFromSD(writeToSDCard);
         String logPart2 = getLogFileTextFromSD(!writeToSDCard);
         StringBuilder stringBuilder = new StringBuilder().append(logPart1).append(logPart2);

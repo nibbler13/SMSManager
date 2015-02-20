@@ -115,11 +115,11 @@ public class POP3SettingsActivity extends Activity {
                 if (pop3ServerPortInt == 0) {
                     errors += "Порт POP3 сервера не может быть пустым\n";
                 }
-                if (loginString.equalsIgnoreCase("")) {
-                    errors += "Логин не может быть пустым\n";
+                if (pop3LoginString.equalsIgnoreCase("")) {
+                    errors += "POP3 логин не может быть пустым\n";
                 }
-                if (passwordString.equalsIgnoreCase("")) {
-                    errors += "Пароль не может быть пустым\n";
+                if (pop3PasswordString.equalsIgnoreCase("")) {
+                    errors += "POP3 пароль не может быть пустым\n";
                 }
                 if (sendLogFileToMailBool){
                     if (smtpServerNameString.equalsIgnoreCase("")) {
@@ -127,6 +127,12 @@ public class POP3SettingsActivity extends Activity {
                     }
                     if (smtpPortInt == 0) {
                         errors += "Порт SMTP сервера не может быть пустым\n";
+                    }
+                    if (smtpLoginString.equalsIgnoreCase("")) {
+                        errors += "SMTP логин не может быть пустым\n";
+                    }
+                    if (smtpPasswordString.equalsIgnoreCase("")) {
+                        errors += "SMTP пароль не может быть пустым\n";
                     }
                 }
 
@@ -185,19 +191,18 @@ public class POP3SettingsActivity extends Activity {
     }
 
     public void changeEditTextStatus(boolean isChecked){
-        if (!isChecked){
-            smtpServerNameET.setEnabled(false);
-            smtpServerNameET.setTextColor(Color.rgb(150, 150, 150));
-            smtpPortET.setEnabled(false);
-            smtpPortET.setTextColor(Color.rgb(150, 150, 150));
-            smtpAuthenticationCB.setEnabled(false);
-        } else {
-            smtpServerNameET.setEnabled(true);
-            smtpServerNameET.setTextColor(Color.rgb(0, 0, 0));
-            smtpPortET.setEnabled(true);
-            smtpPortET.setTextColor(Color.rgb(0, 0, 0));
-            smtpAuthenticationCB.setEnabled(true);
-        }
+        int modifier = (isChecked) ? 0 : 1;
+        int color = Color.rgb(150 * modifier, 150 * modifier, 150 * modifier);
+        smtpServerNameET.setEnabled(isChecked);
+        smtpServerNameET.setTextColor(color);
+        smtpPortET.setEnabled(isChecked);
+        smtpPortET.setTextColor(color);
+        smtpAuthenticationCB.setEnabled(isChecked);
+        smtpLoginET.setEnabled(isChecked);
+        smtpLoginET.setTextColor(color);
+        smtpPasswordET.setEnabled(isChecked);
+        smtpPasswordET.setTextColor(color);
+        smtpUseSSLCB.setEnabled(isChecked);
     }
 
     public void onPause() {
@@ -233,9 +238,14 @@ public class POP3SettingsActivity extends Activity {
         }
 
         smtpAuthenticationBool = smtpAuthenticationCB.isChecked();
-        useSSLBool = useSSLCB.isChecked();
-        loginString = loginET.getText().toString();
-        passwordString = passwordET.getText().toString();
+        smtpUseSSLBool = smtpUseSSLCB.isChecked();
+        smtpLoginString = smtpLoginET.getText().toString();
+        smtpPasswordString = smtpPasswordET.getText().toString();
+
+        pop3UseSSLBool = pop3UseSSLCB.isChecked();
+        pop3LoginString = pop3LoginET.getText().toString();
+        pop3PasswordString = pop3PasswordET.getText().toString();
+
         inboxFolderNameString = inboxFolderNameET.getText().toString();
 
         try {
@@ -255,9 +265,12 @@ public class POP3SettingsActivity extends Activity {
         editor.putString(getString(R.string.smtpServerName), smtpServerNameString);
         editor.putInt(getString(R.string.smtpServerPort), smtpPortInt);
         editor.putBoolean(getString(R.string.smtpAuthentication), smtpAuthenticationBool);
-        editor.putBoolean(getString(R.string.useSSL), useSSLBool);
-        editor.putString(getString(R.string.login), loginString);
-        editor.putString(getString(R.string.password), passwordString);
+        editor.putBoolean(getString(R.string.smtpUseSSL), smtpUseSSLBool);
+        editor.putString(getString(R.string.smtpLogin), smtpLoginString);
+        editor.putString(getString(R.string.smtpPassword), smtpPasswordString);
+        editor.putBoolean(getString(R.string.pop3UseSSL), pop3UseSSLBool);
+        editor.putString(getString(R.string.pop3Login), pop3LoginString);
+        editor.putString(getString(R.string.pop3Password), pop3PasswordString);
         editor.putString(getString(R.string.emailFolderName), inboxFolderNameString);
         editor.putInt(getString(R.string.checkingInterval), checkIntervalInt);
         editor.apply();
