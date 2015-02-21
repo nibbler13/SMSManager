@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -28,11 +27,12 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView totalSmsLabel;
 	private TextView totalMessagesLabel;
 	private TextView totalEmailsReceivedLabel;
-	private TextView serviceLabel;
     private Boolean isServiceRun = false;
     private Context context = this;
     private SharedPreferences sharedPreferences;
     private LogFile logFile;
+
+    private SharedPreferences.OnSharedPreferenceChangeListener listener;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +50,6 @@ public class MainActivity extends Activity implements OnClickListener {
         totalSmsLabel = (TextView) findViewById(R.id.totalSMSLabel);
         totalMessagesLabel = (TextView) findViewById(R.id.totalMessagesLabel);
         totalEmailsReceivedLabel = (TextView) findViewById(R.id.totalEmailReceivedLabel);
-        serviceLabel = (TextView) findViewById(R.id.serviceLabel);
-        serviceLabel.setBackgroundColor(Color.RED);
 
         boolean checking = sharedPreferences.getBoolean(getString(R.string.isThisFirstTime), true);
         Log.d("nibbler", "onCreate checking=" + checking);
@@ -65,6 +63,19 @@ public class MainActivity extends Activity implements OnClickListener {
         } else {
             setMainButton(false);
         }
+
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                Log.d("nibbler", "Settings key changed: " + key);
+                if (key.equals(getString(R.string.totalMessagesCounter)) ||
+                    key.equals(getString(R.string.totalEmailCounter)) ||
+                    key.equals(getString(R.string.totalSmsCounter))) {
+                    updateLabel();
+                }
+            }
+        };
+        sharedPreferences.registerOnSharedPreferenceChangeListener(listener);
 
         updateLabel();
     }
@@ -145,13 +156,9 @@ public class MainActivity extends Activity implements OnClickListener {
     private void setMainButton(boolean status){
         if (status) {
             startServiceButton.setText("Остановить");
-            serviceLabel.setText("Сервис выполняется");
-            serviceLabel.setBackgroundColor(Color.GREEN);
             isServiceRun = true;
         } else {
             startServiceButton.setText("Запустить");
-            serviceLabel.setText("Сервис остановлен");
-            serviceLabel.setBackgroundColor(Color.RED);
             isServiceRun = false;
         }
     }
@@ -240,5 +247,15 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         }
         return false;
+    }
+
+    public void onPause() {
+        super.onPause();
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(listener);
+    }
+
+    public void onResume() {
+        super.onResume();
+        updateLabel();
     }
 }

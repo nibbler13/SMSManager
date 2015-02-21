@@ -14,7 +14,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -71,7 +73,8 @@ public class BackgroundEmailCheck extends Service {
     private String smtpPassword;
     private boolean smtpUseSSL;
     private String emailFolderName;
-    private String[] addresses_list;
+    private String[] addresses_name;
+    private String[] addresses_number;
     private String[] excluded_list;
     private String[] unreadable_list;
     private TimeTableElement[] timeTableElements;
@@ -118,7 +121,15 @@ public class BackgroundEmailCheck extends Service {
         Set<String> excludedSet = sharedPreferences.getStringSet(getString(R.string.excluded_list), new HashSet<String>(Arrays.asList(new String[]{""})));
         Set<String> unreadableSet = sharedPreferences.getStringSet(getString(R.string.unreadable_list), new HashSet<String>(Arrays.asList(new String[]{""})));
 
-        addresses_list = addressesSet.toArray(new String[0]);
+        String[] addresses_list = addressesSet.toArray(new String[0]);
+        addresses_name = new String[addresses_list.length];
+        addresses_number = new String[addresses_list.length];
+        for (int i = 0; i < addresses_list.length; i++) {
+            String[] separatedString = addresses_list[i].split("=", 2);
+            addresses_name[i] = separatedString[0].toLowerCase();
+            addresses_number[i] = separatedString[1];
+        }
+
         excluded_list = excludedSet.toArray(new String[0]);
         unreadable_list = unreadableSet.toArray(new String[0]);
 
@@ -161,6 +172,9 @@ public class BackgroundEmailCheck extends Service {
         }
         showNotificationNormalState(configIsCorrect);
         if (!configIsCorrect) return;
+        ////////
+        //need to send notification to admin
+        ////////
 
         int checkingInterval = sharedPreferences.getInt(getString(R.string.checkingInterval), 60);
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -173,18 +187,19 @@ public class BackgroundEmailCheck extends Service {
     }
 
     private void checkEmail(){
-        Log.d("nibbler", "background service checkEmail");
+        Log.d("nibbler", "BackgroundEmailCheck checkEmail");
 
         PerformCheck performCheck = new PerformCheck();
         performCheck.execute();
-        boolean isAnythingFounded = false;
+        //boolean isAnythingFounded = false;
         try {
             String[] messages = performCheck.get();
+            if (messages.length == 0) return;
             logFile.writeToLog("Обнаружено сообщений: " + messages.length/2);
 
             for (int i = 0; i < messages.length; i += 2){
                 if (messages[i] != null) {
-                    isAnythingFounded = true;
+                    //isAnythingFounded = true;
                     Log.d("nibbler", "BackgroundEmailCheck checkEmail --- message " + i/2 + " subject: " + messages[i] + " content: " + messages[i+1]);
                     try{
                         SmsManager smsManager = SmsManager.getDefault();
@@ -192,17 +207,21 @@ public class BackgroundEmailCheck extends Service {
                         smsManager.sendMultipartTextMessage(messages[i], null, msgArray, null, null);
                         totalSmsCounter += msgArray.size();
                         totalMessagesCounter += 1;
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(getString(R.string.totalSmsCounter), totalSmsCounter);
+                        editor.putInt(getString(R.string.totalMessagesCounter), totalMessagesCounter);
+                        editor.apply();
                         logFile.writeToLog("Сообщения для;" + messages[i] + ";со следующим содержанием;" + messages[i+1] + ";было отправлено, кол-во СМС;" + msgArray.size());
                     } catch (Exception ex) {
-                        Log.d("nibbler", "BackgroundEmailCheck checkEmail SmsManager Exception");
-                        logFile.writeToLog("Сообщение не было отправлено;SmsManager Exception");
+                        Log.d("nibbler", "BackgroundEmailCheck checkEmail SMSManager Exception");
+                        logFile.writeToLog("Сообщение не было отправлено;SMSManager Exception");
                         ex.printStackTrace();
                     }
                 }
             }
-            if (isAnythingFounded){
+            /*if (isAnythingFounded){
                 logFile.writeToLog("Информация;СМС отправлено: " + Integer.toString(totalSmsCounter) + ", messagesCounter: " + Integer.toString(totalMessagesCounter) + ", Сообщений получено: " + Integer.toString(totalEmailCounter));
-            }
+            }*/
         } catch (InterruptedException e) {
             Log.d("nibbler", "BackgroundEmailCheck checkEmail --- MESSAGES CATCH InterruptedException");
             logFile.writeToLog("BackgroundEmailCheck checkEmail --- MESSAGES CATCH InterruptedException");
@@ -220,26 +239,37 @@ public class BackgroundEmailCheck extends Service {
     public class SendLogFile extends AsyncTask<Address, Void, Void> {
         protected Void doInBackground(javax.mail.Address... addresses){
             Properties localPropertiesSmtp = System.getProperties();
-            localPropertiesSmtp.setProperty("mail.smtp.port", "465");
+            localPropertiesSmtp.setProperty("mail.smtp.port", Integer.toString(smtpServerPort));
             localPropertiesSmtp.setProperty("mail.smtp.connectiontimeout", "4000");
             localPropertiesSmtp.setProperty("mail.smtp.timeout", "10000");
-            localPropertiesSmtp.setProperty("mail.smtp.host", "smtp.yandex.com");
-            localPropertiesSmtp.setProperty("mail.smtp.auth", "true");
-            localPropertiesSmtp.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-            localPropertiesSmtp.setProperty("mail.smtp.socketFactory.port", "465");
-            localPropertiesSmtp.setProperty("mail.smtp.socketFactory.fallback", "false");
-            Session session = Session.getInstance(localPropertiesSmtp, new javax.mail.Authenticator(){
-                protected PasswordAuthentication getPasswordAuthentication(){
-                    return new PasswordAuthentication("nibble2", "N!i9b8b7##");
-                }
-            });
+            localPropertiesSmtp.setProperty("mail.smtp.host", smtpServerName);
+            if (smtpAuthentication) localPropertiesSmtp.setProperty("mail.smtp.auth", "true");
+            if (smtpUseSSL) {
+                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.port", Integer.toString(smtpServerPort));
+                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.fallback", "false");
+            }
+            Session session;
+            if (smtpAuthentication) {
+                session = Session.getInstance(localPropertiesSmtp, new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(smtpLogin, smtpPassword);
+                    }
+                });
+            } else {
+                session = Session.getInstance(localPropertiesSmtp);
+            }
+
             try {
                 MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("nibble2@yandex.ru"));
+                message.setFrom(new InternetAddress(smtpLogin));
                 if (addresses[0] != null) {
                     message.addRecipient(Message.RecipientType.TO, addresses[0]);
                 } else {
                     message.addRecipient(Message.RecipientType.TO, new InternetAddress("nibble@yandex.ru"));
+                    /////
+                    //Here are should be administrator email
+                    /////
                 }
                 message.setSubject("Email2SMS LogFile");
                 BodyPart messageBodyPart = new MimeBodyPart();
@@ -255,9 +285,11 @@ public class BackgroundEmailCheck extends Service {
                 }
                 message.setContent(multipart);
                 Transport.send(message);
+                logFile.writeToLog("Лог-файл был успешно выслан на адрес;" + InternetAddress.toString(addresses));
                 Log.d("nibbler", "message successfully sent");
             } catch (MessagingException mex) {
                 mex.printStackTrace();
+                logFile.writeToLog("Не удалось отправить лог-файл");
                 Log.d("nibbler", "!!!MessagingException");
             }
             return null;
@@ -265,38 +297,50 @@ public class BackgroundEmailCheck extends Service {
     }
 
     public class PerformCheck extends AsyncTask<Void, Void, String[]>{
-        String toLogFile = "";
         @SuppressLint("DefaultLocale")
         @Override
         protected String[] doInBackground(Void... params){
             try {
                 Properties localProperties = System.getProperties();
-                localProperties.setProperty("mail.pop3.port", "995");
+
+                //Log.d("nibbler", "BackgroundEmailCheck PerformCheck port: " + Integer.toString(pop3ServerPort) + " serverName: " + pop3ServerName + " login: " + pop3Login + " password: " + pop3Password + " ssl: " + Integer.toString((pop3UseSSL) ? 1 : 0) + " emailFolder: " + emailFolderName);
+
+                localProperties.setProperty("mail.pop3.port", Integer.toString(pop3ServerPort));
                 localProperties.setProperty("mail.pop3.connectiontimeout", "4000");
                 localProperties.setProperty("mail.pop3.timeout", "10000");
-                localProperties.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                localProperties.setProperty("mail.pop3.socketFactory.port", "995");
-                localProperties.setProperty("mail.pop3.socketFactory.fallback", "false");
+                if (pop3UseSSL) {
+                    localProperties.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                    localProperties.setProperty("mail.pop3.socketFactory.port", Integer.toString(pop3ServerPort));
+                    localProperties.setProperty("mail.pop3.socketFactory.fallback", "false");
+                }
                 Store localStore = Session.getDefaultInstance(localProperties).getStore("pop3");
-                localStore.connect("pop.yandex.com", "nibble2", "N!i9b8b7##");
-                Folder localFolder = localStore.getFolder("inbox");
+                localStore.connect(pop3ServerName, pop3Login, pop3Password);
+                Folder localFolder = localStore.getFolder(emailFolderName);
+
                 Message[] arrayOfMessage;
-                String[] messagesToSMS;
+                List<String> messagesToSMS = new ArrayList<>();
                 int messagesTotal = 0;
                 if (localFolder != null) {
                     Log.d("nibbler", "localFolder is notNULL");
-                    //toLogFile += timeStamp() + "LocalFolder is notNull\r\n";
                     localFolder.open(Folder.READ_WRITE);
                     arrayOfMessage = localFolder.getMessages();
                     messagesTotal = arrayOfMessage.length;
-                    messagesToSMS = new String[messagesTotal * 2];
                     Log.d("nibbler", "Inbox contains: " + messagesTotal);
-                    //toLogFile += timeStamp() + "Inbox contains," + messagesTotal + "\r\n";
                     if (messagesTotal <= 0) {
                         localFolder.close(true);
                         localStore.close();
                     } else {
-                        //emailsCounter += messagesTotal;
+                        totalEmailCounter += messagesTotal;
+                        Calendar calendar = Calendar.getInstance();
+                        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+                        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+                        int currentMinute = calendar.get(Calendar.MINUTE);
+                        currentDay -= 2;
+                        if (currentDay < 0) currentDay = 6;
+                        //Log.d("nibbler", "BackgroundEmailCheck PerformCheck --- currentDay: " + Integer.toString(currentDay) + " currentHour: " + Integer.toString(currentHour) + " currentMinute: " + Integer.toString(currentMinute));
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(getString(R.string.totalEmailCounter), totalEmailCounter);
+                        editor.apply();
 
                         for (int i = 0; i < messagesTotal; i++) {
                             try {
@@ -304,80 +348,79 @@ public class BackgroundEmailCheck extends Service {
                                 String contentType = arrayOfMessage[i].getContentType().toLowerCase();
                                 String subject = arrayOfMessage[i].getSubject().toLowerCase();
 
-                                if (subject.contains("log")){
+                                if (subject.contains("log") && sendLogViaMail){
                                     SendLogFile sendLog = new SendLogFile();
                                     sendLog.execute(arrayOfMessage[i].getFrom());
+                                    logFile.writeToLog("Получено письмо с темой;" + subject +";отправитель;" + InternetAddress.toString(arrayOfMessage[i].getFrom()));
+                                } else {
+                                    logFile.writeToLog("Получено письмо с темой;" + subject);
                                 }
 
-                                toLogFile += "Получено сообщение с темой;" + subject;
-
                                 if (contentType.contains("text")){
-                                    if (subject.contains("������")) {
-                                        //������� ����� ��������
-                                        messagesToSMS[i*2] = "89601811873";
-                                    } else if (subject.contains("������")){
-                                        //������� ������ �����������
-                                        messagesToSMS[i*2] = "89674659975";
-                                    } else if (subject.contains("���������")){
-                                        //���������� ����� ���������
-                                        messagesToSMS[i*2] = "89673034433";
-                                    } else if (subject.contains("���")){
-                                        //������� ������� ����������
-                                        messagesToSMS[i*2] = "89603848641";
-                                    } else if (subject.contains("���������")){
-                                        //������ �������� ���������
-                                        messagesToSMS[i*2] = "89216516778";
-                                    } else if (subject.contains("�����������")){
-                                        //������� �������� ��������
-                                        messagesToSMS[i*2] = "89095327069";
-                                    } else if (subject.contains("����������")){
-                                        //������ ��������� �������������
-                                        messagesToSMS[i*2] = "89659031324";
+
+                                    boolean needToIgnore = false;
+
+
+                                    if (timeTableElements[currentDay].getEnable() &&
+                                        currentHour >= timeTableElements[currentDay].getHour_start() &&
+                                        currentHour <= timeTableElements[currentDay].getHour_end() &&
+                                        currentMinute >= timeTableElements[currentDay].getMinute_start() &&
+                                        currentMinute <= timeTableElements[currentDay].getMinute_end()) {
+
+                                        for (int count = 0; count < excluded_list.length; count++) {
+                                        if (content.toString().contains(excluded_list[count])) {
+                                            needToIgnore = true;
+                                            logFile.writeToLog("Письмо содержит ключевую фразу из списка исключений и будет проигнорировано;" + excluded_list[count]);
+                                        }
+                                    }
+                                        //Log.d("nibbler", "BackgroundEmailCheck PerformCheck time is OK");
+                                    } else {
+                                        needToIgnore = true;
+                                        Log.d("nibbler", "BackgroundEmailCheck PerformCheck time is out of range");
+                                        logFile.writeToLog("Время получения письма выходит за границы заданного расписания, письмо будет проигнорировано");
                                     }
 
-                                    if (messagesToSMS[i*2] != null) {
-                                        messagesToSMS[i*2+1] = content.toString()
-                                                .replace("\n", "")
-                                                .replace("\r", "")
-                                                .replace("<BR>", " ")
-                                                .replace(";", ",")
-                                                .replace("&lt,", "")
-                                                .replace("&gt,", "")
-                                                .replace("<a href=\"mailto:", "");
-                                        toLogFile += ";с текстом;" + messagesToSMS[i*2+1];
-                                        if (messagesToSMS[i*2+1].length() > 350) {
-                                            messagesToSMS[i*2+1] = messagesToSMS[i*2+1].substring(0, 350);
+                                    for (int count = 0; count < addresses_name.length; count++) {
+                                        if (subject.contains(addresses_name[count]) && !needToIgnore) {
+                                            messagesToSMS.add(addresses_name[count]);
+                                            logFile.writeToLog("Письмо будет выслано адресату;" + addresses_name[count] + ";на номер;" + addresses_number[count]);
+
+                                            String resultingMessage = content.toString().replace("\r", "").replace("\n", "").replace(";", ",");
+                                            for (int count2 = 0; count2 < unreadable_list.length; count2++) {
+                                                resultingMessage = resultingMessage.replace(unreadable_list[count2], "");
+                                            }
+
+                                            if (resultingMessage.length() > maxSymbolsInSMS) {
+                                                resultingMessage = resultingMessage.substring(0, maxSymbolsInSMS);
+                                            }
+
+                                            messagesToSMS.add(resultingMessage);
                                         }
                                     }
                                 }
-                                toLogFile += "\r\n";
                                 arrayOfMessage[i].setFlag(Flags.Flag.DELETED, true);
                             } catch (MessagingException ex) {
-                                Log.d("nibbler", "ME");
-                                toLogFile += "MessagingException ME";
+                                logFile.writeToLog("Ошибка;BackgroundEmailCheck PerformCheck MessagingException");
+                                Log.d("nibbler", "BackgroundEmailCheck PerformCheck MessagingException");
                             } catch (Exception ex) {
-                                Log.d("nibbler", "EE");
-                                toLogFile += "Exception EE";
+                                logFile.writeToLog("Ошибка;BackgroundEmailCheck PerformCheck Exception");
+                                Log.d("nibbler", "BackgroundEmailCheck PerformCheck Exception");
                             }
                         }
                         localFolder.close(true);
                         localStore.close();
                         if (messagesTotal > 0) {
-                            logFile.writeToLog(toLogFile);
-                            Log.d("nibbler", "messagesTotal: " + messagesTotal);
-                            //toLogFile = "Информация;СМС отправлено: " + smsCounter.toString() + ", messagesCounter: " + messagesCounter.toString() + ", Сообщений получено: " + emailsCounter.toString();
-                            //logFile.writeToLog(toLogFile);
+                            Log.d("nibbler", "BackgroundEmailCheck PerformCheck messagesTotal: " + messagesTotal);
                         }
-                        return messagesToSMS;
+                        return messagesToSMS.toArray(new String[0]);
                     }
                 } else {
                     localStore.close();
                 }
             } catch (Exception localException) {
-                localException.printStackTrace();
-                Log.d("nibbler", "EXCEPTION");
-                toLogFile += "Exception localException";
-                logFile.writeToLog(toLogFile);
+                //localException.printStackTrace();
+                Log.d("nibbler", "BackgroundEmailCheck PerformCheck EXCEPTION");
+                logFile.writeToLog("Ошибка;BackgroundEmailCheck PerformCheck EXCEPTION");
             }
             return null;
         }

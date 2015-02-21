@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -102,6 +101,13 @@ public class POP3SettingsActivity extends Activity {
             }
         });
 
+        smtpAuthenticationCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                changeSmtpLoginStatus(isChecked);
+            }
+        });
+
         checkConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,18 +196,25 @@ public class POP3SettingsActivity extends Activity {
 
     }
 
+    public void changeSmtpLoginStatus(boolean isChecked){
+        float modifier = 1.0f - 0.5f * ((isChecked) ? 0 : 1);
+        smtpLoginET.setEnabled(isChecked);
+        smtpLoginET.setAlpha(modifier);
+        smtpPasswordET.setEnabled(isChecked);
+        smtpPasswordET.setAlpha(modifier);
+    }
+
     public void changeEditTextStatus(boolean isChecked){
-        int modifier = (isChecked) ? 0 : 1;
-        int color = Color.rgb(150 * modifier, 150 * modifier, 150 * modifier);
+        float modifier = 1.0f - 0.5f * ((isChecked) ? 0 : 1);
         smtpServerNameET.setEnabled(isChecked);
-        smtpServerNameET.setTextColor(color);
+        smtpServerNameET.setAlpha(modifier);
         smtpPortET.setEnabled(isChecked);
-        smtpPortET.setTextColor(color);
+        smtpPortET.setAlpha(modifier);
         smtpAuthenticationCB.setEnabled(isChecked);
         smtpLoginET.setEnabled(isChecked);
-        smtpLoginET.setTextColor(color);
+        smtpLoginET.setAlpha(modifier);
         smtpPasswordET.setEnabled(isChecked);
-        smtpPasswordET.setTextColor(color);
+        smtpPasswordET.setAlpha(modifier);
         smtpUseSSLCB.setEnabled(isChecked);
     }
 

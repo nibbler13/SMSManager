@@ -69,7 +69,8 @@ public class SettingsActivity extends Activity{
                 "Адреса получателей",
                 "Список исключений",
                 "Нечитаемые знаки",
-                "Расписание"
+                "Расписание",
+                "Контакты администратора"
         );
 
         adapter.notifyDataSetChanged();
