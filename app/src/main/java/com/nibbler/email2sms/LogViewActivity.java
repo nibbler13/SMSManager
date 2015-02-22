@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.text.InputType;
@@ -17,25 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Properties;
-import java.util.concurrent.ExecutionException;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.Address;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 /**
  * Created by nn-admin on 30.01.2015.
@@ -57,20 +40,16 @@ public class LogViewActivity extends Activity{
     private FileObserver fileObserver;
     private Thread thread;
 
-    private String smtpServerName;
-    private int smtpServerPort;
-    private boolean smtpAuthentication;
-    private String smtpLogin;
-    private String smtpPassword;
-    private boolean smtpUseSSL;
-    private SharedPreferences sharedPreferences;
-
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logview_layout);
         logFile = new LogFile(this);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (NullPointerException e) {
+            Log.d("nibbler", "LogViewActivity NullPointerException");
+        }
         //Log.d("nibbler", "This is LogView onCreate");
 
         logTextView = (TextView)findViewById(R.id.logViewTextView);
@@ -133,13 +112,12 @@ public class LogViewActivity extends Activity{
     public void senLogActionBarClicked(MenuItem item){
         //Log.d("nibbler", "logViewActivity senLogToEmailClicked");
 
-        sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
-        smtpServerName = sharedPreferences.getString(getString(R.string.smtpServerName), "");
-        smtpServerPort = sharedPreferences.getInt(getString(R.string.smtpServerPort), 0);
-        smtpAuthentication = sharedPreferences.getBoolean(getString(R.string.smtpAuthentication), true);
-        smtpLogin = sharedPreferences.getString(getString(R.string.smtpLogin), "");
-        smtpPassword = sharedPreferences.getString(getString(R.string.smtpPassword), "");
-        smtpUseSSL = sharedPreferences.getBoolean(getString(R.string.smtpUseSSL), true);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(getString(R.string.sharedSettingsName), MODE_PRIVATE);
+        String smtpServerName = sharedPreferences.getString(getString(R.string.smtpServerName), "");
+        int smtpServerPort = sharedPreferences.getInt(getString(R.string.smtpServerPort), 0);
+        boolean smtpAuthentication = sharedPreferences.getBoolean(getString(R.string.smtpAuthentication), true);
+        String smtpLogin = sharedPreferences.getString(getString(R.string.smtpLogin), "");
+        String smtpPassword = sharedPreferences.getString(getString(R.string.smtpPassword), "");
 
         String errorString = "";
         if (smtpServerName.length() == 0) errorString += "Имя SMTP сервера не может быть пустым\n";
@@ -183,23 +161,16 @@ public class LogViewActivity extends Activity{
                 //ОТПРАВКА ФАЙЛА
                 ////
 
-                SendLogFile sendLog = new SendLogFile();
+                MailSystem mailSystem = new MailSystem(context);
                 try {
-                    sendLog.execute(new InternetAddress(value));
-                    try {
-                        if (sendLog.get()) {
-                            Toast.makeText(context, "Лог-файл успешно выслан", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, "Не удалось отправить лог-файл\nПроверьте настройки", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (ExecutionException e) {
-                        Log.d("nibbler", "LogViewActivity sendLog ExecutionException");
-                        Toast.makeText(context, "Не удалось отправить лог-файл", Toast.LENGTH_LONG).show();
-                    } catch (InterruptedException e) {
-                        Log.d("nibbler", "LogViewActivity sendLog InterruptedException");
-                        Toast.makeText(context, "Не удалось отправить лог-файл", Toast.LENGTH_LONG).show();
+                    Address address = new InternetAddress(value);
+                    if (mailSystem.sendLogFileTo(address)) {
+                        Toast.makeText(context, "Лог-файл успешно выслан", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(context, "Не удалось отправить лог-файл\nПроверьте настройки", Toast.LENGTH_LONG).show();
                     }
                 } catch (AddressException e) {
+                    Toast.makeText(context, "Неверно указан адрес", Toast.LENGTH_LONG).show();
                     Log.d("nibbler", "LogVieActivity sendLog AddressException: " + value);
                 }
             }
@@ -212,67 +183,6 @@ public class LogViewActivity extends Activity{
         });
 
         alert.show();
-    }
-
-    public class SendLogFile extends AsyncTask<Address, Void, Boolean> {
-        protected Boolean doInBackground(javax.mail.Address... addresses){
-            Properties localPropertiesSmtp = System.getProperties();
-            localPropertiesSmtp.setProperty("mail.smtp.port", Integer.toString(smtpServerPort));
-            localPropertiesSmtp.setProperty("mail.smtp.connectiontimeout", "4000");
-            localPropertiesSmtp.setProperty("mail.smtp.timeout", "10000");
-            localPropertiesSmtp.setProperty("mail.smtp.host", smtpServerName);
-            if (smtpAuthentication) localPropertiesSmtp.setProperty("mail.smtp.auth", "true");
-            if (smtpUseSSL) {
-                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.port", Integer.toString(smtpServerPort));
-                localPropertiesSmtp.setProperty("mail.smtp.socketFactory.fallback", "false");
-            }
-            Session session;
-            if (smtpAuthentication) {
-                session = Session.getInstance(localPropertiesSmtp, new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(smtpLogin, smtpPassword);
-                    }
-                });
-            } else {
-                session = Session.getInstance(localPropertiesSmtp);
-            }
-
-            try {
-                MimeMessage message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(smtpLogin));
-                if (addresses[0] != null) {
-                    message.addRecipient(Message.RecipientType.TO, addresses[0]);
-                } else {
-                    message.addRecipient(Message.RecipientType.TO, new InternetAddress("nibble@yandex.ru"));
-                    /////
-                    //Here are should be administrator email
-                    /////
-                }
-                message.setSubject("Email2SMS LogFile");
-                BodyPart messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setText(logFile.timeStamp());
-                Multipart multipart = new MimeMultipart();
-                multipart.addBodyPart(messageBodyPart);
-                messageBodyPart = new MimeBodyPart();
-                if (logFile.getLogFile() != null) {
-                    DataSource source = new FileDataSource(logFile.getLogFile());
-                    messageBodyPart.setDataHandler(new DataHandler(source));
-                    messageBodyPart.setFileName("Log.csv");
-                    multipart.addBodyPart(messageBodyPart);
-                }
-                message.setContent(multipart);
-                Transport.send(message);
-                logFile.writeToLog("Лог-файл был успешно выслан на адрес;" + InternetAddress.toString(addresses));
-                Log.d("nibbler", "message successfully sent");
-                return true;
-            } catch (MessagingException mex) {
-                mex.printStackTrace();
-                logFile.writeToLog("Не удалось отправить лог-файл");
-                Log.d("nibbler", "!!!MessagingException");
-            }
-            return false;
-        }
     }
 
     public void removeActionBarOnClicked(MenuItem item){

@@ -155,9 +155,32 @@ public class POP3SettingsActivity extends Activity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage(errors).setPositiveButton("Устранить ошибки", dialogClickListener).show();
                 } else {
-                    ///////////
-                    //There are no errors, need to make checking for connection
-                    ///////////
+                    String result = "";
+                    MailSystem mailSystem = new MailSystem(context);
+                    if (mailSystem.testPopConnection()) {
+                        result += "POP3 подключение успешно\n";
+                    } else {
+                        result += "Не удалось подключиться к серверу POP3\n";
+                    }
+                    if (sendLogFileToMailCB.isChecked()) {
+                        if (mailSystem.testSmtpConnection()) {
+                            result += "SMTP подключение успешно\n";
+                        } else {
+                            result += "Не удалось подключиться к серверу SMTP\n";
+                        }
+                    }
+                    DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    break;
+                            }
+                        }
+                    };
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage(result).setPositiveButton("Ок", dialogClickListenerInfo).show();
                 }
             }
         });

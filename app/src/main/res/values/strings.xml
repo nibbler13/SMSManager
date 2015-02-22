@@ -25,6 +25,7 @@
     <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string> <!-- boolean -->
     <string name="deleteLogOlderValue">deleteLogOlderValue</string> <!-- integer -->
     <string name="maxSymbolsInSMS">maxSymbolsInSMS</string> <!-- integer -->
+    <string name="encodingLogFile">encodingLogFile</string> <!-- string -->
     <!--pop3 settings-->
     <string name="pop3ServerName">pop3ServerName</string> <!-- string -->
     <string name="pop3ServerPort">pop3ServerPort</string> <!-- integer -->

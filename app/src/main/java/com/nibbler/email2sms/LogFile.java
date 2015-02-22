@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.OutputStreamWriter;
 import java.util.Calendar;
 
@@ -26,7 +28,7 @@ public class LogFile {
     Context context;
     private static final String FOLDER_NAME = "Email2SMS";
     private static final String FILE_NAME = "Log.csv";
-    private static final String ENCODING = "CP1251";
+    private String encoding;
     private boolean writeToSDCard;
 
     public LogFile(Context externalContext){
@@ -34,6 +36,7 @@ public class LogFile {
         context = externalContext;
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharedSettingsName), Context.MODE_PRIVATE);
         writeToSDCard = sharedPreferences.getBoolean(context.getString(R.string.writeLogFileToSD), true);
+        encoding = sharedPreferences.getString(context.getString(R.string.encodingLogFile), "CP1251");
     }
 
     public void writeToLog(String info){
@@ -46,7 +49,7 @@ public class LogFile {
         try {
             //Log.d("nibbler", "LogFile try to write string to file");
             FileOutputStream f = new FileOutputStream(file, true);
-            OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
+            OutputStreamWriter os = new OutputStreamWriter(f, encoding);
             os.write(timeStamp() + info + "\r\n");
             os.flush();
             os.close();
@@ -72,7 +75,7 @@ public class LogFile {
         try {
             //Log.d("nibbler", "LogFile try to write string to file");
             FileOutputStream f = new FileOutputStream(file, true);
-            OutputStreamWriter os = new OutputStreamWriter(f, ENCODING);
+            OutputStreamWriter os = new OutputStreamWriter(f, encoding);
             os.write(info);
             os.flush();
             os.close();
@@ -113,15 +116,21 @@ public class LogFile {
         if (file.exists()) {
             try {
                 inputStream = new BufferedInputStream(new FileInputStream(file));
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "CP1251"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, encoding));
                 String line = "";
                 StringBuilder stringBuilder = new StringBuilder();
-                while ((line = bufferedReader.readLine()) != null) {
-                    line = line.replaceAll("\\s\\D{3,}\\s\\d{4}[;]", " - ").replace(" GMT", "");
-                    stringBuilder.append(line + "\n");
+                int lineCounter = 0;
+                LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(getLogFile()));
+                while (lineNumberReader.readLine() != null) lineCounter = lineNumberReader.getLineNumber();
+                if (lineCounter > 100) stringBuilder.append("Для просмотра полного лог-файла вышлите его себе на почту (значок письма чуть выше)\n\n");
+                LineNumberReader lineNumberReader1 = new LineNumberReader(bufferedReader);
+                while ((line = lineNumberReader1.readLine()) != null) {
+                    if (lineNumberReader1.getLineNumber() > lineCounter - 100) {
+                        line = line.replaceAll("\\s\\D{3,}\\s\\d{4}[;]", " - ").replaceAll("[+]\\S{2,}\\s\\d{4}[;]", " - ").replace(" GMT", "");
+                        stringBuilder.append(line + "\n");
+                    }
                 }
                 textFromLogFile = stringBuilder.toString();
-
                 inputStream.close();
             } catch (FileNotFoundException e) {
                 Log.d("nibbler", "LogFile getLogFileText FileNotFoundException");
@@ -150,7 +159,7 @@ public class LogFile {
         if (file.exists()) {
             try {
                 inputStream = new BufferedInputStream(new FileInputStream(file));
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "CP1251"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, encoding));
                 String line = "";
                 StringBuilder stringBuilder = new StringBuilder();
                 while ((line = bufferedReader.readLine()) != null) {

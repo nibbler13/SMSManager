@@ -15,6 +15,7 @@
     <string name="deleteLogOlderThanDays">deleteLogOlderThanDays</string>
     <string name="deleteLogOlderValue">deleteLogOlderValue</string>
     <string name="emailFolderName">emailFolderName</string>
+    <string name="encodingLogFile">encodingLogFile</string>
     <string name="excluded_list">excluded_list</string>
     <string name="excluded_list_activity">Список исключений</string>
     <string name="friday_checkbox">friday_checkbox</string>

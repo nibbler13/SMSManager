@@ -25,7 +25,6 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="nibbler" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.email2sms" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f8a7809-04f6-42ff-a60c-537221bc8c44" name="Default" comment="" />
@@ -55,55 +54,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LogViewActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LogViewActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogViewActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.97619045" vertical-offset="2160" max-vertical-offset="4095">
-              <caret line="224" column="29" selection-start-line="224" selection-start-column="29" selection-end-line="224" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2970">
+              <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
               <folding>
-                <element signature="e#2453#2687#0" expanded="true" />
-                <element signature="e#2676#2677#0" expanded="true" />
-                <element signature="e#4636#4674#0" expanded="true" />
-                <element signature="e#4744#4778#0" expanded="true" />
-                <element signature="e#4835#4869#0" expanded="true" />
-                <element signature="e#4933#4971#0" expanded="true" />
-                <element signature="e#5028#5057#0" expanded="true" />
-                <element signature="e#5115#5147#0" expanded="true" />
-                <element signature="e#5204#5234#0" expanded="true" />
-                <element signature="e#5878#6203#0" expanded="true" />
-                <element signature="e#6188#6189#0" expanded="true" />
-                <element signature="e#6872#8404#0" expanded="true" />
-                <element signature="e#8393#8394#0" expanded="true" />
-                <element signature="e#8450#8617#0" expanded="true" />
-                <element signature="e#8606#8607#0" expanded="true" />
-                <element signature="e#9800#10039#0" expanded="true" />
-                <element signature="e#10020#10021#0" expanded="true" />
+                <element signature="e#6160#7246#0" expanded="true" />
+                <element signature="e#7235#7236#0" expanded="true" />
+                <element signature="e#7292#7459#0" expanded="true" />
+                <element signature="e#7448#7449#0" expanded="true" />
+                <element signature="e#7684#8528#0" expanded="true" />
+                <element signature="e#8517#8518#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BackgroundEmailCheck.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BackgroundEmailCheck.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/BackgroundEmailCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2070" max-vertical-offset="6330">
-              <caret line="358" column="66" selection-start-line="358" selection-start-column="66" selection-end-line="358" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.76106197" vertical-offset="1531" max-vertical-offset="2550">
+              <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
               <folding>
-                <element signature="e#12121#12360#0" expanded="true" />
-                <element signature="e#12341#12342#0" expanded="true" />
-                <element signature="e#17186#17223#0" expanded="true" />
-                <element signature="e#23434#23466#1" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1462#1500#0" expanded="true" />
+                <element signature="e#1578#1612#0" expanded="true" />
+                <element signature="e#1673#1707#0" expanded="true" />
+                <element signature="e#1775#1809#0" expanded="true" />
+                <element signature="e#1878#1912#0" expanded="true" />
+                <element signature="e#1973#2007#0" expanded="true" />
+                <element signature="e#2079#2117#0" expanded="true" />
+                <element signature="e#2181#2210#0" expanded="true" />
+                <element signature="e#2275#2307#0" expanded="true" />
+                <element signature="e#2369#2398#0" expanded="true" />
+                <element signature="e#2463#2495#0" expanded="true" />
+                <element signature="e#2554#2589#0" expanded="true" />
+                <element signature="e#2651#2691#0" expanded="true" />
+                <element signature="e#3757#3793#0" expanded="true" />
+                <element signature="e#5257#5292#0" expanded="true" />
+                <element signature="e#5346#5386#0" expanded="true" />
+                <element signature="e#6660#6692#1" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/SettingsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-              <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -111,25 +103,92 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3030" max-vertical-offset="3645">
-              <caret line="251" column="27" selection-start-line="251" selection-start-column="27" selection-end-line="251" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2942" max-vertical-offset="3570">
+              <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailSystem.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MailSystem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5263" max-vertical-offset="6540">
+              <caret line="354" column="50" selection-start-line="354" selection-start-column="50" selection-end-line="354" selection-end-column="50" />
               <folding>
-                <element signature="e#2319#2863#0" expanded="true" />
-                <element signature="e#2598#2638#0" expanded="true" />
-                <element signature="e#2674#2711#0" expanded="true" />
-                <element signature="e#2747#2782#0" expanded="true" />
-                <element signature="e#2852#2853#0" expanded="true" />
-                <element signature="e#3149#3193#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#2466#2512#0" expanded="true" />
+                <element signature="e#2589#2632#0" expanded="true" />
+                <element signature="e#2693#2735#0" expanded="true" />
+                <element signature="e#2792#2834#0" expanded="true" />
+                <element signature="e#2894#2936#0" expanded="true" />
+                <element signature="e#2998#3040#0" expanded="true" />
+                <element signature="e#3097#3139#0" expanded="true" />
+                <element signature="e#3203#3249#0" expanded="true" />
+                <element signature="e#3308#3346#0" expanded="true" />
+                <element signature="e#3403#3440#0" expanded="true" />
+                <element signature="e#3498#3538#0" expanded="true" />
+                <element signature="e#3593#3630#0" expanded="true" />
+                <element signature="e#3688#3728#0" expanded="true" />
+                <element signature="e#3785#3823#0" expanded="true" />
+                <element signature="e#3886#3929#0" expanded="true" />
+                <element signature="e#3990#4035#0" expanded="true" />
+                <element signature="e#4108#4150#0" expanded="true" />
+                <element signature="e#4272#4313#0" expanded="true" />
+                <element signature="e#4437#4480#0" expanded="true" />
+                <element signature="e#7386#7625#0" expanded="true" />
+                <element signature="e#7606#7607#0" expanded="true" />
+                <element signature="e#13526#13571#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddressesListActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/AddressesListActivity.java">
+      <file leaf-file-name="POP3SettingsActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/POP3SettingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1470" max-vertical-offset="1920">
-              <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="97" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3737" max-vertical-offset="4455">
+              <caret line="94" column="24" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
+              <folding>
+                <element signature="e#2931#2969#0" expanded="true" />
+                <element signature="e#3046#3080#0" expanded="true" />
+                <element signature="e#3140#3174#0" expanded="true" />
+                <element signature="e#3234#3263#0" expanded="true" />
+                <element signature="e#3327#3359#0" expanded="true" />
+                <element signature="e#3420#3450#0" expanded="true" />
+                <element signature="e#3520#3554#0" expanded="true" />
+                <element signature="e#3622#3656#0" expanded="true" />
+                <element signature="e#3710#3744#0" expanded="true" />
+                <element signature="e#3812#3850#0" expanded="true" />
+                <element signature="e#3913#3943#0" expanded="true" />
+                <element signature="e#4006#4035#0" expanded="true" />
+                <element signature="e#4099#4131#0" expanded="true" />
+                <element signature="e#4198#4233#0" expanded="true" />
+                <element signature="e#4297#4333#0" expanded="true" />
+                <element signature="e#12265#12299#0" expanded="true" />
+                <element signature="e#12346#12380#0" expanded="true" />
+                <element signature="e#12428#12462#0" expanded="true" />
+                <element signature="e#12513#12547#0" expanded="true" />
+                <element signature="e#12594#12628#0" expanded="true" />
+                <element signature="e#12670#12708#0" expanded="true" />
+                <element signature="e#12761#12791#0" expanded="true" />
+                <element signature="e#12835#12864#0" expanded="true" />
+                <element signature="e#12909#12941#0" expanded="true" />
+                <element signature="e#12990#13020#0" expanded="true" />
+                <element signature="e#13064#13093#0" expanded="true" />
+                <element signature="e#13138#13170#0" expanded="true" />
+                <element signature="e#13218#13253#0" expanded="true" />
+                <element signature="e#13301#13337#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogFile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogFile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3210">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -815,7 +874,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/addresses_list_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/excluded_list_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/unread_symbols_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/general_settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smsmanager/GeneralSettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smsmanager/ExcludedListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/smsmanager/UnreadSymbolsActivity.java" />
@@ -838,19 +896,21 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MyScheduleReceiver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/GeneralSettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/TimetableActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/pop3settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/AddressesListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/UnreadSymbolsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogFile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/POP3SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/SettingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/BackgroundEmailCheck.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/GeneralSettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogFile.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/general_settings_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogViewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/POP3SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MailSystem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/BackgroundEmailCheck.java" />
       </list>
     </option>
   </component>
@@ -858,9 +918,9 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1403" />
-    <option name="height" value="1053" />
+    <option name="y" value="68" />
+    <option name="width" value="1440" />
+    <option name="height" value="832" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -904,6 +964,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -918,7 +979,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1041,6 +1101,38 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SMSManager" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SMSManager" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -1065,7 +1157,7 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="3_2_HVGA_slider" />
     <property name="FullScreen" value="false" />
     <property name="OverrideImplement.combined" value="true" />
@@ -1279,38 +1371,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1403" height="1053" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="68" width="1440" height="832" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3328435" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22266401" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18229854" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3988764" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.334214" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29775882" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3337989" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32960895" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286517" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3366426" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25720385" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2081545" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39910313" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2555866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249354" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295964" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1366,13 +1458,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/GeneralSettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1320" max-vertical-offset="2295">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7021">
@@ -1499,26 +1584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/addresses_list_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.3333335" vertical-offset="174" max-vertical-offset="570">
-          <caret line="23" column="53" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/excluded_list_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.222222" vertical-offset="174" max-vertical-offset="570">
-          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/ExcludedListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1800">
@@ -1561,16 +1626,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/logview_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3816794" vertical-offset="0" max-vertical-offset="393">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
@@ -1607,36 +1662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/general_settings_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1515">
-          <caret line="7" column="57" selection-start-line="7" selection-start-column="57" selection-end-line="7" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/timetable_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.7880795" vertical-offset="5082" max-vertical-offset="6585">
-          <caret line="423" column="36" selection-start-line="423" selection-start-column="36" selection-end-line="423" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/unread_symbols_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.111111" vertical-offset="60" max-vertical-offset="570">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/TimeTableElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1717">
@@ -1648,13 +1673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
           <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="13" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/GeneralSettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2565157" vertical-offset="254" max-vertical-offset="2130">
-          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1679,50 +1697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1560">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="3105">
-          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pop3settings_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="3090">
-          <caret line="183" column="37" selection-start-line="183" selection-start-column="37" selection-end-line="183" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/POP3SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2520" max-vertical-offset="4155">
-          <caret line="215" column="45" selection-start-line="215" selection-start-column="45" selection-end-line="215" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.259259" vertical-offset="650" max-vertical-offset="1155">
-          <caret line="60" column="45" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/AddressesListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1920">
@@ -1731,18 +1705,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3030" max-vertical-offset="3645">
-          <caret line="251" column="27" selection-start-line="251" selection-start-column="27" selection-end-line="251" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.42031524" vertical-offset="150" max-vertical-offset="1695">
+          <caret line="26" column="76" selection-start-line="26" selection-start-column="76" selection-end-line="26" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/GeneralSettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20302014" vertical-offset="524" max-vertical-offset="2265">
+          <caret line="55" column="105" selection-start-line="55" selection-start-column="105" selection-end-line="55" selection-end-column="105" />
           <folding>
-            <element signature="e#2319#2863#0" expanded="true" />
-            <element signature="e#2598#2638#0" expanded="true" />
-            <element signature="e#2674#2711#0" expanded="true" />
-            <element signature="e#2747#2782#0" expanded="true" />
-            <element signature="e#2852#2853#0" expanded="true" />
-            <element signature="e#3149#3193#0" expanded="true" />
+            <element signature="e#2343#2378#0" expanded="true" />
+            <element signature="e#5021#5056#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5285235" vertical-offset="585" max-vertical-offset="1620">
+          <caret line="72" column="39" selection-start-line="72" selection-start-column="39" selection-end-line="72" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/addresses_list_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32445922" vertical-offset="0" max-vertical-offset="601">
+          <caret line="13" column="47" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5790349" vertical-offset="552" max-vertical-offset="1155">
+          <caret line="60" column="45" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/logview_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24958402" vertical-offset="0" max-vertical-offset="601">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/general_settings_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52579033" vertical-offset="1139" max-vertical-offset="1815">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/excluded_list_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74875206" vertical-offset="0" max-vertical-offset="601">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/pop3settings_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6239601" vertical-offset="0" max-vertical-offset="3090">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1751,55 +1803,158 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3233831" vertical-offset="0" max-vertical-offset="603">
+        <state vertical-scroll-proportion="0.32445922" vertical-offset="0" max-vertical-offset="601">
           <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/SettingsActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/timetable_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-          <caret line="66" column="34" selection-start-line="66" selection-start-column="34" selection-end-line="66" selection-end-column="34" />
+        <state vertical-scroll-proportion="10.5574045" vertical-offset="0" max-vertical-offset="6585">
+          <caret line="423" column="36" selection-start-line="423" selection-start-column="36" selection-end-line="423" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/BackgroundEmailCheck.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/unread_symbols_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3660" max-vertical-offset="6330">
-          <caret line="358" column="66" selection-start-line="358" selection-start-column="66" selection-end-line="358" selection-end-column="66" />
-          <folding>
-            <element signature="e#12121#12360#0" expanded="true" />
-            <element signature="e#12341#12342#0" expanded="true" />
-            <element signature="e#17186#17223#0" expanded="true" />
-            <element signature="e#23434#23466#1" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.79866886" vertical-offset="0" max-vertical-offset="601">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3210">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/LogViewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.97619045" vertical-offset="2160" max-vertical-offset="4095">
-          <caret line="224" column="29" selection-start-line="224" selection-start-column="29" selection-end-line="224" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2970">
+          <caret line="51" column="9" selection-start-line="51" selection-start-column="9" selection-end-line="51" selection-end-column="9" />
           <folding>
-            <element signature="e#2453#2687#0" expanded="true" />
-            <element signature="e#2676#2677#0" expanded="true" />
-            <element signature="e#4636#4674#0" expanded="true" />
-            <element signature="e#4744#4778#0" expanded="true" />
-            <element signature="e#4835#4869#0" expanded="true" />
-            <element signature="e#4933#4971#0" expanded="true" />
-            <element signature="e#5028#5057#0" expanded="true" />
-            <element signature="e#5115#5147#0" expanded="true" />
-            <element signature="e#5204#5234#0" expanded="true" />
-            <element signature="e#5878#6203#0" expanded="true" />
-            <element signature="e#6188#6189#0" expanded="true" />
-            <element signature="e#6872#8404#0" expanded="true" />
-            <element signature="e#8393#8394#0" expanded="true" />
-            <element signature="e#8450#8617#0" expanded="true" />
-            <element signature="e#8606#8607#0" expanded="true" />
-            <element signature="e#9800#10039#0" expanded="true" />
-            <element signature="e#10020#10021#0" expanded="true" />
+            <element signature="e#6160#7246#0" expanded="true" />
+            <element signature="e#7235#7236#0" expanded="true" />
+            <element signature="e#7292#7459#0" expanded="true" />
+            <element signature="e#7448#7449#0" expanded="true" />
+            <element signature="e#7684#8528#0" expanded="true" />
+            <element signature="e#8517#8518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/POP3SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3737" max-vertical-offset="4455">
+          <caret line="94" column="24" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="24" />
+          <folding>
+            <element signature="e#2931#2969#0" expanded="true" />
+            <element signature="e#3046#3080#0" expanded="true" />
+            <element signature="e#3140#3174#0" expanded="true" />
+            <element signature="e#3234#3263#0" expanded="true" />
+            <element signature="e#3327#3359#0" expanded="true" />
+            <element signature="e#3420#3450#0" expanded="true" />
+            <element signature="e#3520#3554#0" expanded="true" />
+            <element signature="e#3622#3656#0" expanded="true" />
+            <element signature="e#3710#3744#0" expanded="true" />
+            <element signature="e#3812#3850#0" expanded="true" />
+            <element signature="e#3913#3943#0" expanded="true" />
+            <element signature="e#4006#4035#0" expanded="true" />
+            <element signature="e#4099#4131#0" expanded="true" />
+            <element signature="e#4198#4233#0" expanded="true" />
+            <element signature="e#4297#4333#0" expanded="true" />
+            <element signature="e#12265#12299#0" expanded="true" />
+            <element signature="e#12346#12380#0" expanded="true" />
+            <element signature="e#12428#12462#0" expanded="true" />
+            <element signature="e#12513#12547#0" expanded="true" />
+            <element signature="e#12594#12628#0" expanded="true" />
+            <element signature="e#12670#12708#0" expanded="true" />
+            <element signature="e#12761#12791#0" expanded="true" />
+            <element signature="e#12835#12864#0" expanded="true" />
+            <element signature="e#12909#12941#0" expanded="true" />
+            <element signature="e#12990#13020#0" expanded="true" />
+            <element signature="e#13064#13093#0" expanded="true" />
+            <element signature="e#13138#13170#0" expanded="true" />
+            <element signature="e#13218#13253#0" expanded="true" />
+            <element signature="e#13301#13337#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2942" max-vertical-offset="3570">
+          <caret line="237" column="0" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/MailSystem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5263" max-vertical-offset="6540">
+          <caret line="354" column="50" selection-start-line="354" selection-start-column="50" selection-end-line="354" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2466#2512#0" expanded="true" />
+            <element signature="e#2589#2632#0" expanded="true" />
+            <element signature="e#2693#2735#0" expanded="true" />
+            <element signature="e#2792#2834#0" expanded="true" />
+            <element signature="e#2894#2936#0" expanded="true" />
+            <element signature="e#2998#3040#0" expanded="true" />
+            <element signature="e#3097#3139#0" expanded="true" />
+            <element signature="e#3203#3249#0" expanded="true" />
+            <element signature="e#3308#3346#0" expanded="true" />
+            <element signature="e#3403#3440#0" expanded="true" />
+            <element signature="e#3498#3538#0" expanded="true" />
+            <element signature="e#3593#3630#0" expanded="true" />
+            <element signature="e#3688#3728#0" expanded="true" />
+            <element signature="e#3785#3823#0" expanded="true" />
+            <element signature="e#3886#3929#0" expanded="true" />
+            <element signature="e#3990#4035#0" expanded="true" />
+            <element signature="e#4108#4150#0" expanded="true" />
+            <element signature="e#4272#4313#0" expanded="true" />
+            <element signature="e#4437#4480#0" expanded="true" />
+            <element signature="e#7386#7625#0" expanded="true" />
+            <element signature="e#7606#7607#0" expanded="true" />
+            <element signature="e#13526#13571#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/nibbler/email2sms/BackgroundEmailCheck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76106197" vertical-offset="1531" max-vertical-offset="2550">
+          <caret line="129" column="43" selection-start-line="129" selection-start-column="43" selection-end-line="129" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1462#1500#0" expanded="true" />
+            <element signature="e#1578#1612#0" expanded="true" />
+            <element signature="e#1673#1707#0" expanded="true" />
+            <element signature="e#1775#1809#0" expanded="true" />
+            <element signature="e#1878#1912#0" expanded="true" />
+            <element signature="e#1973#2007#0" expanded="true" />
+            <element signature="e#2079#2117#0" expanded="true" />
+            <element signature="e#2181#2210#0" expanded="true" />
+            <element signature="e#2275#2307#0" expanded="true" />
+            <element signature="e#2369#2398#0" expanded="true" />
+            <element signature="e#2463#2495#0" expanded="true" />
+            <element signature="e#2554#2589#0" expanded="true" />
+            <element signature="e#2651#2691#0" expanded="true" />
+            <element signature="e#3757#3793#0" expanded="true" />
+            <element signature="e#5257#5292#0" expanded="true" />
+            <element signature="e#5346#5386#0" expanded="true" />
+            <element signature="e#6660#6692#1" expanded="true" />
           </folding>
         </state>
       </provider>

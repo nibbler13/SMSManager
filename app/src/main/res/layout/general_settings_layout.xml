@@ -1,96 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Автоматически запускать вместе с запуском устройства"
+        android:id="@+id/startOnBootBox"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:elegantTextHeight="true" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Автоматически запускать вместе с запуском устройства"
-            android:id="@+id/startOnBootBox"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:checked="false"
-            android:elegantTextHeight="true" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Писать лог-файл на карту памяти"
+        android:id="@+id/writeLogToSDCheckBox"
+        android:layout_marginTop="10dp"
+        android:checked="true"
+        android:layout_below="@+id/startOnBootBox"
+        android:layout_alignLeft="@+id/startOnBootBox"
+        android:layout_alignStart="@+id/startOnBootBox" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Писать лог-файл на карту памяти"
-            android:id="@+id/writeLogToSDCheckBox"
-            android:layout_marginTop="10dp"
-            android:checked="true"
-            android:layout_below="@+id/startOnBootBox"
-            android:layout_alignLeft="@+id/startOnBootBox"
-            android:layout_alignStart="@+id/startOnBootBox" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалять записи в \nжурнале старше"
+        android:id="@+id/deleteOlderThanCheckBox"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/writeLogToSDCheckBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="true" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Удалять записи в \nжурнале старше"
-            android:id="@+id/deleteOlderThanCheckBox"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/writeLogToSDCheckBox"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:checked="true" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="3"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:id="@+id/deleteOlderValueEditText"
+        android:layout_toRightOf="@+id/deleteOlderThanCheckBox"
+        android:layout_alignBottom="@+id/deleteOlderThanCheckBox"
+        android:layout_marginLeft="10dp"
+        android:hint="60"
+        android:gravity="center" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="3"
-            android:singleLine="true"
-            android:maxLength="4"
-            android:id="@+id/deleteOlderValueEditText"
-            android:layout_toRightOf="@+id/deleteOlderThanCheckBox"
-            android:layout_alignBottom="@+id/deleteOlderThanCheckBox"
-            android:layout_marginLeft="10dp"
-            android:hint="60"
-            android:gravity="center" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="дней"
+        android:layout_toRightOf="@+id/deleteOlderValueEditText"
+        android:layout_alignBaseline="@+id/deleteOlderValueEditText"
+        android:layout_marginLeft="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="дней"
-            android:layout_toRightOf="@+id/deleteOlderValueEditText"
-            android:layout_alignBaseline="@+id/deleteOlderValueEditText"
-            android:layout_marginLeft="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отправлять в виде СМС из каждого сообщения первые"
+        android:id="@+id/sendFirstSymbolsTextView"
+        android:layout_below="@+id/deleteOlderThanCheckBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Отправлять в виде СМС из каждого сообщения первые"
-            android:id="@+id/sendFirstSymbolsTextView"
-            android:layout_below="@+id/deleteOlderThanCheckBox"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="4"
+        android:singleLine="true"
+        android:maxLength="6"
+        android:hint="350"
+        android:gravity="center"
+        android:id="@+id/maxSymbolsToSendEditText"
+        android:layout_below="@+id/sendFirstSymbolsTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="4"
-            android:singleLine="true"
-            android:maxLength="6"
-            android:hint="350"
-            android:gravity="center"
-            android:id="@+id/maxSymbolsToSendEditText"
-            android:layout_below="@+id/sendFirstSymbolsTextView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="символов"
+        android:layout_toRightOf="@+id/maxSymbolsToSendEditText"
+        android:layout_alignBaseline="@+id/maxSymbolsToSendEditText"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="символов"
-            android:layout_toRightOf="@+id/maxSymbolsToSendEditText"
-            android:layout_alignBaseline="@+id/maxSymbolsToSendEditText"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Кодировка, используемая в лог-файле"
+        android:layout_marginTop="10dp"
+        android:id="@+id/encodingTextView"
+        android:layout_below="@id/maxSymbolsToSendEditText"/>
 
-    </RelativeLayout>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/encodingTextView"
+        android:hint="CP1251"
+        android:id="@+id/encodingEditText"
+        android:singleLine="true"
+        android:gravity="center"
+        />
+</RelativeLayout>
+</ScrollView>

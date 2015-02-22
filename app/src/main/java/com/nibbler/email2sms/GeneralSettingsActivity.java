@@ -25,6 +25,7 @@ public class GeneralSettingsActivity extends Activity{
     CheckBox deleteOlderCB;
     EditText deleteValueET;
     EditText maxSymbolsET;
+    EditText encodingET;
 
     Context context = this;
 
@@ -33,6 +34,7 @@ public class GeneralSettingsActivity extends Activity{
     boolean deleteOlderBool;
     int deleteOlderValueInt;
     int maxSymbolsInt;
+    String encodingString;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -47,18 +49,21 @@ public class GeneralSettingsActivity extends Activity{
         deleteOlderCB = (CheckBox)findViewById(R.id.deleteOlderThanCheckBox);
         deleteValueET = (EditText)findViewById(R.id.deleteOlderValueEditText);
         maxSymbolsET = (EditText)findViewById(R.id.maxSymbolsToSendEditText);
+        encodingET = (EditText)findViewById(R.id.encodingEditText);
 
         autoStartBool = sharedPreferences.getBoolean(getString(R.string.automaticallyStartWithOS), true);
         writeToSDBool = sharedPreferences.getBoolean(getString(R.string.writeLogFileToSD), true);
         deleteOlderBool = sharedPreferences.getBoolean(getString(R.string.deleteLogOlderThanDays), true);
         deleteOlderValueInt = sharedPreferences.getInt(getString(R.string.deleteLogOlderValue), 60);
         maxSymbolsInt = sharedPreferences.getInt(getString(R.string.maxSymbolsInSMS), 350);
+        encodingString = sharedPreferences.getString(getString(R.string.encodingLogFile), "CP1251");
 
         autoStartCB.setChecked(autoStartBool);
         writeLogToSDCB.setChecked(writeToSDBool);
         deleteOlderCB.setChecked(deleteOlderBool);
         deleteValueET.setText(Integer.toString(deleteOlderValueInt));
         maxSymbolsET.setText(Integer.toString(maxSymbolsInt));
+        encodingET.setText(encodingString);
 
         changeEditTextStatus(deleteOlderBool);
 
@@ -104,6 +109,9 @@ public class GeneralSettingsActivity extends Activity{
             maxSymbolsInt = 350;
         }
 
+        encodingString = encodingET.getText().toString();
+        if (encodingString.length() == 0) encodingString = "CP1251";
+
         if (deleteOlderValueInt < 1) {
             deleteOlderValueInt = 1;
         }
@@ -122,6 +130,7 @@ public class GeneralSettingsActivity extends Activity{
         editor.putBoolean(getString(R.string.deleteLogOlderThanDays), deleteOlderBool);
         editor.putInt(getString(R.string.deleteLogOlderValue), deleteOlderValueInt);
         editor.putInt(getString(R.string.maxSymbolsInSMS), maxSymbolsInt);
+        editor.putString(getString(R.string.encodingLogFile), encodingString);
         editor.apply();
 
         Log.d("nibbler", "GeneralSettingsActivity onPause");
