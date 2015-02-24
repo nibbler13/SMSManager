@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -157,5 +158,30 @@ public class GeneralSettingsActivity extends Activity{
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Одно СМС сообщение на латинице допускает максимум 160 символов, в кириллице максимум 70 символов. При превышении указанных размеров сообщение будет отправлено в виде нескольких СМС и соответственно будет дороже стоить.").setPositiveButton("Ок", dialogClickListenerInfo).show();
+    }
+
+    public void resetCountersButtonOnClick(View view){
+        Log.d("nibbler", "resetCountersButtonOnClick");
+
+        DialogInterface.OnClickListener dialogClickListenerInfo = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt(getString(R.string.totalEmailCounter), 0);
+                        editor.putInt(getString(R.string.totalMessagesCounter), 0);
+                        editor.putInt(getString(R.string.totalSmsCounter), 0);
+                        editor.apply();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        Log.d("nibbler", "GeneralSettingsActivity resetCountersButtonOnClick DialogInterface NO");
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Вы действительно хотите обнулить все счетчики?").setPositiveButton("Да, удалить", dialogClickListenerInfo).setNegativeButton("Нет", dialogClickListenerInfo).show();
     }
 }

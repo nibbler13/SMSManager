@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="action_settings">Настройки</string>
     <string name="addresses_list">addresses_list</string>
@@ -27,7 +27,7 @@
     <string name="isThisFirstTime">isThisFirstTime</string>
     <string name="logview_activity">Журнал работы</string>
     <string name="mainActivityAboutActionBarText">Приложение периодически проверяет указанный в настройках электронный ящик, в случае если письмо удовлетворяет требованиям настроек, то сообщение пересылается получателю через СМС.\n\nАвтор: Грашкин Павел\nnn-admin@nnkk.budzdorov.su\n2015 Нижний Новгород\nv1.0beta\n\nВозможности:\n-Получение писем через POP3 протокол\n-Возможность использовать SSL\n-Номера телефонов получателей СМС задаются на основе кодового слова в теме письма\n-Часть символов (ненужных) можно исключить из СМС сообщения\n-Игнорирование письма, если оно содержит определенную строку\n-Возможность работы по заданному расписанию\n-Ведение лог-файла в формате CSV для выгрузки в Excel\n-Лог файл может быть выслан по почте\n-Изменение время опроса почтового сервера.</string>
-    <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>
+    <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Приложение проверяет только письма в формате Plain Text. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>
     <string name="mainActivitySettingsStartErrorText">Настройки можно изменять только когда сервис остановлен.</string>
     <string name="maxSymbolsInSMS">maxSymbolsInSMS</string>
     <string name="monday_checkbox">monday_checkbox</string>
@@ -87,7 +87,7 @@
     <string name="wednesday_minute_end">wednesday_end</string>
     <string name="wednesday_minute_start">wednesday_start</string>
     <string name="writeLogFileToSD">writeLogFileToSD</string>
-    <!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

@@ -110,6 +110,7 @@ public class BackgroundEmailCheck extends Service {
         if (messages.length == 0) return;
         logFile.writeToLog("Обнаружено сообщений: " + messages.length/2);
 
+        boolean needToNotification = false;
         for (int i = 0; i < messages.length; i += 2){
             if (messages[i] != null) {
                 //isAnythingFounded = true;
@@ -126,11 +127,16 @@ public class BackgroundEmailCheck extends Service {
                     editor.apply();
                     logFile.writeToLog("Сообщения для;" + messages[i] + ";со следующим содержанием;" + messages[i+1] + ";было отправлено, кол-во СМС;" + msgArray.size());
                 } catch (Exception ex) {
+                    needToNotification = true;
                     Log.d("nibbler", "BackgroundEmailCheck checkEmail SMSManager Exception");
                     logFile.writeToLog("Сообщение не было отправлено;SMSManager Exception");
                     ex.printStackTrace();
                 }
             }
+        }
+
+        if (needToNotification) {
+            mailSystem.sendEmailNotification("Не удалось отправить SMS сообщение, ошибка SMSManager Exception");
         }
     }
 

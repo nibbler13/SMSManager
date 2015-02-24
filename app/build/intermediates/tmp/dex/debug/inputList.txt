@@ -1,7 +1,7 @@
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/classes/debug
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-ec5c55bb509b2dfd38cf93d8fd166f2a3af430c7.jar
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/activation-9d2fd5609b76b25276ec85fd5597d20782cd6e1b.jar
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/additionnal-f21d0e916857caea4fe20147d69f6883e6eb5087.jar
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-bd0e3e2aaf211ff1cf23f6d4f6e9a4c53edd5477.jar
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/mail-3c782d36e2afc2de4a5cfb1ddb595d68c371ad80.jar
-/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/build/intermediates/pre-dexed/debug/classes-1dbaed64451fbad7344f6929a251e9acfe6584bc.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\classes\debug
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-aa16b3cf885393ef74ba8407c65bcf20627dd05b.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\activation-41a621d97c380018842eccab414a4d17c527d0c9.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\additionnal-d0bf28da9e4363f5580fba7e831e132b17dcf760.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-d5e162e9ae476d960d2909398466faade2eabf3d.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\mail-e5f4467901aaa8317af19cb27957db34513c7b2f.jar
+C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\classes-de02cad3982b742ef8d1fe3c74cc742f4009cc95.jar

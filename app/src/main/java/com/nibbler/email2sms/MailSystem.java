@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.telephony.SmsManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -69,8 +70,11 @@ public class MailSystem {
     private int totalEmailCounter;
 
     //testing
-    boolean needToTestConnection;
-    boolean testingResult;
+    private boolean needToTestConnection;
+    private boolean testingResult;
+
+    //notification
+    private String notificationString;
 
     public MailSystem(Context newContext) {
         context = newContext;
@@ -78,6 +82,7 @@ public class MailSystem {
         //needToTestConnection = false;
         //Log.d("nibbler", "MailSystem Constructor needToTestConnection: " + needToTestConnection);
         testingResult = false;
+        notificationString = "";
 
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharedSettingsName), Context.MODE_PRIVATE);
 
@@ -134,7 +139,7 @@ public class MailSystem {
 
     private class SendLogFile extends AsyncTask<Address, Void, Boolean> {
         protected Boolean doInBackground(javax.mail.Address... addresses){
-            Log.d("nibbler", "MailSystem SendLogFile needToCheck: " + needToTestConnection);
+            //Log.d("nibbler", "MailSystem SendLogFile needToCheck: " + needToTestConnection);
             Properties localPropertiesSmtp = System.getProperties();
             localPropertiesSmtp.setProperty("mail.smtp.port", Integer.toString(smtpServerPort));
             localPropertiesSmtp.setProperty("mail.smtp.connectiontimeout", "4000");
@@ -172,13 +177,15 @@ public class MailSystem {
                 BodyPart messageBodyPart = new MimeBodyPart();
                 if (needToTestConnection) {
                     message.setSubject("Email2SMS SMTP connection testing");
+                } else if (!notificationString.equalsIgnoreCase("")) {
+                    message.setSubject("Email2SMS System notification");
                 } else {
                     message.setSubject("Email2SMS LogFile");
                 }
-                messageBodyPart.setText(logFile.timeStamp());
+                messageBodyPart.setText(logFile.timeStamp() + notificationString);
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(messageBodyPart);
-                if (!needToTestConnection) {
+                if (!needToTestConnection && notificationString.equalsIgnoreCase("")) {
                     messageBodyPart = new MimeBodyPart();
                     if (logFile.getLogFile() != null) {
                         DataSource source = new FileDataSource(logFile.getLogFile());
@@ -192,7 +199,7 @@ public class MailSystem {
                 Transport.send(message);
                 if (needToTestConnection) {
                     logFile.writeToLog("Тестовое сообщение было успешно выслано на адрес;" + InternetAddress.toString(addresses));
-                } else {
+                } else if (notificationString.equalsIgnoreCase("") && !needToTestConnection) {
                     logFile.writeToLog("Лог-файл был успешно выслан на адрес;" + InternetAddress.toString(addresses));
                 }
                 Log.d("nibbler", "message successfully sent");
@@ -202,6 +209,19 @@ public class MailSystem {
                 logFile.writeToLog("Не удалось отправить письмо");
                 Log.d("nibbler", "MailSystem SendLogFile !!!MessagingException");
             }
+
+            String phoneNumber = sharedPreferences.getString(context.getString(R.string.notificationPhoneNumber), "89601811873");
+            try{
+                SmsManager smsManager = SmsManager.getDefault();
+                ArrayList<String> msgArray = smsManager.divideMessage("Email2SMS не удалось выполнить получение\\отправку почты");
+                smsManager.sendMultipartTextMessage(phoneNumber, null, msgArray, null, null);
+                logFile.writeToLog("Системное уведомление о неработоспособности почты было отправлено через СМС на номер: " + phoneNumber);
+            } catch (Exception ex) {
+                Log.d("nibbler", "MailSystem sendEmailLog SMSManager Exception");
+                logFile.writeToLog("Ошибка!;Не удалось отправить системное уведомление через СМС на номер:" + phoneNumber);
+                ex.printStackTrace();
+            }
+
             return false;
         }
     }
@@ -232,8 +252,8 @@ public class MailSystem {
                 List<String> messagesToSMS = new ArrayList<>();
                 int messagesTotal = 0;
                 if (localFolder != null) {
-                    Log.d("nibbler", "MailSystem PerformCheck localFolder is notNULL");
-                    Log.d("nibbler", "MailSystem PerformCheck needToTestConnection: " + needToTestConnection);
+                    //Log.d("nibbler", "MailSystem PerformCheck localFolder is notNULL");
+                    //Log.d("nibbler", "MailSystem PerformCheck needToTestConnection: " + needToTestConnection);
                     localFolder.open(Folder.READ_WRITE);
                     if (needToTestConnection) {
                         testingResult = true;
@@ -246,8 +266,8 @@ public class MailSystem {
                     if (messagesTotal <= 0) {
                         localFolder.close(true);
                         localStore.close();
-                        Log.d("nibbler", "MailSystem PerformCheck closing localFolder & localStore");
-                        return null;
+                        //Log.d("nibbler", "MailSystem PerformCheck closing localFolder & localStore");
+                        return new String[0];
                     } else {
                         totalEmailCounter += messagesTotal;
                         Calendar calendar = Calendar.getInstance();
@@ -275,11 +295,10 @@ public class MailSystem {
                                     logFile.writeToLog("Получено письмо с темой;" + subject);
                                 }
 
+                                Log.d("nibbler", "contentType: " + contentType);
                                 if (contentType.contains("text")){
 
                                     boolean needToIgnore = false;
-
-
                                     if (timeTableElements[currentDay].getEnable() &&
                                             currentHour >= timeTableElements[currentDay].getHour_start() &&
                                             currentHour <= timeTableElements[currentDay].getHour_end() &&
@@ -348,12 +367,15 @@ public class MailSystem {
     }
 
     public String[] checkEmail () {
-        Log.d("nibbler", "MailSystem checkMail");
+        //Log.d("nibbler", "MailSystem checkMail");
         PerformCheck performCheck = new PerformCheck();
         performCheck.execute();
         try {
             String[] strings = performCheck.get();
-            if (strings == null) return new String[0];
+            if (strings == null) {
+                sendEmailNotification("Ошибка!;Не удалось подключиться к POP3 серверу, ошибка MailSystem PerformCheck Exception");
+                return new String[0];
+            }
             Log.d("nibbler", "MailSystem checkMail return strings.length: " + strings.length);
             return strings;
         } catch (ExecutionException e) {
@@ -417,5 +439,24 @@ public class MailSystem {
         Log.d("nibbler", "MailSystem testPopConnection needToTestConnection: " + needToTestConnection);
         Log.d("nibbler", "MailSystem testPopConnection testingResult: " + testingResult);
         return testingResult;
+    }
+
+    public void sendEmailNotification(String string){
+        notificationString = string;
+        Address address;
+        try {
+            String addressString = sharedPreferences.getString(context.getString(R.string.notificationEmailAddress), "nibble@yandex.ru");
+            address = new InternetAddress(addressString);
+            if (sendLogFileTo(address)){
+                logFile.writeToLog("Системное уведомление email успешно отправлено со следующим текстом;" + string + ";на адрес;" + addressString);
+                notificationString = "";
+            } else {
+                logFile.writeToLog("Ошибка!;Не удалось отправить системное уведомление");
+                notificationString = "";
+            }
+        } catch (AddressException e) {
+            logFile.writeToLog("Ошибка!;Неверно указан адрес почты получателя системных уведомлений");
+            Log.d("nibbler", "MailSystem sendEmailNotification AddressException");
+        }
     }
 }
