@@ -55,7 +55,7 @@ public class GeneralSettingsActivity extends Activity{
         autoStartBool = sharedPreferences.getBoolean(getString(R.string.automaticallyStartWithOS), true);
         writeToSDBool = sharedPreferences.getBoolean(getString(R.string.writeLogFileToSD), true);
         deleteOlderBool = sharedPreferences.getBoolean(getString(R.string.deleteLogOlderThanDays), true);
-        deleteOlderValueInt = sharedPreferences.getInt(getString(R.string.deleteLogOlderValue), 60);
+        deleteOlderValueInt = sharedPreferences.getInt(getString(R.string.deleteLogOlderValue), 3);
         maxSymbolsInt = sharedPreferences.getInt(getString(R.string.maxSymbolsInSMS), 350);
         encodingString = sharedPreferences.getString(getString(R.string.encodingLogFile), "CP1251");
 
@@ -101,7 +101,7 @@ public class GeneralSettingsActivity extends Activity{
         try {
             deleteOlderValueInt = Integer.parseInt(deleteValueET.getText().toString());
         } catch (NumberFormatException e) {
-            deleteOlderValueInt = 60;
+            deleteOlderValueInt = 3;
         }
 
         try {

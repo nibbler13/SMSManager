@@ -86,7 +86,7 @@ public class MainActivity extends Activity implements OnClickListener {
         editor.putBoolean(getString(R.string.automaticallyStartWithOS), true);
         editor.putBoolean(getString(R.string.writeLogFileToSD), true);
         editor.putBoolean(getString(R.string.deleteLogOlderThanDays), true);
-        editor.putInt(getString(R.string.deleteLogOlderValue), 60);
+        editor.putInt(getString(R.string.deleteLogOlderValue), 3);
         editor.putInt(getString(R.string.maxSymbolsInSMS), 350);
         editor.putString(getString(R.string.encodingLogFile), "CP1251");
         //pop3 settings default value

@@ -34,7 +34,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Удалять записи в \nжурнале старше"
+        android:text="Удалять файлы журнала старше чем"
         android:id="@+id/deleteOlderThanCheckBox"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/writeLogToSDCheckBox"
@@ -48,28 +48,27 @@
         android:inputType="number"
         android:ems="3"
         android:singleLine="true"
-        android:maxLength="4"
+        android:maxLength="3"
         android:id="@+id/deleteOlderValueEditText"
-        android:layout_toRightOf="@+id/deleteOlderThanCheckBox"
-        android:layout_alignBottom="@+id/deleteOlderThanCheckBox"
-        android:layout_marginLeft="10dp"
-        android:hint="60"
+        android:layout_below="@+id/deleteOlderThanCheckBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="3"
         android:gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="дней"
+        android:text="месяца(ев)"
         android:layout_toRightOf="@+id/deleteOlderValueEditText"
-        android:layout_alignBaseline="@+id/deleteOlderValueEditText"
-        android:layout_marginLeft="10dp"/>
+        android:layout_alignBaseline="@+id/deleteOlderValueEditText"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Отправлять в виде СМС из каждого сообщения первые"
         android:id="@+id/sendFirstSymbolsTextView"
-        android:layout_below="@+id/deleteOlderThanCheckBox"
+        android:layout_below="@+id/deleteOlderValueEditText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />

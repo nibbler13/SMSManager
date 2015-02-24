@@ -75,6 +75,7 @@ public class MailSystem {
 
     //notification
     private String notificationString;
+    private long previousNotificationSend;
 
     public MailSystem(Context newContext) {
         context = newContext;
@@ -83,6 +84,7 @@ public class MailSystem {
         //Log.d("nibbler", "MailSystem Constructor needToTestConnection: " + needToTestConnection);
         testingResult = false;
         notificationString = "";
+        previousNotificationSend = 0;
 
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharedSettingsName), Context.MODE_PRIVATE);
 
@@ -114,6 +116,10 @@ public class MailSystem {
             String[] separatedString = addresses_list[i].split("=", 2);
             addresses_name[i] = separatedString[0].toLowerCase();
             addresses_number[i] = separatedString[1];
+        }
+
+        if (addresses_name.length == 0) {
+            sendEmailNotification("В списке адресатов нет ни одной записи, входящие письма не смогут быть отправлены получателям.");
         }
 
         excluded_list = excludedSet.toArray(new String[0]);
@@ -202,7 +208,7 @@ public class MailSystem {
                 } else if (notificationString.equalsIgnoreCase("") && !needToTestConnection) {
                     logFile.writeToLog("Лог-файл был успешно выслан на адрес;" + InternetAddress.toString(addresses));
                 }
-                Log.d("nibbler", "message successfully sent");
+                Log.d("nibbler", "MailSystem --- Email successfully sent");
                 return true;
             } catch (MessagingException mex) {
                 mex.printStackTrace();
@@ -210,10 +216,14 @@ public class MailSystem {
                 Log.d("nibbler", "MailSystem SendLogFile !!!MessagingException");
             }
 
+            if (!sharedPreferences.getBoolean(context.getString(R.string.sendSMSIfError), false)) {
+                return false;
+            }
+
             String phoneNumber = sharedPreferences.getString(context.getString(R.string.notificationPhoneNumber), "89601811873");
             try{
                 SmsManager smsManager = SmsManager.getDefault();
-                ArrayList<String> msgArray = smsManager.divideMessage("Email2SMS не удалось выполнить получение\\отправку почты");
+                ArrayList<String> msgArray = smsManager.divideMessage("Email2SMS не удалось подключиться к серверу почты (POP3|SMTP)");
                 smsManager.sendMultipartTextMessage(phoneNumber, null, msgArray, null, null);
                 logFile.writeToLog("Системное уведомление о неработоспособности почты было отправлено через СМС на номер: " + phoneNumber);
             } catch (Exception ex) {
@@ -295,7 +305,7 @@ public class MailSystem {
                                     logFile.writeToLog("Получено письмо с темой;" + subject);
                                 }
 
-                                Log.d("nibbler", "contentType: " + contentType);
+                                //Log.d("nibbler", "contentType: " + contentType + " content:" + content.toString());
                                 if (contentType.contains("text")){
 
                                     boolean needToIgnore = false;
@@ -367,7 +377,6 @@ public class MailSystem {
     }
 
     public String[] checkEmail () {
-        //Log.d("nibbler", "MailSystem checkMail");
         PerformCheck performCheck = new PerformCheck();
         performCheck.execute();
         try {
@@ -403,7 +412,6 @@ public class MailSystem {
 
     public boolean testSmtpConnection() {
         needToTestConnection = true;
-        Log.d("nibbler", "MailSystem testSmtpConnection needToTestConnection: " + needToTestConnection);
         Address address;
         try {
             address = new InternetAddress("nibble@yandex.ru");
@@ -415,7 +423,9 @@ public class MailSystem {
         SendLogFile sendLogFile = new SendLogFile();
         sendLogFile.execute(address);
         try {
-            return sendLogFile.get();
+            boolean result = sendLogFile.get();
+            needToTestConnection = false;
+            return result;
         } catch (ExecutionException e) {
             Log.d("nibbler", "MailSystem sendLogFileTo ExecutionException");
         } catch (InterruptedException e) {
@@ -436,12 +446,20 @@ public class MailSystem {
         } catch (InterruptedException e) {
             Log.d("nibbler", "MailSystem PerformCheck InterruptedException");
         }
-        Log.d("nibbler", "MailSystem testPopConnection needToTestConnection: " + needToTestConnection);
-        Log.d("nibbler", "MailSystem testPopConnection testingResult: " + testingResult);
         return testingResult;
     }
 
     public void sendEmailNotification(String string){
+        if (!sharedPreferences.getBoolean(context.getString(R.string.sendMailIfError), false)) {
+            return;
+        }
+
+        if (System.currentTimeMillis() - previousNotificationSend < 1000 * 60 * 20) {
+            return;
+        }
+
+        previousNotificationSend = System.currentTimeMillis();
+
         notificationString = string;
         Address address;
         try {

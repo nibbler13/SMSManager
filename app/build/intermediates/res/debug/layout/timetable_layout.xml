@@ -431,4 +431,4 @@
             android:layout_alignBaseline="@+id/sundayEndTextView"/>
 
     </RelativeLayout>
-</ScrollView><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/timetable_layout.xml -->
+</ScrollView><!-- From: file:/Users/NIBBLER/Downloads/SMSManager/SMSManager/app/src/main/res/layout/timetable_layout.xml -->

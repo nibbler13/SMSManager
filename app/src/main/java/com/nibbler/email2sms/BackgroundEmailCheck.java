@@ -26,14 +26,13 @@ public class BackgroundEmailCheck extends Service {
     private ScheduledFuture<?> scheduledFuture;
     private SharedPreferences sharedPreferences;
     private LogFile logFile;
-    private final int NUMBER_OF_WEEK_DAYS = 7;
 
     //general counters
     private int totalSmsCounter;
     private int totalMessagesCounter;
     private boolean configIsCorrect;
     private MailSystem mailSystem;
-    private  ScheduledExecutorService scheduledExecutorService;
+    private ScheduledExecutorService scheduledExecutorService;
 
     public IBinder onBind(Intent intent){
         return null;
@@ -73,6 +72,8 @@ public class BackgroundEmailCheck extends Service {
             configIsCorrect = false;
         }
 
+        if (!mailSystem.testPopConnection()) configIsCorrect = false;
+
         if (sendLogViaMail) {
             if (smtpServerName.equalsIgnoreCase("") ||
                 smtpServerPort < 1 ||
@@ -86,12 +87,12 @@ public class BackgroundEmailCheck extends Service {
                     configIsCorrect = false;
                 }
             }
+
+            if (!mailSystem.testSmtpConnection()) configIsCorrect = false;
         }
+
         showNotificationNormalState(configIsCorrect);
         if (!configIsCorrect) return;
-        ////////
-        //need to send notification to admin
-        ////////
 
         int checkingInterval = sharedPreferences.getInt(getString(R.string.checkingInterval), 60);
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
@@ -160,8 +161,18 @@ public class BackgroundEmailCheck extends Service {
             text = "Сервис запущен";
             icon = R.drawable.ic_launcher;
         } else {
-            text = "Неверные настройки!";
+            text = "Неверные настройки почты!";
             icon = R.drawable.ic_launcher_red;
+
+            if (sharedPreferences.getBoolean(getString(R.string.sendMailIfError), false)) {
+                scheduledExecutorService = Executors.newScheduledThreadPool(1);
+                scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+                    @Override
+                    public void run() {
+                        startSendingErrorNotification();
+                    }
+                }, 0, 60, TimeUnit.MINUTES);
+            }
         }
 
         @SuppressWarnings("deprecation")
@@ -170,5 +181,9 @@ public class BackgroundEmailCheck extends Service {
         notification.flags = Notification.FLAG_ONGOING_EVENT;
         notification.setLatestEventInfo(this, "Email2SMS", text, contentIntent);
         mNM.notify(NOTIFICATION, notification);
+    }
+
+    public void startSendingErrorNotification(){
+        mailSystem.sendEmailNotification("Не удается запустить сервис Email2SMS, ошибка в подключении к серверу почты (POP3|SMTP).");
     }
 }
