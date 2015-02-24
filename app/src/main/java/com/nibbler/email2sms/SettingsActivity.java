@@ -1,6 +1,7 @@
 package com.nibbler.email2sms;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class SettingsActivity extends Activity{
         setContentView(R.layout.settings_layout);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         Log.d("nibbler", "This is Settings onCreate");
+        final Context context = this;
 
         listView = (ListView)findViewById(R.id.settingsListView);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
@@ -35,28 +37,36 @@ public class SettingsActivity extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int selectedPosition = position;
 
+                Intent intent = null;
                 switch (selectedPosition) {
                     case 0:
-                        generalSettingsOnClick();
+                        intent = new Intent(context, GeneralSettingsActivity.class);
                         break;
                     case 1:
-                        pop3SettingsOnClick();
+                        intent = new Intent(context, POP3SettingsActivity.class);
                         break;
                     case 2:
-                        addressesListOnClick();
+                        intent = new Intent(context, AddressesListActivity.class);
                         break;
                     case 3:
-                        excludedListOnClick();
+                        intent = new Intent(context, ExcludedListActivity.class);
                         break;
                     case 4:
-                        unreadSymbolsOnClick();
+                        intent = new Intent(context, UnreadSymbolsActivity.class);
                         break;
                     case 5:
-                        timetableOnClick();
+                        intent = new Intent(context, TimetableActivity.class);
+                        break;
+                    case 6:
+                        intent = new Intent(context, SystemNotificationActivity.class);
                         break;
                     default:
                         Log.d("nibbler", "something is wrong in ListView settings");
                         break;
+                }
+
+                if (intent != null) {
+                    startActivity(intent);
                 }
 
 
@@ -74,41 +84,5 @@ public class SettingsActivity extends Activity{
         );
 
         adapter.notifyDataSetChanged();
-    }
-
-    public void pop3SettingsOnClick(){
-        Log.d("nibbler", "pop3SettingsOnClick");
-        Intent intent = new Intent(this, POP3SettingsActivity.class);
-        startActivity(intent);
-    }
-
-    public void addressesListOnClick(){
-        Log.d("nibbler", "addressesListOnClick");
-        Intent intent = new Intent(this, AddressesListActivity.class);
-        startActivity(intent);
-    }
-
-    public void excludedListOnClick(){
-        Log.d("nibbler", "excludedListOnClick");
-        Intent intent = new Intent(this, ExcludedListActivity.class);
-        startActivity(intent);
-    }
-
-    public void timetableOnClick(){
-        Log.d("nibbler", "timetableOnClick");
-        Intent intent = new Intent(this, TimetableActivity.class);
-        startActivity(intent);
-    }
-
-    public void generalSettingsOnClick(){
-        Log.d("nibbler", "generalSettingsOnClick");
-        Intent intent = new Intent(this, GeneralSettingsActivity.class);
-        startActivity(intent);
-    }
-
-    public void unreadSymbolsOnClick(){
-        Log.d("nibbler", "unreadSymbolsButtonOnClick");
-        Intent intent = new Intent(this, UnreadSymbolsActivity.class);
-        startActivity(intent);
     }
 }

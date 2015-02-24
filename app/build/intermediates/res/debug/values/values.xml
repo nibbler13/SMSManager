@@ -35,6 +35,8 @@
     <string name="monday_hour_start">monday_start</string>
     <string name="monday_minute_end">monday_end</string>
     <string name="monday_minute_start">monday_start</string>
+    <string name="notificationEmailAddress">notificationEmailAddress</string>
+    <string name="notificationPhoneNumber">notificationPhoneNumber</string>
     <string name="pop3Login">pop3Login</string>
     <string name="pop3Password">pop3Password</string>
     <string name="pop3ServerName">pop3ServerName</string>
@@ -47,6 +49,8 @@
     <string name="saturday_minute_end">saturday_end</string>
     <string name="saturday_minute_start">saturday_start</string>
     <string name="sendLogViaMail">sendLogViaMail</string>
+    <string name="sendMailIfError">sendMailIfError</string>
+    <string name="sendSMSIfError">sendSMSIfError</string>
     <string name="settings_activity">Настройки</string>
     <string name="sharedSettingsName">com.nibbler.email2sms.settings</string>
     <string name="smtpAuthentication">smtpAuthentication</string>
@@ -60,6 +64,7 @@
     <string name="sunday_hour_start">sunday_start</string>
     <string name="sunday_minute_end">sunday_end</string>
     <string name="sunday_minute_start">sunday_start</string>
+    <string name="system_notification">Системные уведомления</string>
     <string name="thursday_checkbox">thursday_checkbox</string>
     <string name="thursday_hour_end">thursday_end</string>
     <string name="thursday_hour_start">thursday_start</string>

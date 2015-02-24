@@ -11,6 +11,7 @@
     <string name="action_settings">Настройки</string>
     <string name="general_settings">Общие настройки</string>
     <string name="unread_symbols">Нечитаемые знаки</string>
+    <string name="system_notification">Системные уведомления</string>
 
     <!--counters-->
     <string name="totalSmsCounter">totalSmsCounter</string> <!-- integer -->
@@ -90,6 +91,12 @@
     <string name="sunday_hour_end">sunday_end</string> <!-- int -->
     <string name="sunday_minute_start">sunday_start</string> <!-- int -->
     <string name="sunday_minute_end">sunday_end</string> <!-- int -->
+
+    <!--notification settings-->
+    <string name="sendMailIfError">sendMailIfError</string> <!-- boolean -->
+    <string name="sendSMSIfError">sendSMSIfError</string> <!-- boolean -->
+    <string name="notificationEmailAddress">notificationEmailAddress</string> <!-- string -->
+    <string name="notificationPhoneNumber">notificationPhoneNumber</string> <!-- int -->
 
     <!--textForAlertDialog-->
     <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>

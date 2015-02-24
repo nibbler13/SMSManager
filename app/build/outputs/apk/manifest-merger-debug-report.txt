@@ -181,3 +181,13 @@ ADDED from AndroidManifest.xml:112:9
 		ADDED from AndroidManifest.xml:116:13
 	android:name
 		ADDED from AndroidManifest.xml:113:13
+activity#com.nibbler.email2sms.SystemNotificationActivity
+ADDED from AndroidManifest.xml:121:9
+	android:label
+		ADDED from AndroidManifest.xml:123:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:124:13
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:125:13
+	android:name
+		ADDED from AndroidManifest.xml:122:13

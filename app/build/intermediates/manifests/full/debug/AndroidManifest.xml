@@ -115,6 +115,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nibbler.email2sms.SettingsActivity" />
         </activity>
+        <activity
+            android:name="com.nibbler.email2sms.SystemNotificationActivity"
+            android:label="@string/system_notification"
+            android:parentActivityName="com.nibbler.email2sms.SettingsActivity"
+            android:windowSoftInputMode="stateHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nibbler.email2sms.SettingsActivity" />
+        </activity>
     </application>
 
 </manifest>
