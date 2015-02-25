@@ -107,8 +107,6 @@ public class LogFile {
     }
 
     public String getLogFileText(){
-        getZippedLogFile();
-
         //Log.d("nibbler", "LogFile getLogFileText");
         String textFromLogFile = "";
         InputStream inputStream = null;
@@ -192,24 +190,36 @@ public class LogFile {
     }
 
     public File getZippedLogFile() {
-        Log.d("nibbler", "LogFile getZippedLogFile");
+        //Log.d("nibbler", "LogFile getZippedLogFile");
         byte[] buffer = new byte[1024];
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(getLogFile().getParent() + "/Email2SMS/Email2SMS_log.zip"));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(getLogFileDirectory() + "/Email2SMS_log.zip"));
             ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-            ZipEntry zipEntry = new ZipEntry(getLogFile().getName());
-            try {
-                zipOutputStream.putNextEntry(zipEntry);
-                int len = 0;
-                FileInputStream fileInputStream = new FileInputStream(getLogFile());
-                while ((len = fileInputStream.read(buffer)) > 0) {
-                    zipOutputStream.write(buffer, 0, len);
+            File[] files = getLogFileDirectory().listFiles();
+            Arrays.sort(files);
+            if (files.length == 0) return null;
+            for (int i = 0; i < files.length; i++) {
+                if (files[i] != null && !files[i].getName().contains(".zip")) {
+                    ZipEntry zipEntry = new ZipEntry(files[i].getName());
+                    try {
+                        zipOutputStream.putNextEntry(zipEntry);
+                        int len = 0;
+                        FileInputStream fileInputStream = new FileInputStream(files[i]);
+                        while ((len = fileInputStream.read(buffer)) > 0) {
+                            zipOutputStream.write(buffer, 0, len);
+                        }
+                        fileInputStream.close();
+                        zipOutputStream.closeEntry();
+                    } catch (IOException e) {
+                        Log.d("nibbler", "LogFile getZippedLogFile IOException");
+                    }
                 }
-                fileInputStream.close();
-                zipOutputStream.closeEntry();
+            }
+            try {
                 zipOutputStream.close();
+                return new File(getLogFileDirectory() + "/Email2SMS_log.zip");
             } catch (IOException e) {
-                Log.d("nibbler", "LogFile getZippedLogFile IOException");
+                Log.d("nibbler", "LogFile getZippedLogFile zipOutputStream IOException");
             }
         } catch (FileNotFoundException e) {
             Log.d("nibbler", "LogFile getZippedLogFile FileNotFoundException");
@@ -219,7 +229,7 @@ public class LogFile {
     }
 
     public File getLogFile(){
-        File file;
+        //Log.d("nibbler", "LogFile getLogFile directory: " + getLogFileDirectory().getAbsolutePath());
         int month = Calendar.getInstance().get(Calendar.MONTH);
         String monthString;
         if (month < 9) {
@@ -228,28 +238,37 @@ public class LogFile {
             monthString = "" + (month + 1);
         }
         String fileName = "/Email2SMS_log_" + Calendar.getInstance().get(Calendar.YEAR) + "_" + monthString + ".csv";
-        //Log.d("nibbler", "LogFile fileName: " + fileName);
-        //Log.d("nibbler", "LogFile getLogFile isExternalStorageWritable: " + isExternalStorageWritable() + " writeToSDCard: " + writeToSDCard);
-        if (isExternalStorageWritable() && writeToSDCard) {
-            File root = android.os.Environment.getExternalStorageDirectory();
-            //Log.d("nibbler", "LogFile root.getAbsolutePath: " + root.getAbsolutePath());
-            File dir = new File(root.getAbsolutePath() + "/" + FOLDER_NAME);
-            if (!dir.exists()){
-                dir.mkdirs();
-            }
-
-            file = new File(dir, fileName);
-            if (!file.exists()) checkForOldLogFile(dir);
-            return file;
-        }
-
-        file = new File(context.getFilesDir(), fileName);
-        if (!file.exists()) checkForOldLogFile(context.getFilesDir());
+        File file = new File(getLogFileDirectory(), fileName);
+        if (!file.exists()) checkForOldLogFile(getLogFileDirectory());
         return file;
     }
 
-    public void checkForOldLogFile(File directory) {
-        Log.d("nibbler", "LogFile checkForOldLogFile");
+    private File getLogFileDirectory(){
+        File dir;
+        if (isExternalStorageWritable() && writeToSDCard) {
+            File root = android.os.Environment.getExternalStorageDirectory();
+            dir = new File(root.getAbsolutePath() + "/" + FOLDER_NAME);
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+        } else {
+            dir = context.getFilesDir();
+        }
+        return dir;
+    }
+
+    private void checkForOldLogFile(File directory) {
+        //Log.d("nibbler", "LogFile checkForOldLogFile");
+        if (sharedPreferences.getBoolean(context.getString(R.string.sendMailIfError), false)) {
+            if (sharedPreferences.getBoolean(context.getString(R.string.autoSendLog), false)) {
+                if (getLogFileDirectory().listFiles().length != 0) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(context.getString(R.string.needToSendLogToEmail), true);
+                    editor.apply();
+                }
+            }
+        }
+
         if (!sharedPreferences.getBoolean(context.getString(R.string.deleteLogOlderThanDays), true)) return;
 
         File[] files = directory.listFiles();
@@ -257,18 +276,18 @@ public class LogFile {
         if (files.length > 0) {
             for (int i = 0; i < files.length; i++) {
                 if (!files[i].getName().matches("Email2SMS_log_\\d{4}[_]\\d{2}.csv")){
-                    Log.d("nibbler", "LogFile checkForOldLogFile first: " + files[i].getName());
+                    //Log.d("nibbler", "LogFile checkForOldLogFile first: " + files[i].getName());
                     files[i].delete();
                 }
             }
         }
         files = directory.listFiles();
         Arrays.sort(files);
-        Log.d("nibbler", "LogFile checkForOldLogFile files.length: " + files.length);
+        //Log.d("nibbler", "LogFile checkForOldLogFile files.length: " + files.length);
         int monthToSave = sharedPreferences.getInt(context.getString(R.string.deleteLogOlderValue), 3);
         if (files.length > monthToSave) {
             for (int i = 0; i < files.length - monthToSave; i++) {
-                Log.d("nibbler", "LogFile checkForOldLogFile second: " + files[i].getName());
+                //Log.d("nibbler", "LogFile checkForOldLogFile second: " + files[i].getName());
                 files[i].delete();
             }
         }

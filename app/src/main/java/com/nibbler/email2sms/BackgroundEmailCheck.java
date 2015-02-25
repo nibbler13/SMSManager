@@ -16,6 +16,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 /**
  * Created by NIBBLER on 16/02/15.
  */
@@ -24,6 +27,7 @@ public class BackgroundEmailCheck extends Service {
     private NotificationManager mNM;
     private int NOTIFICATION = 76667;
     private ScheduledFuture<?> scheduledFuture;
+    private ScheduledFuture<?> scheduledFutureLogFile;
     private SharedPreferences sharedPreferences;
     private LogFile logFile;
 
@@ -32,7 +36,6 @@ public class BackgroundEmailCheck extends Service {
     private int totalMessagesCounter;
     private boolean configIsCorrect;
     private MailSystem mailSystem;
-    private ScheduledExecutorService scheduledExecutorService;
 
     public IBinder onBind(Intent intent){
         return null;
@@ -95,7 +98,7 @@ public class BackgroundEmailCheck extends Service {
         if (!configIsCorrect) return;
 
         int checkingInterval = sharedPreferences.getInt(getString(R.string.checkingInterval), 60);
-        scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -108,6 +111,20 @@ public class BackgroundEmailCheck extends Service {
         Log.d("nibbler", "BackgroundEmailCheck checkEmail");
         String[] messages = mailSystem.checkEmail();
         Log.d("nibbler", "BackgroundEmailCheck checkEmail, messages.length: " + messages.length);
+
+        if (sharedPreferences.getBoolean(getString(R.string.needToSendLogToEmail), false)) {
+            Log.d("nibbler", "BackgroundEmailCheck checkEmail needToSendLogToEmail");
+            try {
+                mailSystem.sendLogFileTo(new InternetAddress(sharedPreferences.getString(getString(R.string.notificationEmailAddress), "nibble@yandex.ru")));
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(getString(R.string.needToSendLogToEmail), false);
+                editor.apply();
+            } catch (AddressException e) {
+                logFile.writeToLog("Ошибка;Не удалось выполнить автоматическое отправление лог-файла;BackgroundEmailCheck checkEmail AddressException");
+                Log.d("nibbler", "BackgroundEmailCheck checkEmail can't auto send log file");
+            }
+        }
+
         if (messages.length == 0) return;
         logFile.writeToLog("Обнаружено сообщений: " + messages.length/2);
 
@@ -165,7 +182,7 @@ public class BackgroundEmailCheck extends Service {
             icon = R.drawable.ic_launcher_red;
 
             if (sharedPreferences.getBoolean(getString(R.string.sendMailIfError), false)) {
-                scheduledExecutorService = Executors.newScheduledThreadPool(1);
+                ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
                 scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
                     @Override
                     public void run() {

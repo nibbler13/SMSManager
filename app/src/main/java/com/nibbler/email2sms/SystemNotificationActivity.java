@@ -19,6 +19,7 @@ public class SystemNotificationActivity extends Activity {
     private SharedPreferences sharedPreferences;
     private CheckBox sendEmailIfErrorCB;
     private CheckBox sendSMSIfErrorCB;
+    private CheckBox autoSendLogCB;
     private TextView emailAddressTV;
     private TextView phoneNumberTV;
     private EditText emailAddressET;
@@ -33,6 +34,7 @@ public class SystemNotificationActivity extends Activity {
 
         sendEmailIfErrorCB = (CheckBox)findViewById(R.id.sendMailIfErrorCheckBox);
         sendSMSIfErrorCB = (CheckBox)findViewById(R.id.sendSMSIfErrorCheckBox);
+        autoSendLogCB = (CheckBox)findViewById(R.id.autoSendEmailWithLog);
         emailAddressTV = (TextView)findViewById(R.id.notificationEmailTextView);
         phoneNumberTV = (TextView)findViewById(R.id.notificationPhoneTextView);
         emailAddressET = (EditText)findViewById(R.id.notificationEmailEditText);
@@ -40,6 +42,7 @@ public class SystemNotificationActivity extends Activity {
 
         sendEmailIfErrorCB.setChecked(sharedPreferences.getBoolean(getString(R.string.sendMailIfError), false));
         sendSMSIfErrorCB.setChecked(sharedPreferences.getBoolean(getString(R.string.sendSMSIfError), false));
+        autoSendLogCB.setChecked(sharedPreferences.getBoolean(getString(R.string.autoSendLog), false));
         emailAddressET.setText(sharedPreferences.getString(getString(R.string.notificationEmailAddress), ""));
         phoneNumberET.setText(sharedPreferences.getString(getString(R.string.notificationPhoneNumber), ""));
         configureAddress(sendEmailIfErrorCB.isChecked());
@@ -63,6 +66,8 @@ public class SystemNotificationActivity extends Activity {
         emailAddressET.setEnabled(isChecked);
         emailAddressET.setAlpha(modifier);
         emailAddressTV.setAlpha(modifier);
+        autoSendLogCB.setAlpha(modifier);
+        autoSendLogCB.setEnabled(isChecked);
     }
 
     public void configureNumber(boolean isChecked){
@@ -80,6 +85,7 @@ public class SystemNotificationActivity extends Activity {
         editor.putString(getString(R.string.notificationEmailAddress), emailAddressET.getText().toString());
         editor.putBoolean(getString(R.string.sendSMSIfError), sendSMSIfErrorCB.isChecked());
         editor.putString(getString(R.string.notificationPhoneNumber), phoneNumberET.getText().toString());
+        editor.putBoolean(getString(R.string.autoSendLog), autoSendLogCB.isChecked());
         editor.apply();
     }
 }

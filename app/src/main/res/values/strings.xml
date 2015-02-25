@@ -95,8 +95,10 @@
     <!--notification settings-->
     <string name="sendMailIfError">sendMailIfError</string> <!-- boolean -->
     <string name="sendSMSIfError">sendSMSIfError</string> <!-- boolean -->
+    <string name="autoSendLog">autoSendLog</string> <!-- boolean -->
     <string name="notificationEmailAddress">notificationEmailAddress</string> <!-- string -->
     <string name="notificationPhoneNumber">notificationPhoneNumber</string> <!-- string -->
+    <string name="needToSendLogToEmail">needToSendLogToEmail</string> <!-- boolean -->
 
     <!--textForAlertDialog-->
     <string name="mainActivityHelpActionBarText">При первом запуске приложения необходимо настроить параметры почтового ящика из которого нужно забирать письма. Приложение проверяет только письма в формате Plain Text. Для корректной работы приложения требуется наличие выхода в сеть Интернет и рабочая сим-карта с возможностью отправки СМС. Для обеспечения бесперебойной работы необходимо включить режим разработчика (в настройках телефона в разделе о телефоне семь раз кликнуть на версию) и в нем поставить галочку \"Не выключать экран при подключенном питании\".</string>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Понедельник"
+            android:id="@+id/mondayCheckBox"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:checked="false" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Вторник"
+            android:id="@+id/tuesdayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/mondayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Среда"
+            android:id="@+id/wednesdayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/tuesdayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Четверг"
+            android:id="@+id/thursdayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/wednesdayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Пятница"
+            android:id="@+id/fridayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/thursdayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Суббота"
+            android:id="@+id/saturdayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/fridayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkboxClicked"
+            android:text="Воскресенье"
+            android:id="@+id/sundayCheckBox"
+            android:checked="false"
+            android:layout_below="@+id/saturdayStartFromTextView"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <!--   Понедельник   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/mondayStartFromTextView"
+            android:layout_below="@+id/mondayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/mondayStartEditText"
+            android:layout_toRightOf="@+id/mondayStartFromTextView"
+            android:layout_alignBaseline="@+id/mondayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/mondayEndTextView"
+            android:layout_toRightOf="@+id/mondayStartEditText"
+            android:layout_alignBottom="@+id/mondayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/mondayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/mondayEndTextView"
+            android:layout_alignBaseline="@+id/mondayEndTextView"/>
+
+
+        <!--   Вторник   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/tuesdayStartFromTextView"
+            android:layout_below="@+id/tuesdayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/tuesdayStartEditText"
+            android:layout_toRightOf="@+id/tuesdayStartFromTextView"
+            android:layout_alignBaseline="@+id/tuesdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/tuesdayEndTextView"
+            android:layout_toRightOf="@+id/tuesdayStartEditText"
+            android:layout_alignBottom="@+id/tuesdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/tuesdayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tuesdayEndTextView"
+            android:layout_alignBaseline="@+id/tuesdayEndTextView"/>
+
+        <!--   Среда   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/wednesdayStartFromTextView"
+            android:layout_below="@+id/wednesdayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/wednesdayStartEditText"
+            android:layout_toRightOf="@+id/wednesdayStartFromTextView"
+            android:layout_alignBaseline="@+id/wednesdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/wednesdayEndTextView"
+            android:layout_toRightOf="@+id/wednesdayStartEditText"
+            android:layout_alignBottom="@+id/wednesdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/wednesdayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/wednesdayEndTextView"
+            android:layout_alignBaseline="@+id/wednesdayEndTextView"/>
+
+        <!--   Четверг   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/thursdayStartFromTextView"
+            android:layout_below="@+id/thursdayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/thursdayStartEditText"
+            android:layout_toRightOf="@+id/thursdayStartFromTextView"
+            android:layout_alignBaseline="@+id/thursdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/thursdayEndTextView"
+            android:layout_toRightOf="@+id/thursdayStartEditText"
+            android:layout_alignBottom="@+id/thursdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/thursdayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/thursdayEndTextView"
+            android:layout_alignBaseline="@+id/thursdayEndTextView"/>
+
+        <!--   Пятница   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/fridayStartFromTextView"
+            android:layout_below="@+id/fridayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/fridayStartEditText"
+            android:layout_toRightOf="@+id/fridayStartFromTextView"
+            android:layout_alignBaseline="@+id/fridayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/fridayEndTextView"
+            android:layout_toRightOf="@+id/fridayStartEditText"
+            android:layout_alignBottom="@+id/fridayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/fridayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/fridayEndTextView"
+            android:layout_alignBaseline="@+id/fridayEndTextView"/>
+
+        <!--   Суббота   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/saturdayStartFromTextView"
+            android:layout_below="@+id/saturdayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/saturdayStartEditText"
+            android:layout_toRightOf="@+id/saturdayStartFromTextView"
+            android:layout_alignBaseline="@+id/saturdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/saturdayEndTextView"
+            android:layout_toRightOf="@+id/saturdayStartEditText"
+            android:layout_alignBottom="@+id/saturdayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/saturdayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/saturdayEndTextView"
+            android:layout_alignBaseline="@+id/saturdayEndTextView"/>
+
+        <!--   Воскресенье   -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="с"
+            android:id="@+id/sundayStartFromTextView"
+            android:layout_below="@+id/sundayCheckBox"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showStartTimePicker"
+            android:inputType="time"
+            android:hint="00:00"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/sundayStartEditText"
+            android:layout_toRightOf="@+id/sundayStartFromTextView"
+            android:layout_alignBaseline="@+id/sundayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до"
+            android:id="@+id/sundayEndTextView"
+            android:layout_toRightOf="@+id/sundayStartEditText"
+            android:layout_alignBottom="@+id/sundayStartFromTextView"
+            android:layout_marginLeft="10dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:onClick="showEndTimePicker"
+            android:inputType="time"
+            android:hint="23:59"
+            android:maxEms="4"
+            android:gravity="center"
+            android:id="@+id/sundayEndEditText"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/sundayEndTextView"
+            android:layout_alignBaseline="@+id/sundayEndTextView"/>
+
+    </RelativeLayout>
+</ScrollView><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/timetable_layout.xml -->

@@ -12,43 +12,49 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:id="@+id/sendMailIfErrorCheckBox"
-        android:text="Высылать письмо в случае ошибок"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:text="Адрес электронной почты"
-        android:id="@+id/notificationEmailTextView"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/notificationEmailEditText"
-        android:hint="example@company.com"/>
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:id="@+id/sendSMSIfErrorCheckBox"
-        android:text="Высылать СМС сообщение в случае ошибок"
-        android:layout_marginTop="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notificationPhoneTextView"
-        android:text="Номер телефона"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:id="@+id/notificationPhoneEditText"
-        android:hint="89601811873"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/sendMailIfErrorCheckBox"
+            android:text="Высылать уведомления в виде email"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/autoSendEmailWithLog"
+            android:text="Автоматически высылать лог-файл первого числа каждого месяца"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:text="Адрес электронной почты"
+            android:id="@+id/notificationEmailTextView"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationEmailEditText"
+            android:hint="example@company.com"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/sendSMSIfErrorCheckBox"
+            android:text="Высылать СМС сообщение в случае ошибок"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/notificationPhoneTextView"
+            android:text="Номер телефона"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/notificationPhoneEditText"
+            android:hint="89601811873"/>
 
     </LinearLayout>
 </ScrollView>

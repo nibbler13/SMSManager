@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.nibbler.email2sms.MainActivity"
+    android:textAlignment="center">
+
+    <Button
+        android:id="@+id/sendSMS"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Запустить"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/totalEmailReceivedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_marginLeft="10dp"
+        android:text="12345" />
+
+    <TextView
+        android:id="@+id/totalSMSLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_marginLeft="10dp"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/totalMessagesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/textView1"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_marginLeft="10dp"
+        android:text="123" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:text="Всего сообщений отправлено:" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_below="@+id/textView1"
+        android:text="Всего СМС отправлено:" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView3"
+        android:text="Всего писем получено:" />
+
+</RelativeLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/activity_main.xml -->

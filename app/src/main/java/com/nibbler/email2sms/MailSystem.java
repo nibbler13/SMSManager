@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.telephony.SmsManager;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -180,6 +181,7 @@ public class MailSystem {
                     /////
                 }
 
+                File zippedLogFile = null;
                 BodyPart messageBodyPart = new MimeBodyPart();
                 if (needToTestConnection) {
                     message.setSubject("Email2SMS SMTP connection testing");
@@ -187,16 +189,17 @@ public class MailSystem {
                     message.setSubject("Email2SMS System notification");
                 } else {
                     message.setSubject("Email2SMS LogFile");
+                    zippedLogFile = logFile.getZippedLogFile();
                 }
                 messageBodyPart.setText(logFile.timeStamp() + notificationString);
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(messageBodyPart);
                 if (!needToTestConnection && notificationString.equalsIgnoreCase("")) {
                     messageBodyPart = new MimeBodyPart();
-                    if (logFile.getLogFile() != null) {
-                        DataSource source = new FileDataSource(logFile.getLogFile());
+                    if (zippedLogFile != null) {
+                        DataSource source = new FileDataSource(zippedLogFile);
                         messageBodyPart.setDataHandler(new DataHandler(source));
-                        messageBodyPart.setFileName("Log.csv");
+                        messageBodyPart.setFileName("Email2SMS_log.zip");
                         multipart.addBodyPart(messageBodyPart);
                     }
                 }
@@ -209,6 +212,7 @@ public class MailSystem {
                     logFile.writeToLog("Лог-файл был успешно выслан на адрес;" + InternetAddress.toString(addresses));
                 }
                 Log.d("nibbler", "MailSystem --- Email successfully sent");
+                if (zippedLogFile != null) zippedLogFile.delete();
                 return true;
             } catch (MessagingException mex) {
                 mex.printStackTrace();
