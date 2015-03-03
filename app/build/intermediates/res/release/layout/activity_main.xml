@@ -69,4 +69,4 @@
         android:layout_below="@+id/textView3"
         android:text="Всего писем получено:" />
 
-</RelativeLayout><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/activity_main.xml -->
+</RelativeLayout><!-- From: file:/E:/Android%20Studio%20Projects/SMSManager/app/src/main/res/layout/activity_main.xml -->

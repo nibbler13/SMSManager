@@ -334,7 +334,7 @@ public class MailSystem {
 
                                     for (int count = 0; count < addresses_name.length; count++) {
                                         if (subject.contains(addresses_name[count]) && !needToIgnore) {
-                                            messagesToSMS.add(addresses_name[count]);
+                                            messagesToSMS.add(addresses_number[count]);
                                             logFile.writeToLog("Письмо будет выслано адресату;" + addresses_name[count] + ";на номер;" + addresses_number[count]);
 
                                             String resultingMessage = content.toString().replace("\r", "").replace("\n", "").replace(";", ",");

@@ -136,6 +136,7 @@ public class BackgroundEmailCheck extends Service {
                 try{
                     SmsManager smsManager = SmsManager.getDefault();
                     ArrayList<String> msgArray = smsManager.divideMessage(messages[i+1]);
+                    Log.d("nibbler", "TRYING to send SMS to: " + messages[i] + " text: " + messages[i+1]);
                     smsManager.sendMultipartTextMessage(messages[i], null, msgArray, null, null);
                     totalSmsCounter += msgArray.size();
                     totalMessagesCounter += 1;

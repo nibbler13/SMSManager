@@ -2,46 +2,46 @@
 <items version="2" >
 
     <item
-        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-aa16b3cf885393ef74ba8407c65bcf20627dd05b.jar" />
-    </item>
-    <item
-        jar="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\libs\additionnal.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\additionnal-d0bf28da9e4363f5580fba7e831e132b17dcf760.jar" />
-    </item>
-    <item
-        jar="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\libs\activation.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\activation-41a621d97c380018842eccab414a4d17c527d0c9.jar" />
-    </item>
-    <item
-        jar="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-d5e162e9ae476d960d2909398466faade2eabf3d.jar" />
-    </item>
-    <item
-        jar="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jar="E:\Android Studio Projects\SMSManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\classes-de02cad3982b742ef8d1fe3c74cc742f4009cc95.jar" />
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\classes-85045718c8b82ca078a98b8fa12d32958f137744.jar" />
     </item>
     <item
-        jar="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\libs\mail.jar"
+        jar="E:\Android Studio Projects\SMSManager\app\libs\mail.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="428e267abff0d10802ccde86b915da2c20471160">
-        <dex dex="C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\mail-e5f4467901aaa8317af19cb27957db34513c7b2f.jar" />
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\mail-3bae5f7e6a1d7a8433584cb586eda4345e758d07.jar" />
+    </item>
+    <item
+        jar="E:\Android Studio Projects\SMSManager\app\libs\additionnal.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\additionnal-9763ba42a788686cdf533b6ef6641a75d8cbb846.jar" />
+    </item>
+    <item
+        jar="E:\Android Studio Projects\SMSManager\app\libs\activation.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\activation-1e8cbac9da815d39391be4a9b04bd4f18cf640a6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Nibbler\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-8e4d6b0e4cd605369bd64c0d9704ac10feb8b58c.jar" />
+    </item>
+    <item
+        jar="E:\Android Studio Projects\SMSManager\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4781087d1541f2ef0c805397cad71594124e6b18.jar" />
     </item>
 
 </items>
