@@ -1,7 +1,7 @@
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\classes\debug
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-aa16b3cf885393ef74ba8407c65bcf20627dd05b.jar
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\activation-41a621d97c380018842eccab414a4d17c527d0c9.jar
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\additionnal-d0bf28da9e4363f5580fba7e831e132b17dcf760.jar
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-d5e162e9ae476d960d2909398466faade2eabf3d.jar
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\mail-e5f4467901aaa8317af19cb27957db34513c7b2f.jar
-C:\Users\nn-admin\AndroidStudioProjects\SMSManager\app\build\intermediates\pre-dexed\debug\classes-de02cad3982b742ef8d1fe3c74cc742f4009cc95.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\classes\debug
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-8e4d6b0e4cd605369bd64c0d9704ac10feb8b58c.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\activation-1e8cbac9da815d39391be4a9b04bd4f18cf640a6.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\additionnal-9763ba42a788686cdf533b6ef6641a75d8cbb846.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-4781087d1541f2ef0c805397cad71594124e6b18.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\mail-3bae5f7e6a1d7a8433584cb586eda4345e758d07.jar
+E:\Android Studio Projects\SMSManager\app\build\intermediates\pre-dexed\debug\classes-85045718c8b82ca078a98b8fa12d32958f137744.jar

@@ -119,4 +119,4 @@
         android:text="Сбросить счетчики"
         android:onClick="resetCountersButtonOnClick"/>
 </RelativeLayout>
-</ScrollView><!-- From: file:/C:/Users/nn-admin/AndroidStudioProjects/SMSManager/app/src/main/res/layout/general_settings_layout.xml -->
+</ScrollView><!-- From: file:/E:/Android%20Studio%20Projects/SMSManager/app/src/main/res/layout/general_settings_layout.xml -->
